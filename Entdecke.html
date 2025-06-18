@@ -190,12 +190,7 @@
   To install this app, click the browser menu and select "Install" or "Add to Home Screen".
 </p>
 
-<script>
-  // Detect Firefox and show custom install instructions
-  if (navigator.userAgent.toLowerCase().includes('firefox')) {
-    document.getElementById('firefox-install-help').style.display = 'block';
-  }
-</script>
+
             <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhcQoVx1rZxSHqGSetHGmC_W_bsnMfHPvOcnH4rAN4hK86P_azCOvepMXoEKjjkbARIr2Gh0xDhdGKGb25TnsB3CdATT3c2VmrnMRxtNWpfuVWHNnhcsFOWnO6GuOYin2ZT3ANrKbyv0Yi-9tICHT17k4BufqSrGM_eVEcJWChxGMIBGa4eV6N_wO5tr_U/s1024/1000030595.png" alt="German Culture" class="img-fluid">
             <p class="fst-italic text-muted mt-2">Deutsch lernen ist kein Zuckerschlecken!</p>
             <p class="fst-italic text-muted">Learning German is no piece of cake!</p>
@@ -603,6 +598,12 @@
           console.log('Service Worker registration failed:', error);
         });
     });
+  }
+    </script>
+    <script>
+  // Detect Firefox and show custom install instructions
+  if (navigator.userAgent.toLowerCase().includes('firefox')) {
+    document.getElementById('firefox-install-help').style.display = 'block';
   }
     </script>
 </body>
