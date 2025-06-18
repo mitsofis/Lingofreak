@@ -1,7 +1,7 @@
 const CACHE_NAME = 'lingofreak-cache-v1';
 const urlsToCache = [
   '/Lingofreak/Entdecke.html',
-  '/Lingofreak/G-unit1.html',
+  '/Lingofreak/G-Unit1.html',
   '/Lingofreak/manifest.json',
   '/Lingofreak/icon-192.png',
   '/Lingofreak/icon-512.png'
