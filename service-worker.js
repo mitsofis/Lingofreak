@@ -1,4 +1,4 @@
-const CACHE_NAME = 'lingofreak-cache-v1';
+const CACHE_NAME = 'lingofreak-cache-v2';
 const urlsToCache = [
   '/Lingofreak/Entdecke.html',
   '/Lingofreak/G-Unit1.html',
