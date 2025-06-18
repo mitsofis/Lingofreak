@@ -1,0 +1,566 @@
+<div id="German-Post-Container">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discover the German Language</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        .German-Post-Container body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background-color: #f8f9fa;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .dark-mode {
+            background-color: #333;
+            color: #f4f4f9;
+        }
+        :not(.dark-mode) .section {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1rem;
+        }
+        .dark-mode .section {
+            background-color: #555 !important;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            margin-bottom: 1rem;
+        }
+        .dark-mode footer {
+            background-color: #555 !important;
+            color: #f4f4f9;
+        }
+        .dark-mode .letter-card {
+            background-color: #666;
+            color: #f4f4f9;
+        }
+        .dark-mode .unit-button {
+            background-color: #007bff;
+        }
+        .German-Post-Container header {
+            background-color: #42cbdB;
+            color: white;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .culture-image img {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .section-header {
+            cursor: pointer;
+            padding: 1rem;
+            background-color: #e9ecef;
+            border-radius: 8px 8px 0 0;
+            margin: -1rem -1rem 1rem -1rem;
+            transition: background-color 0.3s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .dark-mode .section-header {
+            background-color: #4a4a4a;
+        }
+        .section-header:hover {
+            background-color: #dee2e6;
+        }
+        .dark-mode .section-header:hover {
+            background-color: #5a5a5a;
+        }
+        .section-header::after {
+            content: '';
+            display: inline-block;
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid #000;
+            transition: transform 0.3s;
+        }
+        .dark-mode .section-header::after {
+            border-top-color: #f4f4f9;
+        }
+        .section-header.collapsed::after {
+            transform: rotate(180deg);
+        }
+        .section-content {
+            overflow: hidden;
+        }
+        .letter-card {
+            background-color: #e6f7fa;
+            border-radius: 8px;
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+        .letter-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        .unit-button {
+            background-color: #42cbdB;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: opacity 0.2s, transform 0.2s;
+        }
+        .unit-button:hover {
+            opacity: 0.8;
+            transform: scale(1.05);
+        }
+        .unit-button span {
+            font-family: 'Georgia', serif;
+            font-weight: bold;
+            text-transform: uppercase;
+            background: linear-gradient(to right, #ffffff, #e0f7ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: #ffffff;
+        }
+        .dark-mode .unit-button span {
+            background: linear-gradient(to right, #ffffff, #b3e0ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: #ffffff;
+        }
+        .footer-header {
+            cursor: pointer;
+            padding: 1rem;
+            background-color: #343a40;
+            border-radius: 8px 8px 0 0;
+            margin: -1rem -1rem 1rem -1rem;
+            transition: background-color 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .dark-mode .footer-header {
+            background-color: #4a4a4a;
+        }
+        .footer-header:hover {
+            background-color: #495057;
+        }
+        .dark-mode .footer-header:hover {
+            background-color: #5a5a5a;
+        }
+        .footer-header::after {
+            content: '';
+            display: inline-block;
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid #fff;
+            margin-left: 10px;
+            transition: transform 0.3s;
+        }
+        .dark-mode .footer-header::after {
+            border-top-color: #f4f4f9;
+        }
+        .footer-header.collapsed::after {
+            transform: rotate(180deg);
+        }
+        @media (max-width: 600px) {
+            .unit-button {
+                max-width: 250px;
+            }
+        }
+    </style>
+<link rel="manifest" href="manifest.json" />
+</head>
+<body>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(() => {
+          console.log('Service Worker registered successfully.');
+        })
+        .catch((error) => {
+          console.log('Service Worker registration failed:', error);
+        });
+    });
+  }
+</script>
+    <div class="container my-4">
+        <!-- Header -->
+        <header class="text-center py-4">
+            <h1>Discover the German Language</h1>
+            <button id="themeToggle" class="btn btn-secondary mt-2">Toggle Dark Mode</button>
+        </header>
+
+        <!-- Culture Image -->
+        <div class="culture-image text-center mb-4">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhcQoVx1rZxSHqGSetHGmC_W_bsnMfHPvOcnH4rAN4hK86P_azCOvepMXoEKjjkbARIr2Gh0xDhdGKGb25TnsB3CdATT3c2VmrnMRxtNWpfuVWHNnhcsFOWnO6GuOYin2ZT3ANrKbyv0Yi-9tICHT17k4BufqSrGM_eVEcJWChxGMIBGa4eV6N_wO5tr_U/s1024/1000030595.png" alt="German Culture" class="img-fluid">
+            <p class="fst-italic text-muted mt-2">Deutsch lernen ist kein Zuckerschlecken!</p>
+            <p class="fst-italic text-muted">Learning German is no piece of cake!</p>
+        </div>
+
+        <!-- About Section (Expanded on Load) -->
+        <section class="section p-4 mb-4">
+            <div class="section-header" data-bs-toggle="collapse" data-bs-target="#aboutContent" aria-expanded="true">
+                <h2 class="text-primary mb-0">About the German Language</h2>
+            </div>
+            <div id="aboutContent" class="section-content collapse show">
+                <p>German isn’t just spoken—it’s lived. With roots stretching deeper than Europe’s history and a spirit that unites diversity, German is unique, versatile, and vibrant.</p>
+                <p>Spoken in Germany, Austria, Switzerland, and beyond, German carries the soul of people who’ve preserved their language through centuries. Standard German, colloquial slang, and dialects like Bavarian and Swabian—one language, many voices.</p>
+                <p>Its alphabet boasts 26 letters plus umlauts (Ä, Ö, Ü) and the ß. Its words resonate with history. And in every greeting, there’s <em>Herzlichkeit</em>—the warmth that connects us.</p>
+                <p>German unites. German inspires. German welcomes.</p>
+            </div>
+        </section>
+
+        <!-- Why Learn German Section (Collapsed on Load) -->
+        <section class="section p-4 mb-4">
+            <div class="section-header collapsed" data-bs-toggle="collapse" data-bs-target="#whyLearnContent" aria-expanded="false">
+                <h2 class="text-primary mb-0">Why Learn German?</h2>
+            </div>
+            <div id="whyLearnContent" class="section-content collapse">
+                <p>Learning German opens doors to a vibrant culture steeped in history, music, and tradition. Here’s why it’s worth your time:</p>
+                <ul class="list-unstyled">
+                    <li><strong>Connect with People</strong>: Saying <em>Hallo</em> or <em>Servus</em> builds instant bonds with Germans, known for their hospitality and warmth.</li>
+                    <li><strong>Explore Heritage</strong>: From Goethe’s poetry to modern literature, German unlocks a rich tapestry of stories and traditions.</li>
+                    <li><strong>Travel with Ease</strong>: Navigate Bavaria’s Alps or Berlin’s streets confidently, using phrases like <em>Wie geht’s?</em> to spark conversations.</li>
+                    <li><strong>Unique Challenge</strong>: With umlauts (Ä, Ö, Ü) and dialects like Bavarian or Swabian, German offers a rewarding puzzle for language enthusiasts.</li>
+                    <li><strong>Global Community</strong>: Join a worldwide community speaking German across Europe and beyond, sharing <em>Herzlichkeit</em> through language.</li>
+                </ul>
+                <p>Whether you’re drawn to the rhythm of German folk songs or the chance to greet someone with <em>Guten Tag</em>, learning German is a journey of connection and discovery.</p>
+            </div>
+        </section>
+
+        <!-- Alphabet Section (Collapsed on Load) -->
+        <section class="section p-4 mb-4">
+            <div class="section-header collapsed" data-bs-toggle="collapse" data-bs-target="#alphabetContent" aria-expanded="false">
+                <h2 class="text-primary mb-0">The German Alphabet</h2>
+            </div>
+            <div id="alphabetContent" class="section-content collapse">
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3 alphabet-grid">
+                    <!-- Alphabet Cards -->
+                    <div class="col">
+                        <div class="letter-card card h-100 text-center p-3" data-word="Apfel">
+                            <h3 class="card-title">A</h3>
+                            <p class="ipa card-text text-muted">/aː/</p>
+                            <p class="example card-text text-primary fw-bold">Apfel /ˈap.fəl/ (apple)</p>
+                            <p class="card-text">Like "father" in English</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="letter-card card h-100 text-center p-3" data-word="Ärger">
+                            <h3 class="card-title">Ä</h3>
+                            <p class="ipa card-text text-muted">/ɛː/</p>
+                            <p class="example card-text text-primary fw-bold">Ärger /ˈɛʁ.ɡɐ/ (anger)</p>
+                            <p class="card-text">Like "care" in English</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="letter-card card h-100 text-center p-3" data-word="Buch">
+                            <h3 class="card-title">B</h3>
+                            <p class="ipa card-text text-muted">/b/</p>
+                            <p class="example card-text text-primary fw-bold">Buch /buːx/ (book)</p>
+                            <p class="card-text">Like "boy" in English</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="letter-card card h-100 text-center p-3" data-word="Cello">
+                            <h3 class="card-title">C</h3>
+                            <p class="ipa card-text text-muted">/ts/</p>
+                            <p class="example card-text text-primary fw-bold">Cello /ˈtʃɛ.lo/ (cello)</p>
+                            <p class="card-text">Like "cats" in English</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="letter-card card h-100 text-center p-3" data-word="Dach">
+                            <h3 class="card-title">D</h3>
+                            <p class="ipa card-text text-muted">/d/</p>
+                            <p class="example card-text text-primary fw-bold">Dach /dax/ (roof)</p>
+                            <p class="card-text">Like "dog" in English</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="letter-card card h-100 text-center p-3" data-word="Esel">
+                            <h3 class="card-title">E</h3>
+                            <p class="ipa card-text text-muted">/eː/</p>
+                            <p class="example card-text text-primary fw-bold">Esel /ˈeː.zəl/ (donkey)</p>
+                            <p class="card-text">Like "say" in English</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="letter-card card h-100 text-center p-3" data-word="Fisch">
+                            <h3 class="card-title">F</h3>
+                            <p class="ipa card-text text-muted">/f/</p>
+                            <p class="example card-text text-primary fw-bold">Fisch /fɪʃ/ (fish)</p>
+                            <p class="card-text">Like "fish" in English</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="letter-card card h-100 text-center p-3" data-word="Gans">
+                            <h3 class="card-title">G</h3>
+                            <p class="ipa card-text text-muted">/ɡ/</p>
+                            <p class="example card-text text-primary fw-bold">Gans /ɡans/ (goose)</p>
+                            <p class="card-text">Like "go" in English</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="letter-card card h-100 text-center p-3" data-word="Haus">
+                            <h3 class="card-title">H</h3>
+                            <p class="ipa card-text text-muted">/h/</p>
+                            <p class="example card-text text-primary fw-bold">Haus /haʊs/ (house)</p>
+                            <p class="card-text">Like "hat" in English</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="letter-card card h-100 text-center p-3" data-word="Igel">
+                            <h3 class="card-title">I</h3>
+                            <p class="ipa card-text text-muted">/iː/</p>
+                            <p class="example card-text text-primary fw-bold">Igel /ˈiː.ɡəl/ (hedgehog)</p>
+                            <p class="card-text">Like "see" in English</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="letter-card card h-100 text-center p-3" data-word="Ja">
+                            <h3 class="card-title">J</h3>
+                            <p class="ipa card-text text-muted">/j/</p>
+                            <p class="example card-text text-primary fw-bold">Ja /jaː/ (yes)</p>
+                            <p class="card-text">Like "yes" in English</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="letter-card card h-100 text-center p-3" data-word="Katz">
+                            <h3 class="card-title">K</h3>
+                            <p class="ipa card-text text-muted">/k/</p>
+                            <p class="example card-text text-primary fw-bold">Katz /kats/ (cat)</p>
+                            <p class="card-text">Like "cat" in English</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="letter-card card h-100 text-center p-3" data-word="Lampe">
+                            <h3 class="card-title">L</h3>
+                            <p class="ipa card-text text-muted">/l/</p>
+                            <p class="example card-text text-primary fw-bold">Lampe /ˈlam.pə/ (lamp)</p>
+                            <p class="card-text">Like "love" in English</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="letter-card card h-100 text-center p-3" data-word="Maus">
+                            <h3 class="card-title">M</h3>
+                            <p class="ipa card-text text-muted">/m/</p>
+                            <p class="example card-text text-primary fw-bold">Maus /maʊs/ (mouse)</p>
+                            <p class="card-text">Like "man" in English</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="letter-card card h-100 text-center p-3" data-word="Nase">
+                            <h3 class="card-title">N</h3>
+                            <p class="ipa card-text text-muted">/n/</p>
+                            <p class="example card-text text-primary fw-bold">Nase /ˈnaː.zə/ (nose)</p>
+                            <p class="card-text">Like "no" in English</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="letter-card card h-100 text-center p-3" data-word="Ofen">
+                            <h3 class="card-title">O</h3>
+                            <p class="ipa card-text text-muted">/oː/</p>
+                            <p class="example card-text text-primary fw-bold">Ofen /ˈoː.fən/ (oven)</p>
+                            <p class="card-text">Like "core" in English</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="letter-card card h-100 text-center p-3" data-word="Öl">
+                            <h3 class="card-title">Ö</h3>
+                            <p class="ipa card-text text-muted">/øː/</p>
+                            <p class="example card-text text-primary fw-bold">Öl /øːl/ (oil)</p>
+                            <p class="card-text">Like French "peu"</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="letter-card card h-100 text-center p-3" data-word="Pferd">
+                            <h3 class="card-title">P</h3>
+                            <p class="ipa card-text text-muted">/p/</p>
+                            <p class="example card-text text-primary fw-bold">Pferd /pfɛʁt/ (horse)</p>
+                            <p class="card-text">Like "pen" in English</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="letter-card card h-100 text-center p-3" data-word="Quelle">
+                            <h3 class="card-title">Q</h3>
+                            <p class="ipa card-text text-muted">/k/</p>
+                            <p class="example card-text text-primary fw-bold">Quelle /ˈkʋɛ.lə/ (source)</p>
+                            <p class="card-text">Like "quick" in English</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="letter-card card h-100 text-center p-3" data-word="Rose">
+                            <h3 class="card-title">R</h3>
+                            <p class="ipa card-text text-muted">/ʁ/</p>
+                            <p class="example card-text text-primary fw-bold">Rose /ˈʁoː.zə/ (rose)</p>
+                            <p class="card-text">Like guttural "r" in French</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="letter-card card h-100 text-center p-3" data-word="Sonne">
+                            <h3 class="card-title">S</h3>
+                            <p class="ipa card-text text-muted">/s/</p>
+                            <p class="example card-text text-primary fw-bold">Sonne /ˈzɔ.nə/ (sun)</p>
+                            <p class="card-text">Like "sun" in English</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="letter-card card h-100 text-center p-3" data-word="Fuß">
+                            <h3 class="card-title">ß</h3>
+                            <p class="ipa card-text text-muted">/s/</p>
+                            <p class="example card-text text-primary fw-bold">Fuß /fuːs/ (foot)</p>
+                            <p class="card-text">Like "ss" in "hiss"</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="letter-card card h-100 text-center p-3" data-word="Tisch">
+                            <h3 class="card-title">T</h3>
+                            <p class="ipa card-text text-muted">/t/</p>
+                            <p class="example card-text text-primary fw-bold">Tisch /tɪʃ/ (table)</p>
+                            <p class="card-text">Like "top" in English</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="letter-card card h-100 text-center p-3" data-word="Uhr">
+                            <h3 class="card-title">U</h3>
+                            <p class="ipa card-text text-muted">/uː/</p>
+                            <p class="example card-text text-primary fw-bold">Uhr /uːʁ/ (clock)</p>
+                            <p class="card-text">Like "moon" in English</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="letter-card card h-100 text-center p-3" data-word="Über">
+                            <h3 class="card-title">Ü</h3>
+                            <p class="ipa card-text text-muted">/yː/</p>
+                            <p class="example card-text text-primary fw-bold">Über /ˈyː.bɐ/ (over)</p>
+                            <p class="card-text">Like French "tu"</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="letter-card card h-100 text-center p-3" data-word="Vogel">
+                            <h3 class="card-title">V</h3>
+                            <p class="ipa card-text text-muted">/f/</p>
+                            <p class="example card-text text-primary fw-bold">Vogel /ˈfoː.ɡəl/ (bird)</p>
+                            <p class="card-text">Like "fish" in English</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="letter-card card h-100 text-center p-3" data-word="Wasser">
+                            <h3 class="card-title">W</h3>
+                            <p class="ipa card-text text-muted">/v/</p>
+                            <p class="example card-text text-primary fw-bold">Wasser /ˈva.sɐ/ (water)</p>
+                            <p class="card-text">Like "voice" in English</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="letter-card card h-100 text-center p-3" data-word="Xylophon">
+                            <h3 class="card-title">X</h3>
+                            <p class="ipa card-text text-muted">/ks/</p>
+                            <p class="example card-text text-primary fw-bold">Xylophon /ksyː.loˈfoːn/ (xylophone)</p>
+                            <p class="card-text">Like "box" in English</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="letter-card card h-100 text-center p-3" data-word="Yoga">
+                            <h3 class="card-title">Y</h3>
+                            <p class="ipa card-text text-muted">/yː/</p>
+                            <p class="example card-text text-primary fw-bold">Yoga /ˈjoː.ɡa/ (yoga)</p>
+                            <p class="card-text">Like "see" in English</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="letter-card card h-100 text-center p-3" data-word="Zebra">
+                            <h3 class="card-title">Z</h3>
+                            <p class="ipa card-text text-muted">/ts/</p>
+                            <p class="example card-text text-primary fw-bold">Zebra /ˈtseː.bʁa/ (zebra)</p>
+                            <p class="card-text">Like "cats" in English</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center py-4 bg-dark text-white rounded">
+            <p>Explore German culture and language with curiosity and joy!</p>
+            <p>Learn German: A Dialectal Journey</p>
+            <div class="footer-header collapsed" data-bs-toggle="collapse" data-bs-target="#unitsContent" aria-expanded="false">
+                <h3 class="mb-0">Learning Units</h3>
+            </div>
+            <div id="unitsContent" class="collapse">
+                <div class="d-flex flex-wrap justify-content-center gap-2 mt-3 unit-buttons">
+                    <a class="unit-button btn d-block text-center" href="https://www.lingetscript.com/2025/04/umgangssprachliches-deutsch-fur.html"><span>Unit 1: Hello!</span></a>
+                    <a class="unit-button btn d-block text-center" href="https://www.lingetscript.com/2025/05/einheit-2small-talk-and-introductions.html"><span>Unit 2: Introductions and Small Talk</span></a>
+                    <a class="unit-button btn d-block text-center" href="https://www.lingetscript.com/2025/05/umgangssprachliches-deutsch-fur_26.html"><span>Unit 3: At the market.</span></a>
+                    <a class="unit-button btn d-block text-center" href="https://www.lingetscript.com/2025/05/umgangssprachliches-deutsch-fur.html"><span>Unit 4: At the Cafè.</span></a>
+                    <a class="unit-button btn d-block text-center" href="https://www.lingetscript.com/2025/05/umgangssprachliches-deutsch-fur_56.html"><span>Unit 5: Travel and Directions</span></a>
+                    <a class="unit-button btn d-block text-center" href="https://www.lingetscript.com/2025/05/umgangssprachliches-deutsch-fur_28.html"><span>Unit 6: Family and relationships</span></a>
+                    <a class="unit-button btn d-block text-center" href="https://www.lingetscript.com/2025/05/umgangssprachliches-deutsch-fur_29.html"><span>Unit 7: Work and Professions.</span></a>
+                    <a class="unit-button btn d-block text-center" href="https://www.lingetscript.com/2025/05/einheit-8-hobbys-und-freizeit.html"><span>Unit 8: Hobbies and Leisure.</span></a>
+                    <a class="unit-button btn d-block text-center" href="https://www.lingetscript.com/2025/05/einheit-8zu-hausem.html"><span>Unit 9: At Home.</span></a>
+                    <a class="unit-button btn d-block text-center" href="https://www.lingetscript.com/2025/05/umgangssprachliches-deutsch-fur_30.html"><span>Unit 10: Health and Welness</span></a>
+                    <a class="unit-button btn d-block text-center" href="https://www.lingetscript.com/2025/05/umgangssprachliches-deutsch-fur_30.html"><span>Talking About Time and Seasons</span></a>
+                    <a class="unit-button btn d-block text-center" href="https://www.lingetscript.com/2025/06/einheit-12-feste-und-traditionen.html"><span>Unit 12: Festivals and Celebrations</span></a>
+                    <a class="unit-button btn d-block text-center" href="https://www.lingetscript.com/2025/06/umgangssprachliches-deutsch-fur.html"><span>Unit 13: Advanced Conversations</span></a>
+                    <a class="unit-button btn d-block text-center" href="https://www.lingetscript.com/2025/06/german-idioms.html"><span>Unit 14: German Idioms</span></a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Bootstrap 5 JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script>
+        // Dark Mode Toggle
+        document.getElementById('themeToggle').addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const buttonText = document.body.classList.contains('dark-mode') ? 'Light Mode' : 'Dark Mode';
+            document.getElementById('themeToggle').textContent = `Toggle ${buttonText}`;
+        });
+
+        // Smooth Scroll for Unit Buttons
+        document.querySelectorAll('.unit-button').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const href = button.getAttribute('href');
+                if (href.startsWith('#')) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+
+        // Text-to-Speech for Alphabet Cards
+        document.querySelectorAll('.letter-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const word = card.getAttribute('data-word');
+                const utterance = new SpeechSynthesisUtterance(word);
+                utterance.lang = 'de-DE'; // Set language to German
+                speechSynthesis.speak(utterance);
+            });
+        });
+
+        // Handle Collapse Arrow Rotation
+        document.querySelectorAll('[data-bs-toggle="collapse"]').forEach(header => {
+            const target = document.querySelector(header.getAttribute('data-bs-target'));
+            // Set initial state
+            header.classList.toggle('collapsed', !target.classList.contains('show'));
+            // Listen for Bootstrap collapse events
+            target.addEventListener('shown.bs.collapse', () => {
+                header.classList.remove('collapsed');
+            });
+            target.addEventListener('hidden.bs.collapse', () => {
+                header.classList.add('collapsed');
+            });
+        });
+    </script>
+</body>
+</html>
+</div>
