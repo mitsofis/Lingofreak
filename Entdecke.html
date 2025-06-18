@@ -173,19 +173,7 @@
     <link rel="manifest" href="/Lingofreak/manifest.json?v=2" />
 </head>
 <body>
-<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('service-worker.js')
-        .then(() => {
-          console.log('Service Worker registered successfully.');
-        })
-        .catch((error) => {
-          console.log('Service Worker registration failed:', error);
-        });
-    });
-  }
-</script>
+
     <div class="container my-4">
         <!-- Header -->
         <header class="text-center py-4">
@@ -594,6 +582,19 @@
     console.log('PWA was installed');
   });
 </script>
+    <script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(() => {
+          console.log('Service Worker registered successfully.');
+        })
+        .catch((error) => {
+          console.log('Service Worker registration failed:', error);
+        });
+    });
+  }
+    </script>
 </body>
 </html>
 
