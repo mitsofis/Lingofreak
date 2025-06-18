@@ -1,7 +1,7 @@
 {
   "name": "Entdecke die Deutsche Sprache",
   "short_name": "Lingofreak",
-  "start_url": "./Entdecke.html",
+  "start_url": "/Entdecke.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#317EFB",
