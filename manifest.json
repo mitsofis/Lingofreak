@@ -1,8 +1,7 @@
 {
   "name": "Entdecke die Deutsche Sprache",
-  "short_name": "Deutsche Sprache",
-  "description": "Learn about the German language and culture.",
-  "start_url": "./",
+  "short_name": "Lingofreak",
+  "start_url": "./Entdecke.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#317EFB",
