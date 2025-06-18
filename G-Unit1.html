@@ -1,0 +1,1482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Umgangssprachliches Deutsch für Anfänger</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            margin: auto;
+        }
+        h1 {
+            font-size: 2.5rem;
+        }
+        h2 {
+            font-size: 2rem;
+        }
+        h3 {
+            font-size: 1.8rem;
+        }
+        h4 {
+            font-size: 1.5rem;
+        }
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .tab-link {
+            padding: 14px 24px;
+            cursor: pointer;
+            background: #e0e0e0;
+            border-radius: 20px;
+            border: none;
+            font-size: 1.2rem;
+            transition: background 0.3s, color 0.3s;
+        }
+        .tab-link:hover {
+            background: #007bff;
+            color: white;
+        }
+        .tab-link.active {
+            background: #007bff;
+            color: white;
+            font-weight: bold;
+        }
+        .tab-content {
+            display: none;
+            padding: 10px;
+            border-radius: 8px;
+            background: #ffffff;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .dialogue, .vocabulary, .grammar, .exercises, .reading {
+            margin-bottom: 30px;
+        }
+        .dialogue-card, .passage-card, .vocab-card, .grammar-card, .glossary-card, .exercise-card {
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            font-size: 1.1rem;
+            border: 1px solid rgba(0, 0, 0, 0.125);
+        }
+        .dialogue-card:hover, .passage-card:hover, .vocab-card:hover, .grammar-card:hover, .glossary-card:hover, .exercise-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .audio-btn {
+            font-size: 1.1rem;
+            padding: 10px 20px;
+            margin-bottom: 15px;
+        }
+        .note {
+            font-style: italic;
+            color: #555;
+            font-size: 1rem;
+        }
+        #audio-feedback {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            max-width: 90%;
+        }
+        .vocab-card p, .grammar-card p, .glossary-card p, .exercise-card p {
+            margin-bottom: 0.5rem;
+        }
+        .vocab-card strong, .grammar-card strong, .glossary-card strong, .exercise-card strong {
+            color: #007bff;
+        }
+        .collapse-btn {
+            font-size: 1.1rem;
+            padding: 8px 16px;
+            margin-bottom: 15px;
+        }
+        .draggable, .draggable-word {
+            cursor: move;
+            user-select: none;
+        }
+        .draggable.dragging, .draggable-word.dragging {
+            opacity: 0.5;
+        }
+        .droppable, .droppable-sentence {
+            min-height: 40px;
+            border: 2px dashed #007bff;
+            padding: 10px;
+            background: #f8f9fa;
+        }
+        .droppable:hover, .droppable-sentence:hover {
+            background: #e0e0e0;
+        }
+        .form-control.d-inline-block {
+            width: 100px;
+            display: inline-block;
+            margin: 0 5px;
+        }
+        .alert-success, .alert-warning, .alert-danger {
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .list-group-item {
+            margin-bottom: 5px;
+        }
+        @media (max-width: 576px) {
+            body {
+                font-size: 1.1rem;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            h2 {
+                font-size: 1.8rem;
+            }
+            h3 {
+                font-size: 1.6rem;
+            }
+            h4 {
+                font-size: 1.4rem;
+            }
+            .dialogue-card, .passage-card, .vocab-card, .grammar-card, .glossary-card, .exercise-card {
+                font-size: 1rem;
+            }
+            .tab-link {
+                font-size: 1rem;
+                padding: 10px 18px;
+            }
+            .audio-btn, .collapse-btn {
+                font-size: 1rem;
+                padding: 8px 16px;
+            }
+            .form-control.d-inline-block {
+                width: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container my-5">
+        <h1 class="text-center mb-4">📘 Colloquial German for Beginners</h1>
+        <h2 class="text-center mb-4">🟨 UNIT 1: Hello!</h2>
+
+        <!-- Audio Feedback -->
+        <div id="audio-feedback" class="alert" role="alert"></div>
+
+        <!-- Tabs Navigation -->
+        <div class="tabs">
+            <button class="tab-link active" onclick="openTab(event, 'dialogues')">Dialogues</button>
+            <button class="tab-link" onclick="openTab(event, 'vocabulary')">Vocabulary</button>
+            <button class="tab-link" onclick="openTab(event, 'grammar')">Grammar</button>
+            <button class="tab-link" onclick="openTab(event, 'exercises')">Exercises</button>
+            <button class="tab-link" onclick="openTab(event, 'reading')">Reading</button>
+        </div>
+
+        <!-- Tab Content -->
+        <div class="tab-content active" id="dialogues">
+            <!-- Dialogue 1: Standard German -->
+            <section class="dialogue">
+                <div class="dialogue-card card p-4 mb-4">
+                    <h3 class="card-title">🗣️ Dialogue 1 – Formal Greeting (Standard German)</h3>
+                    <div class="audio-container mb-3">
+                        <button class="btn btn-primary audio-btn" onclick="speak('Guten Tag! Wie geht es Ihnen heute? Gut. Vielen Dank. Und Ihnen. Was gibt’s Neues? Sehr gut. Ich bin zufrieden. Ich bin Anna. Wie heißen Sie? Ich bin Ben. Freut mich. Sie kennenzulernen! Woher kommen Sie? Ich komme aus Berlin. Und Sie? Aus Hamburg. Schön. Sie hier zu treffen! Ebenso. Bis bald. Hoffe ich!', 'de-DE')">Play Audio</button>
+                    </div>
+                    <div class="basic-phrases">
+                        <h4>Basic Phrases:</h4>
+                        <ul>
+                            <li>Hallo! – Hello!</li>
+                            <li>Guten Tag! – Good day!</li>
+                            <li>Wie geht es Ihnen? – How are you?</li>
+                            <li>Danke! – Thank you!</li>
+                            <li>Auf Wiedersehen! – Goodbye!</li>
+                        </ul>
+                    </div>
+                    <div class="dialogue-text" id="dialogue1-text">
+                        <p><strong>Anna:</strong> Guten Tag! Wie geht es Ihnen heute?</p>
+                        <p><strong>Ben:</strong> Gut, vielen Dank. Und Ihnen, was gibt’s Neues?</p>
+                        <p><strong>Anna:</strong> Sehr gut, ich bin zufrieden. Ich bin Anna. Wie heißen Sie?</p>
+                        <p><strong>Ben:</strong> Ich bin Ben. Freut mich, Sie kennenzulernen! Woher kommen Sie?</p>
+                        <p><strong>Anna:</strong> Ich komme aus Berlin. Und Sie?</p>
+                        <p><strong>Ben:</strong> Aus Hamburg. Schön, Sie hier zu treffen!</p>
+                        <p><strong>Anna:</strong> Ebenso. Bis bald, hoffe ich!</p>
+                    </div>
+                    <div class="translation">
+                        <h4>📝 Translation</h4>
+                        <p><strong>Anna:</strong> Good day! How are you today?</p>
+                        <p><strong>Ben:</strong> Good, thank you very much. And you, what’s new?</p>
+                        <p><strong>Anna:</strong> Very well, I’m happy. I’m Anna. What’s your name?</p>
+                        <p><strong>Ben:</strong> I’m Ben. Nice to meet you! Where are you from?</p>
+                        <p><strong>Anna:</strong> I’m from Berlin. And you?</p>
+                        <p><strong>Ben:</strong> From Hamburg. Good to meet you here!</p>
+                        <p><strong>Anna:</strong> Likewise. See you soon, I hope!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Dialogue 2: Colloquial German -->
+            <section class="dialogue">
+                <div class="dialogue-card card p-4 mb-4">
+                    <h3 class="card-title">🗣️ Dialogue 2 – Informal Greeting (Colloquial German)</h3>
+                    <div class="audio-container mb-3">
+                        <button class="btn btn-primary audio-btn" onclick="speak('Hey. Was geht! Na. Wie geht’s Kumpel? Alles klar. Mann! Und dir. Was liegt an? Alles cool. Aber was hast du in letzter Zeit gemacht? Hab dich ewig nicht gesehen! War unterwegs. Bei Verwandten. Bin gestern spät zurück. Nice. Freut mich! Komm. Lass uns ’nen Kaffee trinken. Wir haben viel zu quatschen! Okay. Los geht’s. Wohin willst du?', 'de-DE')">Play Audio</button>
+                    </div>
+                    <div class="basic-phrases">
+                        <h4>Basic Phrases:</h4>
+                        <ul>
+                            <li>Hey! – Hey!</li>
+                            <li>Na, wie geht’s? – Yo, how’s it going?</li>
+                            <li>Was geht? – What’s up?</li>
+                            <li>Was machst du? – What you up to?</li>
+                            <li>Cool, Mann! – Cool, dude!</li>
+                            <li>Komm schon! – Come on!</li>
+                        </ul>
+                    </div>
+                    <div class="dialogue-text" id="dialogue2-text">
+                        <p><strong>Lina:</strong> Hey, was geht! Na, wie geht’s, Kumpel?</p>
+                        <p><strong>Toni:</strong> Alles klar, Mann! Und dir, what liegt an?</p>
+                        <p><strong>Lina:</strong> Alles cool, aber was hast du in letzter Zeit gemacht? Hab dich ewig nicht gesehen!</p>
+                        <p><strong>Toni:</strong> War unterwegs, bei Verwandten. Bin gestern spät zurück.</p>
+                        <p><strong>Lina:</strong> Nice, freut mich! Komm, lass uns ’nen Kaffee trinken, wir haben viel zu quatschen!</p>
+                        <p><strong>Toni:</strong> Okay, los geht’s. Wohin willst du?</p>
+                    </div>
+                    <div class="translation">
+                        <h4>📝 Translation</h4>
+                        <p><strong>Lina:</strong> Hey, what’s up! Yo, how’s it going, buddy?</p>
+                        <p><strong>Toni:</strong> All good, dude! And you, what’s new?</p>
+                        <p><strong>Lina:</strong> All cool, but what’ve you been up to lately? Haven’t seen you in ages!</p>
+                        <p><strong>Toni:</strong> Was out of town, with some relatives. Got back late last night.</p>
+                        <p><strong>Lina:</strong> Nice, I’m glad! Let’s grab a coffee—we’ve got tons to catch up on!</p>
+                        <p><strong>Toni:</strong> Cool, let’s go. Where do you wanna head?</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Dialogue 3: Bavarian Dialect -->
+            <section class="dialogue">
+                <div class="dialogue-card card p-4 mb-4">
+                    <h3 class="card-title">🗣️ Dialogue 3 – Informal Greeting (Bavarian)</h3>
+                    <div class="audio-container mb-3">
+                        <button class="btn btn-primary audio-btn" onclick="speak('Servus! Bist guat drau. Gell? Jo. Passt scho! Und du. Wo geht’s hin? Mei. Dich hob i a Ewigkeit nimmer g’seh. Wo warst’n? War in Minga. Bei meiner Bagage. Bin heit z’ruck. Guat. Dass’d wieder da bist! Geh. Trink ma an Kaffee. Oder? Jo. Klar. Mia zwoa gehn ins Wirtshaus!', 'de-DE')">Play Audio</button>
+                    </div>
+                    <div class="basic-phrases">
+                        <h4>Basic Phrases:</h4>
+                        <ul>
+                            <li>Servus! – Hello!</li>
+                            <li>Wo geht’s? – How’s it going?</li>
+                            <li>Was machst? – What you doing?</li>
+                            <li>Passt scho! – All good!</li>
+                            <li>Schaug’n ma! – See you!</li>
+                        </ul>
+                    </div>
+                    <div class="dialogue-text" id="dialogue3-text">
+                        <p><strong>Fritz:</strong> Servus! Bist guat drau, gell?</p>
+                        <p><strong>Sepp:</strong> Jo, passt scho! Und du, wo geht’s hin?</p>
+                        <p><strong>Fritz:</strong> Mei, dich hob i a Ewigkeit nimmer g’seh. Wo warst’n?</p>
+                        <p><strong>Sepp:</strong> War in Minga, bei meiner Bagage. Bin heit z’ruck.</p>
+                        <p><strong>Fritz:</strong> Guat, dass’d wieder da bist! Geh, trink ma an Kaffee, oder?</p>
+                        <p><strong>Sepp:</strong> Jo, klar. Mia zwoa gehn ins Wirtshaus!</p>
+                    </div>
+                    <div class="translation">
+                        <h4>📝 Translation</h4>
+                        <p><strong>Fritz:</strong> Hello! You’re doing alright, yeah?</p>
+                        <p><strong>Sepp:</strong> Yeah, all good! And you, how’s it going?</p>
+                        <p><strong>Fritz:</strong> Man, haven’t seen you in forever. Where’ve you been?</p>
+                        <p><strong>Sepp:</strong> Was in Munich, with my family. Got back today.</p>
+                        <p><strong>Fritz:</strong> Good to have you back! Come on, let’s grab a coffee, yeah?</p>
+                        <p><strong>Sepp:</strong> Sure thing. Let’s hit the pub!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Dialogue 4: Swabian Dialect -->
+            <section class="dialogue">
+                <div class="dialogue-card card p-4 mb-4">
+                    <h3 class="card-title">🗣️ Dialogue 4 – Informal Greeting (Swabian)</h3>
+                    <div class="audio-container mb-3">
+                        <button class="btn btn-primary audio-btn" onclick="speak('Grüß di! Wie goht’s dir. Gudd? Gudd. Danke der! Und dir. Was machst’n? Ewig nimmer g’seh! Wo warst’n die ganze Zeit? War in Stuggi. Bei meim Onkel. Bin heut früh zruck. Willkomme zruck! Magst’n Kaffee mit mir trinke? Jo. Klar! Geh ma ins Café. Lang nimmer g’schwätzt!', 'de-DE')">Play Audio</button>
+                    </div>
+                    <div class="basic-phrases">
+                        <h4>Basic Phrases:</h4>
+                        <ul>
+                            <li>Grüß di! – Hello!</li>
+                            <li>Wie goht’s? – How you doing?</li>
+                            <li>Gudd! – Good!</li>
+                            <li>Willkomme zruck! – Welcome back!</li>
+                            <li>Kömmst mit? – You coming?</li>
+                        </ul>
+                    </div>
+                    <div class="dialogue-text" id="dialogue4-text">
+                        <p><strong>Mia:</strong> Grüß di! Wie goht’s dir, gudd?</p>
+                        <p><strong>Gustav:</strong> Gudd, danke der! Und dir, was machst’n?</p>
+                        <p><strong>Mia:</strong> Ewig nimmer g’seh! Wo warst’n die ganze Zeit?</p>
+                        <p><strong>Gustav:</strong> War in Stuggi, bei meim Onkel. Bin heut früh zruck.</p>
+                        <p><strong>Mia:</strong> Willkomme zruck! Magst’n Kaffee mit mir trinke?</p>
+                        <p><strong>Gustav:</strong> Jo, klar! Geh ma ins Café, lang nimmer g’schwätzt!</p>
+                    </div>
+                    <div class="translation">
+                        <h4>📝 Translation</h4>
+                        <p><strong>Mia:</strong> Hello! How you doing, good?</p>
+                        <p><strong>Gustav:</strong> Good, thanks! And you, what’s up?</p>
+                        <p><strong>Mia:</strong> Haven’t seen you in ages! Where’ve you been all this time?</p>
+                        <p><strong>Gustav:</strong> Was in Stuttgart, at my uncle’s. Got back early today.</p>
+                        <p><strong>Mia:</strong> Welcome back! Wanna grab a coffee with me?</p>
+                        <p><strong>Gustav:</strong> Yeah, sure! Let’s go to the café, it’s been a while since we chatted!</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="tab-content" id="vocabulary">
+            <section class="vocabulary card p-4">
+                <h3 class="card-title">🧠 Vocabulary</h3>
+                <div class="audio-container mb-3">
+                    <button class="btn btn-primary audio-btn" onclick="speak('Hallo. Hey. Servus. Grüß di. Hello. Wie. Na. Was geht. Wo. Wie. How. What’s up. Bin. Bin. Bin. Bin. I am. Danke. Alles klar. Passt scho. Gudd. Thank you. Good. Sehr. Total. Voll. Mei. Richtig. Very. A lot. Mann. Kumpel. Gell. Ma. Man. Friend. Ja. Ja. Jo. Jo. Yes. Ein. ’nen. An. En. One. A. Wo. Wo. Was. Wo. Wo. Where. Kaffee. Kaffee. Kaffee. Kaffee. Coffee. Gespräch. Quatschen. Schwätzen. Schwätzen. Conversation. Chat.', 'de-DE')">Play Vocabulary</button>
+                </div>
+                <div class="row g-3">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="vocab-card card p-3">
+                            <p><strong>Standard:</strong> Hallo</p>
+                            <p><strong>Colloquial:</strong> Hey</p>
+                            <p><strong>Bavarian:</strong> Servus</p>
+                            <p><strong>Swabian:</strong> Grüß di</p>
+                            <p><strong>Meaning:</strong> Hello</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="vocab-card card p-3">
+                            <p><strong>Standard:</strong> Wie</p>
+                            <p><strong>Colloquial:</strong> Na / Was geht</p>
+                            <p><strong>Bavarian:</strong> Wo</p>
+                            <p><strong>Swabian:</strong> Wie</p>
+                            <p><strong>Meaning:</strong> How / What’s up</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="vocab-card card p-3">
+                            <p><strong>Standard:</strong> Bin</p>
+                            <p><strong>Colloquial:</strong> Bin</p>
+                            <p><strong>Bavarian:</strong> Bin</p>
+                            <p><strong>Swabian:</strong> Bin</p>
+                            <p><strong>Meaning:</strong> I am</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="vocab-card card p-3">
+                            <p><strong>Standard:</strong> Danke</p>
+                            <p><strong>Colloquial:</strong> Alles klar</p>
+                            <p><strong>Bavarian:</strong> Passt scho</p>
+                            <p><strong>Swabian:</strong> Gudd</p>
+                            <p><strong>Meaning:</strong> Thank you / Good</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="vocab-card card p-3">
+                            <p><strong>Standard:</strong> Sehr</p>
+                            <p><strong>Colloquial:</strong> Total / Voll</p>
+                            <p><strong>Bavarian:</strong> Mei</p>
+                            <p><strong>Swabian:</strong> Richtig</p>
+                            <p><strong>Meaning:</strong> Very / A lot</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="vocab-card card p-3">
+                            <p><strong>Standard:</strong> Mann</p>
+                            <p><strong>Colloquial:</strong> Kumpel</p>
+                            <p><strong>Bavarian:</strong> Gell</p>
+                            <p><strong>Swabian:</strong> Ma</p>
+                            <p><strong>Meaning:</strong> Man / Friend</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="vocab-card card p-3">
+                            <p><strong>Standard:</strong> Ja</p>
+                            <p><strong>Colloquial:</strong> Ja</p>
+                            <p><strong>Bavarian:</strong> Jo</p>
+                            <p><strong>Swabian:</strong> Jo</p>
+                            <p><strong>Meaning:</strong> Yes</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="vocab-card card p-3">
+                            <p><strong>Standard:</strong> Ein</p>
+                            <p><strong>Colloquial:</strong> ’nen</p>
+                            <p><strong>Bavarian:</strong> An</p>
+                            <p><strong>Swabian:</strong> En</p>
+                            <p><strong>Meaning:</strong> One / A</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="vocab-card card p-3">
+                            <p><strong>Standard:</strong> Wo</p>
+                            <p><strong>Colloquial:</strong> Wo / Was</p>
+                            <p><strong>Bavarian:</strong> Wo</p>
+                            <p><strong>Swabian:</strong> Wo</p>
+                            <p><strong>Meaning:</strong> Where</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="vocab-card card p-3">
+                            <p><strong>Standard:</strong> Kaffee</p>
+                            <p><strong>Colloquial:</strong> Kaffee</p>
+                            <p><strong>Bavarian:</strong> Kaffee</p>
+                            <p><strong>Swabian:</strong> Kaffee</p>
+                            <p><strong>Meaning:</strong> Coffee</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="vocab-card card p-3">
+                            <p><strong>Standard:</strong> Gespräch</p>
+                            <p><strong>Colloquial:</strong> Quatschen</p>
+                            <p><strong>Bavarian:</strong> Schwätzen</p>
+                            <p><strong>Swabian:</strong> Schwätzen</p>
+                            <p><strong>Meaning:</strong> Conversation / Chat</p>
+                        </div>
+                    </div>
+                </div>
+                <p class="note mt-3"><strong>Note:</strong> Bavarian often uses “jo” instead of “ja” and has a sing-song intonation. Swabian is softer, with expressions like “gudd” or “ma.” Colloquial German frequently includes slang like “Mann” or “voll” for emphasis.</p>
+            </section>
+        </div>
+
+        <div class="tab-content" id="grammar">
+            <section class="grammar card p-4">
+                <h3 class="card-title">📚 Grammar Focus: Present Tense of “sein”</h3>
+                <div class="audio-container mb-3">
+                    <button class="btn btn-primary audio-btn" onclick="speak('The verb “sein” to be is central in German. With consistent conjugation across dialects but varying pronunciation and usage. Standard German. Regular conjugation. Formal and clear. Colloquial German. Same as standard. But with slang like “Mann” for emphasis. Bavarian. Same conjugation. Often with “jo” or “gell” for flair. Swabian. Identical conjugation. With softer. Melodic pronunciation. Ich. Bin. Bin. Bin. Bin. Du. Bist. Bist. Bist. Bist. Er. Sie. Ist. Ist. Ist. Ist. Wir. Sind. Sind. Sind. Sind. Ihr. Seid. Seid. Seid. Seid. Sie. Sind. Sind. Sind. Sind. Examples. Standard. Ich bin Anna. Formal and clear. Bist du aus Berlin? Polite question. Wir sind Freunde. Neutral and clear. Colloquial. Alles klar. Mann! Relaxed and friendly. Bist du okay. Kumpel? Casual. Wir sind fit. Was geht! Lively and informal. Bavarian. Wo bist? Sing-song. With “wo” instead of “wie.” I bin aus Minga. Regional charm. Se san stark. Bavarian tone. Swabian. Bin gudd. Danke! Soft and warm. Bist gudd drau. Ma? Melodic pronunciation. Mir sind z’samm. Kumpel! Expressive.', 'de-DE')">Play Grammar</button>
+                </div>
+                <p>The verb “sein” (to be) is central in German, with consistent conjugation across dialects but varying pronunciation and usage:</p>
+                <ul>
+                    <li><strong>Standard German:</strong> Regular conjugation, formal and clear (Dialogue 1).</li>
+                    <li><strong>Colloquial German:</strong> Same as standard, but with slang like “Mann” for emphasis (Dialogue 2).</li>
+                    <li><strong>Bavarian:</strong> Same conjugation, often with “jo” or “gell” for flair (Dialogue 3).</li>
+                    <li><strong>Swabian:</strong> Identical conjugation, with softer, melodic pronunciation (Dialogue 4).</li>
+                </ul>
+                <div class="row g-3">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="grammar-card card p-3">
+                            <p><strong>Person:</strong> Ich</p>
+                            <p><strong>Standard:</strong> Bin</p>
+                            <p><strong>Colloquial:</strong> Bin</p>
+                            <p><strong>Bavarian:</strong> Bin</p>
+                            <p><strong>Swabian:</strong> Bin</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="grammar-card card p-3">
+                            <p><strong>Person:</strong> Du</p>
+                            <p><strong>Standard:</strong> Bist</p>
+                            <p><strong>Colloquial:</strong> Bist</p>
+                            <p><strong>Bavarian:</strong> Bist</p>
+                            <p><strong>Swabian:</strong> Bist</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="grammar-card card p-3">
+                            <p><strong>Person:</strong> Er/Sie</p>
+                            <p><strong>Standard:</strong> Ist</p>
+                            <p><strong>Colloquial:</strong> Ist</p>
+                            <p><strong>Bavarian:</strong> Ist</p>
+                            <p><strong>Swabian:</strong> Ist</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="grammar-card card p-3">
+                            <p><strong>Person:</strong> Wir</p>
+                            <p><strong>Standard:</strong> Sind</p>
+                            <p><strong>Colloquial:</strong> Sind</p>
+                            <p><strong>Bavarian:</strong> Sind</p>
+                            <p><strong>Swabian:</strong> Sind</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="grammar-card card p-3">
+                            <p><strong>Person:</strong> Ihr</p>
+                            <p><strong>Standard:</strong> Seid</p>
+                            <p><strong>Colloquial:</strong> Seid</p>
+                            <p><strong>Bavarian:</strong> Seid</p>
+                            <p><strong>Swabian:</strong> Seid</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="grammar-card card p-3">
+                            <p><strong>Person:</strong> Sie</p>
+                            <p><strong>Standard:</strong> Sind</p>
+                            <p><strong>Colloquial:</strong> Sind</p>
+                            <p><strong>Bavarian:</strong> Sind</p>
+                            <p><strong>Swabian:</strong> Sind</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="examples mt-3">
+                    <h4>Examples:</h4>
+                    <p><strong>Standard:</strong></p>
+                    <ul>
+                        <li>“Ich bin Anna” – Formal and clear.</li>
+                        <li>“Bist du aus Berlin?” – Polite question.</li>
+                        <li>“Wir sind Freunde” – Neutral and clear.</li>
+                    </ul>
+                    <p><strong>Colloquial:</strong></p>
+                    <ul>
+                        <li>“Alles klar, Mann!” – Relaxed and friendly.</li>
+                        <li>“Bist du okay, Kumpel?” – Casual.</li>
+                        <li>“Wir sind fit, was geht!” – Lively and informal.</li>
+                    </ul>
+                    <p><strong>Bavarian:</strong></p>
+                    <ul>
+                        <li>“Wo bist?” – Sing-song, with “wo” instead of “wie.”</li>
+                        <li>“I bin aus Minga” – Regional charm.</li>
+                        <li>“Se san stark” – Bavarian tone.</li>
+                    </ul>
+                    <p><strong>Swabian:</strong></p>
+                    <ul>
+                        <li>“Bin gudd, danke!” – Soft and warm.</li>
+                        <li>“Bist gudd drau, ma?” – Melodic pronunciation.</li>
+                        <li>“Mir sind z’samm, Kumpel!” – Expressive.</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <div class="tab-content" id="exercises">
+            <section class="exercises card p-4">
+                <h3 class="card-title">✍️ Exercises</h3>
+                <div class="audio-container mb-3">
+                    <button class="btn btn-primary audio-btn" onclick="speak('Complete the following exercises to practice your German. Use the text areas for fill-in-the-blank questions. Drag and drop for matching. And select options for multiple choice. Check your answers with the buttons provided.', 'de-DE')">Play Instructions</button>
+                </div>
+
+                <!-- Exercise 1: Fill in the Blank (Standard German) -->
+                <div class="exercise mb-4">
+                    <h4>Exercise 1: Fill in the Blank (Standard German)</h4>
+                    <p>Fill in the blank with the correct form of “sein.”</p>
+                    <ul id="exercise1-list">
+                        <li>1. Ich <input type="text" class="form-control d-inline-block w-auto" id="ex1-1" placeholder="___"> Anna.</li>
+                        <li>2. Du <input type="text" class="form-control d-inline-block w-auto" id="ex1-2" placeholder="___"> aus Berlin?</li>
+                        <li>3. Er <input type="text" class="form-control d-inline-block w-auto" id="ex1-3" placeholder="___"> mein Freund.</li>
+                        <li>4. Wir <input type="text" class="form-control d-inline-block w-auto" id="ex1-4" placeholder="___"> gut.</li>
+                        <li>5. Sie <input type="text" class="form-control d-inline-block w-auto" id="ex1-5" placeholder="___"> aus Deutschland.</li>
+                    </ul>
+                    <button class="btn btn-primary mt-2" onclick="checkExercise1()">Check Answers</button>
+                    <div id="exercise1-feedback" class="mt-2"></div>
+                </div>
+
+                <!-- Exercise 2: Drag-and-Drop Matching Greetings -->
+                <div class="exercise mb-4">
+                    <h4>Exercise 2: Matching Greetings to Dialects</h4>
+                    <p>Drag each greeting to its corresponding dialect.</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Greetings</h5>
+                            <ul id="greetings-list" class="list-group">
+                                <li class="list-group-item draggable" draggable="true" data-answer="A">Hallo</li>
+                                <li class="list-group-item draggable" draggable="true" data-answer="B">Hey</li>
+                                <li class="list-group-item draggable" draggable="true" data-answer="C">Servus</li>
+                                <li class="list-group-item draggable" draggable="true" data-answer="D">Grüß di</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Dialects</h5>
+                            <ul class="list-group">
+                                <li class="list-group-item droppable" data-id="A">A. Standard German</li>
+                                <li class="list-group-item droppable" data-id="B">B. Colloquial German</li>
+                                <li class="list-group-item droppable" data-id="C">C. Bavarian</li>
+                                <li class="list-group-item droppable" data-id="D">D. Swabian</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary mt-2" onclick="checkExercise2()">Check Answers</button>
+                    <div id="exercise2-feedback" class="mt-2"></div>
+                </div>
+
+                <!-- Exercise 3: Sentence Ordering (Colloquial German) -->
+                <div class="exercise mb-4">
+                    <h4>Exercise 3: Sentence Ordering (Colloquial German)</h4>
+                    <p>Drag the words to form correct sentences.</p>
+                    <div id="exercise3">
+                        <div class="mb-3">
+                            <p>1. Kumpel / bist / okay / du?</p>
+                            <ul class="list-group sentence-drag" data-sentence="1" data-correct="Bist du okay, Kumpel?">
+                                <li class="list-group-item draggable-word" draggable="true">Kumpel</li>
+                                <li class="list-group-item draggable-word" draggable="true">bist</li>
+                                <li class="list-group-item draggable-word" draggable="true">okay</li>
+                                <li class="list-group-item draggable-word" draggable="true">du?</li>
+                            </ul>
+                            <div class="droppable-sentence mt-2 p-2 border rounded" data-sentence="1"></div>
+                        </div>
+                        <div class="mb-3">
+                            <p>2. klar / Mann / alles!</p>
+                            <ul class="list-group sentence-drag" data-sentence="2" data-correct="Alles klar, Mann!">
+                                <li class="list-group-item draggable-word" draggable="true">klar</li>
+                                <li class="list-group-item draggable-word" draggable="true">Mann</li>
+                                <li class="list-group-item draggable-word" draggable="true">alles!</li>
+                            </ul>
+                            <div class="droppable-sentence mt-2 p-2 border rounded" data-sentence="2"></div>
+                        </div>
+                        <div class="mb-3">
+                            <p>3. fit / was / sind / wir / geht!</p>
+                            <ul class="list-group sentence-drag" data-sentence="3" data-correct="Wir sind fit, was geht!">
+                                <li class="list-group-item draggable-word" draggable="true">fit</li>
+                                <li class="list-group-item draggable-word" draggable="true">was</li>
+                                <li class="list-group-item draggable-word" draggable="true">sind</li>
+                                <li class="list-group-item draggable-word" draggable="true">wir</li>
+                                <li class="list-group-item draggable-word" draggable="true">geht!</li>
+                            </ul>
+                            <div class="droppable-sentence mt-2 p-2 border rounded" data-sentence="3"></div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary mt-2" onclick="checkExercise3()">Check Answers</button>
+                    <div id="exercise3-feedback" class="mt-2"></div>
+                </div>
+
+                <!-- Exercise 4: Multiple Choice Vocabulary -->
+                <div class="exercise mb-4">
+                    <h4>Exercise 4: Multiple Choice Vocabulary</h4>
+                    <p>Choose the correct vocabulary word to complete the sentence (use the dialect indicated).</p>
+                    <ul>
+                        <li>
+                            1. (Standard) Guten ___!
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="ex4-1" id="ex4-1a" value="Abend">
+                                <label class="form-check-label" for="ex4-1a">A. Abend</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="ex4-1" id="ex4-1b" value="Tag">
+                                <label class="form-check-label" for="ex4-1b">B. Tag</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="ex4-1" id="ex4-1c" value="Morgen">
+                                <label class="form-check-label" for="ex4-1c">C. Morgen</label>
+                            </div>
+                        </li>
+                        <li>
+                            2. (Colloquial) Na, ___ geht’s?
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="ex4-2" id="ex4-2a" value="Was">
+                                <label class="form-check-label" for="ex4-2a">A. Was</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="ex4-2" id="ex4-2b" value="Wie">
+                                <label class="form-check-label" for="ex4-2b">B. Wie</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="ex4-2" id="ex4-2c" value="Wo">
+                                <label class="form-check-label" for="ex4-2c">C. Wo</label>
+                            </div>
+                        </li>
+                        <li>
+                            3. (Bavarian) ___! Bist guat drau?
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="ex4-3" id="ex4-3a" value="Servus">
+                                <label class="form-check-label" for="ex4-3a">A. Servus</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="ex4-3" id="ex4-3b" value="Jo">
+                                <label class="form-check-label" for="ex4-3b">B. Jo</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="ex4-3" id="ex4-3c" value="Mei">
+                                <label class="form-check-label" for="ex4-3c">C. Mei</label>
+                            </div>
+                        </li>
+                        <li>
+                            4. (Swabian) ___ di! Wie goht’s?
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="ex4-4" id="ex4-4a" value="Gudd">
+                                <label class="form-check-label" for="ex4-4a">A. Gudd</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="ex4-4" id="ex4-4b" value="Grüß">
+                                <label class="form-check-label" for="ex4-4b">B. Grüß</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="ex4-4" id="ex4-4c" value="Jo">
+                                <label class="form-check-label" for="ex4-4c">C. Jo</label>
+                            </div>
+                        </li>
+                    </ul>
+                    <button class="btn btn-primary mt-2" onclick="checkExercise4()">Check Answers</button>
+                    <div id="exercise4-feedback" class="mt-2"></div>
+                </div>
+
+                <!-- Exercise 5: Fill in the Blank (Mixed Dialects) -->
+                <div class="exercise mb-4">
+                    <h4>Exercise 5: Fill in the Blank (Mixed Dialects)</h4>
+                    <p>Fill in the blank with the correct form of “sein” (use the dialect indicated).</p>
+                    <ul id="exercise5-list">
+                        <li>1. (Standard) Wir <input type="text" class="form-control d-inline-block w-auto" id="ex5-1" placeholder="___"> in München.</li>
+                        <li>2. (Colloquial) Na, du <input type="text" class="form-control d-inline-block w-auto" id="ex5-2" placeholder="___"> fit, oder?</li>
+                        <li>3. (Bavarian) I <input type="text" class="form-control d-inline-block w-auto" id="ex5-3" placeholder="___"> aus Nürnberg, gell!</li>
+                        <li>4. (Swabian) Mir <input type="text" class="form-control d-inline-block w-auto" id="ex5-4" placeholder="___"> z’samm im Café.</li>
+                        <li>5. (Standard) Sie <input type="text" class="form-control d-inline-block w-auto" id="ex5-5" placeholder="___"> sehr nett, Frau Müller.</li>
+                        <li>6. (Colloquial) Alles klar, wir <input type="text" class="form-control d-inline-block w-auto" id="ex5-6" placeholder="___"> bereit!</li>
+                        <li>7. (Bavarian) Se <input type="text" class="form-control d-inline-block w-auto" id="ex5-7" placeholder="___"> mei beste Freund, jo?</li>
+                        <li>8. (Swabian) Bist du <input type="text" class="form-control d-inline-block w-auto" id="ex5-8" placeholder="___"> gudd drau?</li>
+                    </ul>
+                    <button class="btn btn-primary mt-2" onclick="checkExercise5()">Check Answers</button>
+                    <div id="exercise5-feedback" class="mt-2"></div>
+                </div>
+
+                <!-- Exercise 6: Translate and Transform (Standard to Colloquial) -->
+                <div class="exercise mb-4">
+                    <h4>Exercise 6: Translate and Transform (Standard to Colloquial)</h4>
+                    <p>Translate the following standard German sentences into colloquial German using a text area.</p>
+                    <ul id="exercise6-list">
+                        <li>1. Guten Tag! Wie geht es dir? <br> <textarea class="form-control" id="ex6-1" rows="2" placeholder="Enter colloquial translation"></textarea></li>
+                        <li>2. Ich bin sehr müde. <br> <textarea class="form-control" id="ex6-2" rows="2" placeholder="Enter colloquial translation"></textarea></li>
+                        <li>3. Woher kommst du? <br> <textarea class="form-control" id="ex6-3" rows="2" placeholder="Enter colloquial translation"></textarea></li>
+                        <li>4. Lass uns ins Café gehen! <br> <textarea class="form-control" id="ex6-4" rows="2" placeholder="Enter colloquial translation"></textarea></li>
+                    </ul>
+                    <button class="btn btn-primary mt-2" onclick="checkExercise6()">Check Answers</button>
+                    <div id="exercise6-feedback" class="mt-2"></div>
+                </div>
+
+                <!-- Exercise 7: Create Your Own Dialogue -->
+                <div class="exercise mb-4">
+                    <h4>Exercise 7: Create Your Own Dialogue (Mixed Dialects)</h4>
+                    <p>Write a short dialogue (4-6 lines) between two people meeting for the first time, using one style (Standard, Colloquial, Bavarian, or Swabian). Include one form of “sein” and one greeting. Use the text area below.</p>
+                    <textarea class="form-control" id="ex7-dialogue" rows="6" placeholder="Write your dialogue here"></textarea>
+                    <button class="btn btn-primary mt-2" onclick="checkExercise7()">Submit Dialogue</button>
+                    <div id="exercise7-feedback" class="mt-2"></div>
+                </div>
+
+                <!-- Exercise 8: Multiple Choice (Dialect Identification) -->
+                <div class="exercise mb-4">
+                    <h4>Exercise 8: Multiple Choice (Dialect Identification)</h4>
+                    <p>Identify the dialect of the following sentences.</p>
+                    <ul>
+                        <li>
+                            1. Servus! Bist guat drau?
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="ex8-1" id="ex8-1a" value="A">
+                                <label class="form-check-label" for="ex8-1a">A. Standard German</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="ex8-1" id="ex8-1c" value="C">
+                                <label class="form-check-label" for="ex8-1c">C. Bavarian</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="ex8-1" id="ex8-1d" value="D">
+                                <label class="form-check-label" for="ex8-1d">D. Swabian</label>
+                            </div>
+                        </li>
+                        <li>
+                            2. Guten Tag! Wie geht es Ihnen?
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="ex8-2" id="ex8-2a" value="A">
+                                <label class="form-check-label" for="ex8-2a">A. Standard German</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="ex8-2" id="ex8-2b" value="B">
+                                <label class="form-check-label" for="ex8-2b">B. Colloquial German</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="ex8-2" id="ex8-2c" value="C">
+                                <label class="form-check-label" for="ex8-2c">C. Bavarian</label>
+                            </div>
+                        </li>
+                        <li>
+                            3. Hey, na, alles klar, Kumpel?
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="ex8-3" id="ex8-3b" value="B">
+                                <label class="form-check-label" for="ex8-3b">B. Colloquial German</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="ex8-3" id="ex8-3c" value="C">
+                                <label class="form-check-label" for="ex8-3c">C. Bavarian</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="ex8-3" id="ex8-3d" value="D">
+                                <label class="form-check-label" for="ex8-3d">D. Swabian</label>
+                            </div>
+                        </li>
+                        <li>
+                            4. Grüß di! Wie goht’s, gudd?
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="ex8-4" id="ex8-4a" value="A">
+                                <label class="form-check-label" for="ex8-4a">A. Standard German</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="ex8-4" id="ex8-4b" value="B">
+                                <label class="form-check-label" for="ex8-4b">B. Colloquial German</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="ex8-4" id="ex8-4d" value="D">
+                                <label class="form-check-label" for="ex8-4d">D. Swabian</label>
+                            </div>
+                        </li>
+                    </ul>
+                    <button class="btn btn-primary mt-2" onclick="checkExercise8()">Check Answers</button>
+                    <div id="exercise8-feedback" class="mt-2"></div>
+                </div>
+
+                <!-- Exercise 9: Vocabulary Substitution (Regional Dialects) -->
+                <div class="exercise mb-4">
+                    <h4>Exercise 9: Vocabulary Substitution (Regional Dialects)</h4>
+                    <p>Rewrite the standard German sentences using Bavarian or Swabian vocabulary in the text areas.</p>
+                    <ul id="exercise9-list">
+                        <li>1. Hallo! Wie geht es dir? <br> 
+                            <textarea class="form-control" id="ex9-1-bav" rows="2" placeholder="Bavarian translation"></textarea>
+                            <textarea class="form-control mt-2" id="ex9-1-swa" rows="2" placeholder="Swabian translation"></textarea>
+                        </li>
+                        <li>2. Danke, ich bin gut. <br> 
+                            <textarea class="form-control" id="ex9-2-bav" rows="2" placeholder="Bavarian translation"></textarea>
+                            <textarea class="form-control mt-2" id="ex9-2-swa" rows="2" placeholder="Swabian translation"></textarea>
+                        </li>
+                        <li>3. Lass uns ein Gespräch führen! <br> 
+                            <textarea class="form-control" id="ex9-3-bav" rows="2" placeholder="Bavarian translation"></textarea>
+                            <textarea class="form-control mt-2" id="ex9-3-swa" rows="2" placeholder="Swabian translation"></textarea>
+                        </li>
+                        <li>4. Ja, das ist sehr schön. <br> 
+                            <textarea class="form-control" id="ex9-4-bav" rows="2" placeholder="Bavarian translation"></textarea>
+                            <textarea class="form-control mt-2" id="ex9-4-swa" rows="2" placeholder="Swabian translation"></textarea>
+                        </li>
+                    </ul>
+                    <button class="btn btn-primary mt-2" onclick="checkExercise9()">Check Answers</button>
+                    <div id="exercise9-feedback" class="mt-2"></div>
+                </div>
+
+                <!-- Exercise 10: Comprehension and Writing (Reading-Based) -->
+                <div class="exercise mb-4">
+                    <h4>Exercise 10: Comprehension and Writing (Reading-Based)</h4>
+                    <p>Answer the following questions in complete sentences using Standard or Colloquial German. Then, write a 3-4 sentence paragraph describing a similar scene.</p>
+                    <ul id="exercise10-list">
+                        <li>1. What is similar between the two reading passages? <br> 
+                            <textarea class="form-control" id="ex10-1" rows="2" placeholder="Your answer"></textarea>
+                        </li>
+                        <li>2. How does the tone differ between Text 1 and Text 2? <br> 
+                            <textarea class="form-control" id="ex10-2" rows="2" placeholder="Your answer"></textarea>
+                        </li>
+                        <li>3. What do the dogs do in both passages? <br> 
+                            <textarea class="form-control" id="ex10-3" rows="2" placeholder="Your answer"></textarea>
+                        </li>
+                        <li>Paragraph: <br> 
+                            <textarea class="form-control" id="ex10-paragraph" rows="4" placeholder="Write your paragraph here"></textarea>
+                        </li>
+                    </ul>
+                    <button class="btn btn-primary mt-2" onclick="checkExercise10()">Submit Answers</button>
+                    <div id="exercise10-feedback" class="mt-2"></div>
+                </div>
+            </section>
+        </div>
+
+        <div class="tab-content" id="reading">
+            <section class="reading">
+                <h3 class="mb-4">📖 Reading Passages</h3>
+                <div class="passage standard">
+                    <div class="passage-card card p-4 mb-4">
+                        <h4 class="card-title">Text 1: A Day in the Park (Standard German)</h4>
+                        <div class="audio-container mb-3">
+                            <button class="btn btn-primary audio-btn" onclick="speak('Heute ist ein sonniger Tag. Im Park sind viele Menschen. Einige gehen spazieren. Einige lesen Bücher. Und andere unterhalten sich. Ein älterer Mann grüßt eine junge Frau: „Guten Tag!“ „Guten Tag!“ – sagt sie und lächelt. Sie kennen sich nicht. Sind aber höflich. Kinder spielen in der Nähe eines Brunnens. Ein kleiner Hund jagt einem Ball nach und bellt vor Freude.', 'de-DE')">Play Passage</button>
+                        </div>
+                        <div id="reading1-text">
+                            <p>Heute ist ein sonniger Tag. Im Park sind viele Menschen. Einige gehen spazieren, einige lesen Bücher, und andere unterhalten sich. Ein älterer Mann grüßt eine junge Frau: „Guten Tag!“ „Guten Tag!“ – sagt sie und lächelt. Sie kennen sich nicht, sind aber höflich. Kinder spielen in der Nähe eines Brunnens. Ein kleiner Hund jagt einem Ball nach und bellt vor Freude.</p>
+                        </div>
+                        <h4>📝 Translation</h4>
+                        <p>Today is a sunny day. There are many people in the park. Some are walking, some are reading books, and others are chatting. An older man greets a young woman: “Good day!” “Good day!” – she says and smiles. They don’t know each other, but they are polite. Children play near a fountain. A small dog chases a ball and barks with joy.</p>
+                        <h4>📘 Glossary</h4>
+                        <div class="audio-container mb-3">
+                            <button class="btn btn-primary audio-btn" onclick="speak('Ein. One. A. Im Park. In the park. Viele. Many. Einige. Some. Unterhalten sich. They chat. Mann. Man. Frau. Woman. Junge. Young. Kinder. Children. Brunnen. Fountain. Freude. Joy.', 'de-DE')">Play Glossary</button>
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-md-6 col-lg-4">
+                                <div class="glossary-card card p-3">
+                                    <p><strong>Term:</strong> Ein</p>
+                                    <p><strong>Meaning:</strong> One / A</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="glossary-card card p-3">
+                                    <p><strong>Term:</strong> Im Park</p>
+                                    <p><strong>Meaning:</strong> In the park</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="glossary-card card p-3">
+                                    <p><strong>Term:</strong> Viele</p>
+                                    <p><strong>Meaning:</strong> Many</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="glossary-card card p-3">
+                                    <p><strong>Term:</strong> Einige</p>
+                                    <p><strong>Meaning:</strong> Some</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="glossary-card card p-3">
+                                    <p><strong>Term:</strong> Unterhalten sich</p>
+                                    <p><strong>Meaning:</strong> They chat</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="glossary-card card p-3">
+                                    <p><strong>Term:</strong> Mann</p>
+                                    <p><strong>Meaning:</strong> Man</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="glossary-card card p-3">
+                                    <p><strong>Term:</strong> Frau</p>
+                                    <p><strong>Meaning:</strong> Woman</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="glossary-card card p-3">
+                                    <p><strong>Term:</strong> Junge</p>
+                                    <p><strong>Meaning:</strong> Young</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="glossary-card card p-3">
+                                    <p><strong>Term:</strong> Kinder</p>
+                                    <p><strong>Meaning:</strong> Children</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="glossary-card card p-3">
+                                    <p><strong>Term:</strong> Brunnen</p>
+                                    <p><strong>Meaning:</strong> Fountain</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="glossary-card card p-3">
+                                    <p><strong>Term:</strong> Freude</p>
+                                    <p><strong>Meaning:</strong> Joy</p>
+                                </div>
+                            </div>
+                        </div>
+                        <h4>🧩 Comprehension Questions</h4>
+                        <ul>
+                            <li>What is the weather like today?</li>
+                            <li>What are the people doing in the park?</li>
+                            <li>Who greets first?</li>
+                            <li>Do the man and the woman know each other?</li>
+                            <li>Where are the children playing?</li>
+                        </ul>
+                        <button class="btn btn-secondary collapse-btn" type="button" data-bs-toggle="collapse" data-bs-target="#reading1-solutions" aria-expanded="false" aria-controls="reading1-solutions">
+                            Show Solutions
+                        </button>
+                        <div class="collapse" id="reading1-solutions">
+                            <h4>Solutions</h4>
+                            <ul>
+                                <li>It is a sunny day.</li>
+                                <li>Some are walking, some are reading, others are chatting.</li>
+                                <li>An older man greets first.</li>
+                                <li>No, they don’t know each other.</li>
+                                <li>The children are playing near a fountain.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="passage colloquial">
+                    <div class="passage-card card p-4 mb-4">
+                        <h4 class="card-title">Text 2: A Day in the Neighborhood (Colloquial German)</h4>
+                        <div class="audio-container mb-3">
+                            <button class="btn btn-primary audio-btn" onclick="speak('Heute is’ ’n super sonniger Tag. In der Nachbarschaft hängen ’ne Menge Leute rum. Manche laufen chillig durch die Gegend. Andere quatschen oder checken ihr Handy. Ein Typ ruft ’nem Kumpel zu: „Hey. Na. Wie geht’s?“ „Alles klar!“ – grinst der zurück. Die kennen sich. Total locker. Kids rennen rum und kicken ’nen Ball. ’n kleiner Hund flitzt hinter ’nem Stock her und bellt wie verrückt.', 'de-DE')">Play Passage</button>
+                        </div>
+                        <div id="reading2-text">
+                            <p>Heute is’ ’n super sonniger Tag. In der Nachbarschaft hängen ’ne Menge Leute rum. Manche laufen chillig durch die Gegend, andere quatschen oder checken ihr Handy. Ein Typ ruft ’nem Kumpel zu: „Hey, na, wie geht’s?“ „Alles klar!“ – grinst der zurück. Die kennen sich, total locker. Kids rennen rum und kicken ’nen Ball. ’n kleiner Hund flitzt hinter ’nem Stock her und bellt wie verrückt.</p>
+                        </div>
+                        <h4>📝 Translation</h4>
+                        <p>Today’s a super sunny day. Loads of people are hanging out in the neighborhood. Some are chilling and walking around, others are chatting or checking their phones. One guy shouts to his buddy: “Hey, yo, how’s it going?” “All good!” – he grins back. They know each other, totally chill. Kids are running around, kicking a ball. A small dog dashes after a stick and barks like crazy.</p>
+                        <h4>📘 Glossary</h4>
+                        <div class="audio-container mb-3">
+                            <button class="btn btn-primary audio-btn" onclick="speak('’n. A. One. In der Nachbarschaft. In the neighborhood. ’ne Menge. Lots. Loads. Chillig. Chill. Relaxed. Quatschen. Chat. Checken. Check. Look at. Typ. Guy. Kumpel. Buddy. Kids. Kids. Flitzt. Dashes. Bellt. Barks.', 'de-DE')">Play Glossary</button>
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-md-6 col-lg-4">
+                                <div class="glossary-card card p-3">
+                                    <p><strong>Term:</strong> ’n</p>
+                                    <p><strong>Meaning:</strong> A / One</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="glossary-card card p-3">
+                                    <p><strong>Term:</strong> In der Nachbarschaft</p>
+                                    <p><strong>Meaning:</strong> In the neighborhood</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="glossary-card card p-3">
+                                    <p><strong>Term:</strong> ’ne Menge</p>
+                                    <p><strong>Meaning:</strong> Lots / Loads</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="glossary-card card p-3">
+                                    <p><strong>Term:</strong> Chillig</p>
+                                    <p><strong>Meaning:</strong> Chill / Relaxed</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="glossary-card card p-3">
+                                    <p><strong>Term:</strong> Quatschen</p>
+                                    <p><strong>Meaning:</strong> Chat</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="glossary-card card p-3">
+                                    <p><strong>Term:</strong> Checken</p>
+                                    <p><strong>Meaning:</strong> Check / Look at</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="glossary-card card p-3">
+                                    <p><strong>Term:</strong> Typ</p>
+                                    <p><strong>Meaning:</strong> Guy</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="glossary-card card p-3">
+                                    <p><strong>Term:</strong> Kumpel</p>
+                                    <p><strong>Meaning:</strong> Buddy</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="glossary-card card p-3">
+                                    <p><strong>Term:</strong> Kids</p>
+                                    <p><strong>Meaning:</strong> Kids</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="glossary-card card p-3">
+                                    <p><strong>Term:</strong> Flitzt</p>
+                                    <p><strong>Meaning:</strong> Dashes</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="glossary-card card p-3">
+                                    <p><strong>Term:</strong> Bellt</p>
+                                    <p><strong>Meaning:</strong> Barks</p>
+                                </div>
+                            </div>
+                        </div>
+                        <h4>🧩 Comprehension Questions</h4>
+                        <ul>
+                            <li>What is the weather like today?</li>
+                            <li>What are people doing in the neighborhood?</li>
+                            <li>Who greets first?</li>
+                            <li>Do the two guys know each other?</li>
+                            <li>What are the kids doing?</li>
+                        </ul>
+                        <button class="btn btn-secondary collapse-btn" type="button" data-bs-toggle="collapse" data-bs-target="#reading2-solutions" aria-expanded="false" aria-controls="reading2-solutions">
+                            Show Solutions
+                        </button>
+                        <div class="collapse" id="reading2-solutions">
+                            <h4>Solutions</h4>
+                            <ul>
+                                <li>It’s a super sunny day.</li>
+                                <li>Some are walking relaxed, others are chatting or checking their phones.</li>
+                                <li>One guy greets first.</li>
+                                <li>Yes, they know each other.</li>
+                                <li>The kids are running around and kicking a ball.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+    <!-- JavaScript for Tabs, Text-to-Speech, and Exercises -->
+    <script>
+        // Tab switching function
+        function openTab(event, tabName) {
+            speechSynthesis.cancel();
+            const tabContents = document.getElementsByClassName('tab-content');
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove('active');
+            }
+            const tabLinks = document.getElementsByClassName('tab-link');
+            for (let i = 0; i < tabLinks.length; i++) {
+                tabLinks[i].classList.remove('active');
+            }
+            document.getElementById(tabName).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        // Text-to-Speech Functions
+        const feedback = document.getElementById('audio-feedback');
+
+        function showFeedback(message, alertClass) {
+            feedback.textContent = message;
+            feedback.className = `alert ${alertClass}`;
+            feedback.style.display = 'block';
+            setTimeout(() => {
+                feedback.style.display = 'none';
+            }, 7000);
+        }
+
+        function getVoices() {
+            const voices = speechSynthesis.getVoices();
+            console.log('Available voices:', voices.map(v => ({ name: v.name, lang: v.lang })));
+            return voices;
+        }
+
+        function speak(text, lang) {
+            const processedText = text.replace(/,/g, '.');
+            const utterance = new SpeechSynthesisUtterance(processedText);
+            utterance.lang = lang;
+            utterance.rate = 0.9;
+            utterance.pitch = 1;
+            const voices = getVoices();
+            const germanVoice = voices.find(voice => voice.lang === 'de-DE');
+            if (germanVoice) {
+                utterance.voice = germanVoice;
+                console.log('Speaking with voice:', germanVoice.name, germanVoice.lang);
+            } else {
+                const fallbackVoice = voices[0];
+                if (fallbackVoice) {
+                    utterance.voice = fallbackVoice;
+                    console.log('No German voice, using fallback:', fallbackVoice.name, fallbackVoice.lang);
+                    showFeedback('No German voice available. Install a German language pack and restart your browser.', 'alert-warning');
+                } else {
+                    console.log('No voices available.');
+                    showFeedback('No voices available. Install a German language pack and restart your browser.', 'alert-danger');
+                    return;
+                }
+            }
+            utterance.onerror = (event) => {
+                console.error('Speech error:', event);
+                showFeedback(`Error playing audio: ${event.error}. Check audio settings, use HTTPS, or try another browser.`, 'alert-danger');
+            };
+            utterance.onend = () => {
+                showFeedback('Audio played successfully.', 'alert-success');
+            };
+            speechSynthesis.speak(utterance);
+        }
+
+      
+  
+      
+        window.addEventListener('load', () => {
+            speechSynthesis.getVoices();
+        });
+          
+          // Complete the onvoiceschanged event handler
+speechSynthesis.onvoiceschanged = () => {
+    getVoices();
+};
+
+// Function to display exercise feedback
+function showExerciseFeedback(elementId, message, alertClass) {
+    const feedbackElement = document.getElementById(elementId);
+    feedbackElement.innerHTML = message;
+    feedbackElement.className = `alert ${alertClass} mt-2`;
+    feedbackElement.style.display = 'block';
+}
+
+// Exercise 1: Fill-in-the-blank for "sein" forms
+function checkExercise1() {
+    const answers = {
+        'ex1-1': 'bin',
+        'ex1-2': 'bist',
+        'ex1-3': 'ist',
+        'ex1-4': 'sind',
+        'ex1-5': 'sind'
+    };
+    let correct = 0;
+    let feedback = '<h5>Feedback:</h5><ul>';
+    Object.keys(answers).forEach((id, index) => {
+        const userAnswer = document.getElementById(id).value.trim().toLowerCase();
+        if (userAnswer === answers[id]) {
+            correct++;
+            feedback += `<li>${index + 1}. Correct!</li>`;
+        } else {
+            feedback += `<li>${index + 1}. Incorrect. Correct answer: <strong>${answers[id]}</strong></li>`;
+        }
+    });
+    feedback += '</ul>';
+    showExerciseFeedback('exercise1-feedback', `You got ${correct}/5 correct! ${feedback}`, correct === 5 ? 'alert-success' : 'alert-warning');
+}
+
+// Exercise 2: Drag-and-drop matching for greetings and dialects
+let draggedItem = null;
+
+document.querySelectorAll('.draggable').forEach(item => {
+    item.addEventListener('dragstart', (e) => {
+        draggedItem = e.target;
+        e.target.classList.add('dragging');
+    });
+    item.addEventListener('dragend', (e) => {
+        e.target.classList.remove('dragging');
+        draggedItem = null;
+    });
+});
+
+document.querySelectorAll('.droppable').forEach(dropZone => {
+    dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+    });
+    dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        if (draggedItem) {
+            dropZone.appendChild(draggedItem);
+        }
+    });
+});
+
+function checkExercise2() {
+    const correctAnswers = {
+        'A': 'Hallo',
+        'B': 'Hey',
+        'C': 'Servus',
+        'D': 'Grüß di'
+    };
+    let correct = 0;
+    let feedback = '<h5>Feedback:</h5><ul>';
+    document.querySelectorAll('.droppable').forEach(zone => {
+        const dialect = zone.dataset.id;
+        const greeting = zone.querySelector('.draggable');
+        if (greeting && greeting.textContent.trim() === correctAnswers[dialect]) {
+            correct++;
+            feedback += `<li>${greeting.textContent} → ${zone.textContent}: Correct!</li>`;
+        } else {
+            feedback += `<li>${greeting ? greeting.textContent : 'Nothing'} → ${zone.textContent}: Incorrect. Correct answer: <strong>${correctAnswers[dialect]}</strong></li>`;
+        }
+    });
+    feedback += '</ul>';
+    showExerciseFeedback('exercise2-feedback', `You got ${correct}/4 correct! ${feedback}`, correct === 4 ? 'alert-success' : 'alert-warning');
+}
+
+// Exercise 3: Sentence ordering with drag-and-drop
+document.querySelectorAll('.draggable-word').forEach(item => {
+    item.addEventListener('dragstart', (e) => {
+        draggedItem = e.target;
+        e.target.classList.add('dragging');
+    });
+    item.addEventListener('dragend', (e) => {
+        e.target.classList.remove('dragging');
+        draggedItem = null;
+    });
+});
+
+document.querySelectorAll('.droppable-sentence').forEach(dropZone => {
+    dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+    });
+    dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        if (draggedItem) {
+            dropZone.appendChild(draggedItem);
+        }
+    });
+});
+
+function checkExercise3() {
+    let correct = 0;
+    let feedback = '<h5>Feedback:</h5><ul>';
+    document.querySelectorAll('.sentence-drag').forEach(list => {
+        const sentenceId = list.dataset.sentence;
+        const correctSentence = list.dataset.correct;
+        const dropZone = document.querySelector(`.droppable-sentence[data-sentence="${sentenceId}"]`);
+        const userSentence = Array.from(dropZone.children).map(item => item.textContent.trim()).join(' ');
+        if (userSentence === correctSentence) {
+            correct++;
+            feedback += `<li>Sentence ${sentenceId}: Correct!</li>`;
+        } else {
+            feedback += `<li>Sentence ${sentenceId}: Incorrect. Correct answer: <strong>${correctSentence}</strong></li>`;
+        }
+    });
+    feedback += '</ul>';
+    showExerciseFeedback('exercise3-feedback', `You got ${correct}/3 correct! ${feedback}`, correct === 3 ? 'alert-success' : 'alert-warning');
+}
+
+// Exercise 4: Multiple-choice vocabulary
+function checkExercise4() {
+    const answers = {
+        'ex4-1': 'Tag',
+        'ex4-2': 'Wie',
+        'ex4-3': 'Servus',
+        'ex4-4': 'Grüß'
+    };
+    let correct = 0;
+    let feedback = '<h5>Feedback:</h5><ul>';
+    Object.keys(answers).forEach((name, index) => {
+        const selected = document.querySelector(`input[name="${name}"]:checked`);
+        if (selected && selected.value === answers[name]) {
+            correct++;
+            feedback += `<li>${index + 1}. Correct!</li>`;
+        } else {
+            feedback += `<li>${index + 1}. Incorrect. Correct answer: <strong>${answers[name]}</strong></li>`;
+        }
+    });
+    feedback += '</ul>';
+    showExerciseFeedback('exercise4-feedback', `You got ${correct}/4 correct! ${feedback}`, correct === 4 ? 'alert-success' : 'alert-warning');
+}
+
+// Exercise 5: Fill-in-the-blank with mixed dialects
+function checkExercise5() {
+    const answers = {
+        'ex5-1': 'sind',
+        'ex5-2': 'bist',
+        'ex5-3': 'bin',
+        'ex5-4': 'sind',
+        'ex5-5': 'sind',
+        'ex5-6': 'sind',
+        'ex5-7': 'ist',
+        'ex5-8': 'gudd'
+    };
+    let correct = 0;
+    let feedback = '<h5>Feedback:</h5><ul>';
+    Object.keys(answers).forEach((id, index) => {
+        const userAnswer = document.getElementById(id).value.trim().toLowerCase();
+        if (userAnswer === answers[id]) {
+            correct++;
+            feedback += `<li>${index + 1}. Correct!</li>`;
+        } else {
+            feedback += `<li>${index + 1}. Incorrect. Correct answer: <strong>${answers[id]}</strong></li>`;
+        }
+    });
+    feedback += '</ul>';
+    showExerciseFeedback('exercise5-feedback', `You got ${correct}/8 correct! ${feedback}`, correct === 8 ? 'alert-success' : 'alert-warning');
+}
+
+// Exercise 6: Translation to colloquial German
+function checkExercise6() {
+    const answers = {
+        'ex6-1': ['Hey, na, wie geht’s, Kumpel?', 'Hey, wie geht’s, Kumpel?', 'Na, wie geht’s, Mann?'],
+        'ex6-2': ['Mann, ich bin total kaputt!', 'Ich bin voll kaputt, Mann!', 'Total kaputt, Mann!'],
+        'ex6-3': ['Wo kommst’n her?', 'Woher kommst’n?', 'Was, wo kommst’n her?'],
+        'ex6-4': ['Komm, lass uns ’nen Kaffee trinken!', 'Lass uns ’nen Kaffee trinken, Mann!', 'Komm, ’nen Kaffee trinken!']
+    };
+    let correct = 0;
+    let feedback = '<h5>Feedback:</h5><ul>';
+    Object.keys(answers).forEach((id, index) => {
+        const userAnswer = document.getElementById(id).value.trim();
+        if (answers[id].includes(userAnswer)) {
+            correct++;
+            feedback += `<li>${index + 1}. Correct!</li>`;
+        } else {
+            feedback += `<li>${index + 1}. Incorrect. Possible answer: <strong>${answers[id][0]}</strong></li>`;
+        }
+    });
+    feedback += '</ul>';
+    showExerciseFeedback('exercise6-feedback', `You got ${correct}/4 correct! ${feedback}`, correct === 4 ? 'alert-success' : 'alert-warning');
+}
+
+// Exercise 7: Dialogue creation
+function checkExercise7() {
+    const dialogue = document.getElementById('ex7-dialogue').value.trim();
+    if (dialogue.length < 20) {
+        showExerciseFeedback('exercise7-feedback', 'Please write a dialogue with 4-6 lines.', 'alert-danger');
+        return;
+    }
+    const lines = dialogue.split('\n').filter(line => line.trim() !== '');
+    const hasSein = /bin|bist|ist|sind|seid/.test(dialogue.toLowerCase());
+    const hasGreeting = /hallo|hey|servus|grüß di/i.test(dialogue);
+    let feedback = '<h5>Feedback:</h5>';
+    if (lines.length < 4 || lines.length > 6) {
+        feedback += '<p>Dialogue should have 4-6 lines.</p>';
+    }
+    if (!hasSein) {
+        feedback += '<p>Include at least one form of “sein” (bin, bist, ist, sind, seid).</p>';
+    }
+    if (!hasGreeting) {
+        feedback += '<p>Include at least one greeting (Hallo, Hey, Servus, Grüß di).</p>';
+    }
+    if (lines.length >= 4 && lines.length <= 6 && hasSein && hasGreeting) {
+        feedback += '<p>Great job! Your dialogue meets all requirements.</p>';
+        showExerciseFeedback('exercise7-feedback', feedback, 'alert-success');
+    } else {
+        showExerciseFeedback('exercise7-feedback', feedback, 'alert-warning');
+    }
+}
+
+// Exercise 8: Multiple-choice dialect identification
+function checkExercise8() {
+    const answers = {
+        'ex8-1': 'C',
+        'ex8-2': 'A',
+        'ex8-3': 'B',
+        'ex8-4': 'D'
+    };
+    let correct = 0;
+    let feedback = '<h5>Feedback:</h5><ul>';
+    Object.keys(answers).forEach((name, index) => {
+        const selected = document.querySelector(`input[name="${name}"]:checked`);
+        if (selected && selected.value === answers[name]) {
+            correct++;
+            feedback += `<li>${index + 1}. Correct!</li>`;
+        } else {
+            feedback += `<li>${index + 1}. Incorrect. Correct answer: <strong>${['A. Standard German', 'B. Colloquial German', 'C. Bavarian', 'D. Swabian'][parseInt(answers[name].charCodeAt(0) - 65)]}</strong></li>`;
+        }
+    });
+    feedback += '</ul>';
+    showExerciseFeedback('exercise8-feedback', `You got ${correct}/4 correct! ${feedback}`, correct === 4 ? 'alert-success' : 'alert-warning');
+}
+
+// Exercise 9: Vocabulary substitution in dialects
+function checkExercise9() {
+    const answers = {
+        'ex9-1-bav': ['Servus! Wo geht’s dir?', 'Servus! Wo geht’s?'],
+        'ex9-1-swa': ['Grüß di! Wie goht’s dir?', 'Grüß di! Wie goht’s?'],
+        'ex9-2-bav': ['Passt scho, i bin guat.', 'Passt scho, i bin guat, gell.'],
+        'ex9-2-swa': ['Gudd, i bin gudd.', 'Danke, i bin gudd.'],
+        'ex9-3-bav': ['Geh, mia schwätzen a bisserl!', 'Geh, mia schwätzen!'],
+        'ex9-3-swa': ['Geh, mir schwätzen en babbel!', 'Geh, mir schwätzen!'],
+        'ex9-4-bav': ['Jo, des is mei schee.', 'Jo, des is schee, gell.'],
+        'ex9-4-swa': ['Jo, des is richtig schee.', 'Jo, des is schee.']
+    };
+    let correct = 0;
+    let feedback = '<h5>Feedback:</h5><ul>';
+    Object.keys(answers).forEach((id, index) => {
+        const userAnswer = document.getElementById(id).value.trim();
+        if (answers[id].includes(userAnswer)) {
+            correct++;
+            feedback += `<li>${Math.floor(index / 2) + 1}. ${id.includes('bav') ? 'Bavarian' : 'Swabian'}: Correct!</li>`;
+        } else {
+            feedback += `<li>${Math.floor(index / 2) + 1}. ${id.includes('bav') ? 'Bavarian' : 'Swabian'}: Incorrect. Possible answer: <strong>${answers[id][0]}</strong></li>`;
+        }
+    });
+    feedback += '</ul>';
+    showExerciseFeedback('exercise9-feedback', `You got ${correct}/8 correct! ${feedback}`, correct === 8 ? 'alert-success' : 'alert-warning');
+}
+
+// Exercise 10: Comprehension and writing
+function checkExercise10() {
+    const answers = {
+        'ex10-1': ['Beide Texte beschreiben einen sonnigen Tag, wo Leute sich treffen und entspannen.', 'Beide Texte reden von ’nem sonnigen Tag, wo Leute chillen und quatschen.'],
+        'ex10-2': ['Text 1 ist höflich und formell, Text 2 ist locker und freundschaftlich.', 'Text 1 is’ eher förmlich und höflich, Text 2 is’ total locker und wie Kumpels reden.'],
+        'ex10-3': ['Die Hunde jagen etwas und bellen.', 'In beiden Texten jagt ’n Hund was hinterher und bellt wie verrückt.']
+    };
+    let correct = 0;
+    let feedback = '<h5>Feedback:</h5><ul>';
+    Object.keys(answers).forEach((id, index) => {
+        const userAnswer = document.getElementById(id).value.trim();
+        if (answers[id].some(ans => userAnswer.toLowerCase().includes(ans.toLowerCase().split(' ')[0]))) {
+            correct++;
+            feedback += `<li>${index + 1}. Correct!</li>`;
+        } else {
+            feedback += `<li>${index + 1}. Incorrect. Possible answer: <strong>${answers[id][0]}</strong></li>`;
+        }
+    });
+    const paragraph = document.getElementById('ex10-paragraph').value.trim();
+    const paragraphValid = paragraph.split('.').filter(s => s.trim()).length >= 3;
+    if (paragraphValid) {
+        correct++;
+        feedback += '<li>Paragraph: Valid! You wrote a paragraph with 3 or more sentences.</li>';
+    } else {
+        feedback += '<li>Paragraph: Please write 3-4 sentences.</li>';
+    }
+    feedback += '</ul>';
+    showExerciseFeedback('exercise10-feedback', `You got ${correct}/4 correct! ${feedback}`, correct === 4 ? 'alert-success' : 'alert-warning');
+}</script>
+       
+      </body>
+</html>
