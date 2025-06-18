@@ -1,39 +1,43 @@
 const CACHE_NAME = 'lingofreak-cache-v1';
 const urlsToCache = [
-  './Entdecke.html',
-  './manifest.json',
-  './icon-192.png',
-  './icon-512.png'
+  '/Lingofreak/Entdecke.html',
+  '/Lingofreak/manifest.json',
+  '/Lingofreak/icon-192.png',
+  '/Lingofreak/icon-512.png'
 ];
 
 // Install service worker and cache essential files
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then(cache => cache.addAll(urlsToCache))
+      .then(cache => {
+        return cache.addAll(urlsToCache);
+      })
   );
 });
 
-// Intercept fetch requests
+// Serve cached files when offline
 self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(event.request)
-      .then(response => response || fetch(event.request))
+      .then(response => {
+        return response || fetch(event.request);
+      })
   );
 });
 
-// Optional: Cleanup old caches on activate
+// Cleanup old caches
 self.addEventListener('activate', event => {
   const cacheWhitelist = [CACHE_NAME];
   event.waitUntil(
-    caches.keys().then(keyList =>
-      Promise.all(
-        keyList.map(key => {
+    caches.keys().then(keys => {
+      return Promise.all(
+        keys.map(key => {
           if (!cacheWhitelist.includes(key)) {
             return caches.delete(key);
           }
         })
-      )
-    )
+      );
+    })
   );
 });
