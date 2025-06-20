@@ -135,6 +135,13 @@
         .list-group-item {
             margin-bottom: 5px;
         }
+        .collapse {
+            margin-top: 15px;
+            padding: 10px;
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+        }
         @media (max-width: 576px) {
             body {
                 font-size: 1.1rem;
@@ -568,6 +575,19 @@
                         <li>5. Sie <input type="text" class="form-control d-inline-block w-auto" id="ex1-5" placeholder="___"> aus Deutschland.</li>
                     </ul>
                     <button class="btn btn-primary mt-2" onclick="checkExercise1()">Check Answers</button>
+                    <button class="btn btn-secondary collapse-btn mt-2 ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#exercise1-solutions" aria-expanded="false" aria-controls="exercise1-solutions">
+                        Show Solutions
+                    </button>
+                    <div class="collapse" id="exercise1-solutions">
+                        <h4>Solutions</h4>
+                        <ul>
+                            <li>1. bin</li>
+                            <li>2. bist</li>
+                            <li>3. ist</li>
+                            <li>4. sind</li>
+                            <li>5. sind</li>
+                        </ul>
+                    </div>
                     <div id="exercise1-feedback" class="mt-2"></div>
                 </div>
 
@@ -596,6 +616,18 @@
                         </div>
                     </div>
                     <button class="btn btn-primary mt-2" onclick="checkExercise2()">Check Answers</button>
+                    <button class="btn btn-secondary collapse-btn mt-2 ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#exercise2-solutions" aria-expanded="false" aria-controls="exercise2-solutions">
+                        Show Solutions
+                    </button>
+                    <div class="collapse" id="exercise2-solutions">
+                        <h4>Solutions</h4>
+                        <ul>
+                            <li>A. Standard German: Hallo</li>
+                            <li>B. Colloquial German: Hey</li>
+                            <li>C. Bavarian: Servus</li>
+                            <li>D. Swabian: Grüß di</li>
+                        </ul>
+                    </div>
                     <div id="exercise2-feedback" class="mt-2"></div>
                 </div>
 
@@ -606,7 +638,7 @@
                     <div id="exercise3">
                         <div class="mb-3">
                             <p>1. Kumpel / bist / okay / du?</p>
-                            <ul class="list-group sentence-drag" data-sentence="1" data-correct="Bist du okay, Kumpel?">
+                            <ul class="list-group sentence-drag-list" data-sentence="1" data-correct="Bist du okay, Kumpel?">
                                 <li class="list-group-item draggable-word" draggable="true">Kumpel</li>
                                 <li class="list-group-item draggable-word" draggable="true">bist</li>
                                 <li class="list-group-item draggable-word" draggable="true">okay</li>
@@ -616,7 +648,7 @@
                         </div>
                         <div class="mb-3">
                             <p>2. klar / Mann / alles!</p>
-                            <ul class="list-group sentence-drag" data-sentence="2" data-correct="Alles klar, Mann!">
+                            <ul class="list-group sentence-drag-list" data-sentence="2" data-correct="Alles klar, Mann!">
                                 <li class="list-group-item draggable-word" draggable="true">klar</li>
                                 <li class="list-group-item draggable-word" draggable="true">Mann</li>
                                 <li class="list-group-item draggable-word" draggable="true">alles!</li>
@@ -625,7 +657,7 @@
                         </div>
                         <div class="mb-3">
                             <p>3. fit / was / sind / wir / geht!</p>
-                            <ul class="list-group sentence-drag" data-sentence="3" data-correct="Wir sind fit, was geht!">
+                            <ul class="list-group sentence-drag-list" data-sentence="3" data-correct="Wir sind fit, was geht!">
                                 <li class="list-group-item draggable-word" draggable="true">fit</li>
                                 <li class="list-group-item draggable-word" draggable="true">was</li>
                                 <li class="list-group-item draggable-word" draggable="true">sind</li>
@@ -636,6 +668,17 @@
                         </div>
                     </div>
                     <button class="btn btn-primary mt-2" onclick="checkExercise3()">Check Answers</button>
+                    <button class="btn btn-secondary collapse-btn mt-2 ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#exercise3-solutions" aria-expanded="false" aria-controls="exercise3-solutions">
+                        Show Solutions
+                    </button>
+                    <div class="collapse" id="exercise3-solutions">
+                        <h4>Solutions</h4>
+                        <ul>
+                            <li>1. Bist du okay, Kumpel?</li>
+                            <li>2. Alles klar, Mann!</li>
+                            <li>3. Wir sind fit, was geht!</li>
+                        </ul>
+                    </div>
                     <div id="exercise3-feedback" class="mt-2"></div>
                 </div>
 
@@ -706,6 +749,18 @@
                         </li>
                     </ul>
                     <button class="btn btn-primary mt-2" onclick="checkExercise4()">Check Answers</button>
+                    <button class="btn btn-secondary collapse-btn mt-2 ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#exercise4-solutions" aria-expanded="false" aria-controls="exercise4-solutions">
+                        Show Solutions
+                    </button>
+                    <div class="collapse" id="exercise4-solutions">
+                        <h4>Solutions</h4>
+                        <ul>
+                            <li>1. Tag</li>
+                            <li>2. Wie</li>
+                            <li>3. Servus</li>
+                            <li>4. Grüß</li>
+                        </ul>
+                    </div>
                     <div id="exercise4-feedback" class="mt-2"></div>
                 </div>
 
@@ -724,6 +779,22 @@
                         <li>8. (Swabian) Bist du <input type="text" class="form-control d-inline-block w-auto" id="ex5-8" placeholder="___"> gudd drau?</li>
                     </ul>
                     <button class="btn btn-primary mt-2" onclick="checkExercise5()">Check Answers</button>
+                    <button class="btn btn-secondary collapse-btn mt-2 ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#exercise5-solutions" aria-expanded="false" aria-controls="exercise5-solutions">
+                        Show Solutions
+                    </button>
+                    <div class="collapse" id="exercise5-solutions">
+                        <h4>Solutions</h4>
+                        <ul>
+                            <li>1. sind</li>
+                            <li>2. bist</li>
+                            <li>3. bin</li>
+                            <li>4. sind</li>
+                            <li>5. sind</li>
+                            <li>6. sind</li>
+                            <li>7. ist</li>
+                            <li>8. bist</li>
+                        </ul>
+                    </div>
                     <div id="exercise5-feedback" class="mt-2"></div>
                 </div>
 
@@ -738,6 +809,18 @@
                         <li>4. Lass uns ins Café gehen! <br> <textarea class="form-control" id="ex6-4" rows="2" placeholder="Enter colloquial translation"></textarea></li>
                     </ul>
                     <button class="btn btn-primary mt-2" onclick="checkExercise6()">Check Answers</button>
+                    <button class="btn btn-secondary collapse-btn mt-2 ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#exercise6-solutions" aria-expanded="false" aria-controls="exercise6-solutions">
+                        Show Solutions
+                    </button>
+                    <div class="collapse" id="exercise6-solutions">
+                        <h4>Solutions</h4>
+                        <ul>
+                            <li>1. Hey, na, wie geht’s, Kumpel?</li>
+                            <li>2. Mann, ich bin total kaputt!</li>
+                            <li>3. Wo kommst’n her?</li>
+                            <li>4. Komm, lass uns ’nen Kaffee trinken!</li>
+                        </ul>
+                    </div>
                     <div id="exercise6-feedback" class="mt-2"></div>
                 </div>
 
@@ -747,6 +830,16 @@
                     <p>Write a short dialogue (4-6 lines) between two people meeting for the first time, using one style (Standard, Colloquial, Bavarian, or Swabian). Include one form of “sein” and one greeting. Use the text area below.</p>
                     <textarea class="form-control" id="ex7-dialogue" rows="6" placeholder="Write your dialogue here"></textarea>
                     <button class="btn btn-primary mt-2" onclick="checkExercise7()">Submit Dialogue</button>
+                    <button class="btn btn-secondary collapse-btn mt-2 ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#exercise7-solutions" aria-expanded="false" aria-controls="exercise7-solutions">
+                        Show Solutions
+                    </button>
+                    <div class="collapse" id="exercise7-solutions">
+                        <h4>Sample Solution</h4>
+                        <p><strong>Anna:</strong> Servus! I bin Anna.<br>
+                           <strong>Ben:</strong> Servus, Anna! I bin Ben, gell.<br>
+                           <strong>Anna:</strong> Wo bist aus?<br>
+                           <strong>Ben:</strong> Aus Minga. Und du?</p>
+                    </div>
                     <div id="exercise7-feedback" class="mt-2"></div>
                 </div>
 
@@ -817,6 +910,18 @@
                         </li>
                     </ul>
                     <button class="btn btn-primary mt-2" onclick="checkExercise8()">Check Answers</button>
+                    <button class="btn btn-secondary collapse-btn mt-2 ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#exercise8-solutions" aria-expanded="false" aria-controls="exercise8-solutions">
+                        Show Solutions
+                    </button>
+                    <div class="collapse" id="exercise8-solutions">
+                        <h4>Solutions</h4>
+                        <ul>
+                            <li>1. C. Bavarian</li>
+                            <li>2. A. Standard German</li>
+                            <li>3. B. Colloquial German</li>
+                            <li>4. D. Swabian</li>
+                        </ul>
+                    </div>
                     <div id="exercise8-feedback" class="mt-2"></div>
                 </div>
 
@@ -843,6 +948,22 @@
                         </li>
                     </ul>
                     <button class="btn btn-primary mt-2" onclick="checkExercise9()">Check Answers</button>
+                    <button class="btn btn-secondary collapse-btn mt-2 ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#exercise9-solutions" aria-expanded="false" aria-controls="exercise9-solutions">
+                        Show Solutions
+                    </button>
+                    <div class="collapse" id="exercise9-solutions">
+                        <h4>Solutions</h4>
+                        <ul>
+                            <li>1. Bavarian: Servus! Wo geht’s dir?</li>
+                            <li>1. Swabian: Grüß di! Wie goht’s dir?</li>
+                            <li>2. Bavarian: Passt scho, i bin guat.</li>
+                            <li>2. Swabian: Gudd, i bin gudd.</li>
+                            <li>3. Bavarian: Geh, mia schwätzen a bisserl!</li>
+                            <li>3. Swabian: Geh, mir schwätzen en babbel!</li>
+                            <li>4. Bavarian: Jo, des is mei schee.</li>
+                            <li>4. Swabian: Jo, des is richtig schee.</li>
+                        </ul>
+                    </div>
                     <div id="exercise9-feedback" class="mt-2"></div>
                 </div>
 
@@ -865,6 +986,18 @@
                         </li>
                     </ul>
                     <button class="btn btn-primary mt-2" onclick="checkExercise10()">Submit Answers</button>
+                    <button class="btn btn-secondary collapse-btn mt-2 ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#exercise10-solutions" aria-expanded="false" aria-controls="exercise10-solutions">
+                        Show Solutions
+                    </button>
+                    <div class="collapse" id="exercise10-solutions">
+                        <h4>Solutions</h4>
+                        <ul>
+                            <li>1. Beide Texte beschreiben einen sonnigen Tag, wo Leute sich treffen und entspannen.</li>
+                            <li>2. Text 1 ist höflich und formell, Text 2 ist locker und freundschaftlich.</li>
+                            <li>3. Die Hunde jagen etwas und bellen.</li>
+                            <li>Paragraph: (Sample) Heute ist ein sonniger Tag. Im Garten treffen sich Freunde und quatschen. Ein Hund rennt fröhlich herum.</li>
+                        </ul>
+                    </div>
                     <div id="exercise10-feedback" class="mt-2"></div>
                 </div>
             </section>
@@ -993,490 +1126,422 @@
                         <p>Today’s a super sunny day. Loads of people are hanging out in the neighborhood. Some are chilling and walking around, others are chatting or checking their phones. One guy shouts to his buddy: “Hey, yo, how’s it going?” “All good!” – he grins back. They know each other, totally chill. Kids are running around, kicking a ball. A small dog dashes after a stick and barks like crazy.</p>
                         <h4>📘 Glossary</h4>
                         <div class="audio-container mb-3">
-                            <button class="btn btn-primary audio-btn" onclick="speak('’n. A. One. In der Nachbarschaft. In the neighborhood. ’ne Menge. Lots. Loads. Chillig. Chill. Relaxed. Quatschen. Chat. Checken. Check. Look at. Typ. Guy. Kumpel. Buddy. Kids. Kids. Flitzt. Dashes. Bellt. Barks.', 'de-DE')">Play Glossary</button>
+                            <button class="btn btn-primary audio-btn" onclick="speak('’n. A. One. In der Nachbarschaft. In the neighborhood. ’ne Menge. Lots. Loads. Chillig. Chill. Relaxed. Quatschen. Chat.', 'de-DE')">Play Passage</button>
+
+
+<p><strong>Term:</strong> Quatschen</p>
+                            <p><strong>Meaning:</strong> Chat</p>
                         </div>
-                        <div class="row g-3">
-                            <div class="col-md-6 col-lg-4">
-                                <div class="glossary-card card p-3">
-                                    <p><strong>Term:</strong> ’n</p>
-                                    <p><strong>Meaning:</strong> A / One</p>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-4">
-                                <div class="glossary-card card p-3">
-                                    <p><strong>Term:</strong> In der Nachbarschaft</p>
-                                    <p><strong>Meaning:</strong> In the neighborhood</p>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-4">
-                                <div class="glossary-card card p-3">
-                                    <p><strong>Term:</strong> ’ne Menge</p>
-                                    <p><strong>Meaning:</strong> Lots / Loads</p>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-4">
-                                <div class="glossary-card card p-3">
-                                    <p><strong>Term:</strong> Chillig</p>
-                                    <p><strong>Meaning:</strong> Chill / Relaxed</p>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-4">
-                                <div class="glossary-card card p-3">
-                                    <p><strong>Term:</strong> Quatschen</p>
-                                    <p><strong>Meaning:</strong> Chat</p>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-4">
-                                <div class="glossary-card card p-3">
-                                    <p><strong>Term:</strong> Checken</p>
-                                    <p><strong>Meaning:</strong> Check / Look at</p>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-4">
-                                <div class="glossary-card card p-3">
-                                    <p><strong>Term:</strong> Typ</p>
-                                    <p><strong>Meaning:</strong> Guy</p>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-4">
-                                <div class="glossary-card card p-3">
-                                    <p><strong>Term:</strong> Kumpel</p>
-                                    <p><strong>Meaning:</strong> Buddy</p>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-4">
-                                <div class="glossary-card card p-3">
-                                    <p><strong>Term:</strong> Kids</p>
-                                    <p><strong>Meaning:</strong> Kids</p>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-4">
-                                <div class="glossary-card card p-3">
-                                    <p><strong>Term:</strong> Flitzt</p>
-                                    <p><strong>Meaning:</strong> Dashes</p>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-4">
-                                <div class="glossary-card card p-3">
-                                    <p><strong>Term:</strong> Bellt</p>
-                                    <p><strong>Meaning:</strong> Barks</p>
-                                </div>
-                            </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="glossary-card card p-3">
+                            <p><strong>Term:</strong> Checken</p>
+                            <p><strong>Meaning:</strong> Check (e.g., phone)</p>
                         </div>
-                        <h4>🧩 Comprehension Questions</h4>
-                        <ul>
-                            <li>What is the weather like today?</li>
-                            <li>What are people doing in the neighborhood?</li>
-                            <li>Who greets first?</li>
-                            <li>Do the two guys know each other?</li>
-                            <li>What are the kids doing?</li>
-                        </ul>
-                        <button class="btn btn-secondary collapse-btn" type="button" data-bs-toggle="collapse" data-bs-target="#reading2-solutions" aria-expanded="false" aria-controls="reading2-solutions">
-                            Show Solutions
-                        </button>
-                        <div class="collapse" id="reading2-solutions">
-                            <h4>Solutions</h4>
-                            <ul>
-                                <li>It’s a super sunny day.</li>
-                                <li>Some are walking relaxed, others are chatting or checking their phones.</li>
-                                <li>One guy greets first.</li>
-                                <li>Yes, they know each other.</li>
-                                <li>The kids are running around and kicking a ball.</li>
-                            </ul>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="glossary-card card p-3">
+                            <p><strong>Term:</strong> Typ</p>
+                            <p><strong>Meaning:</strong> Guy</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="glossary-card card p-3">
+                            <p><strong>Term:</strong> Kumpel</p>
+                            <p><strong>Meaning:</strong> Buddy</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="glossary-card card p-3">
+                            <p><strong>Term:</strong> Grinst</p>
+                            <p><strong>Meaning:</strong> Grins</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="glossary-card card p-3">
+                            <p><strong>Term:</strong> Kids</p>
+                            <p><strong>Meaning:</strong> Kids</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="glossary-card card p-3">
+                            <p><strong>Term:</strong> Flitzt</p>
+                            <p><strong>Meaning:</strong> Dashes</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="glossary-card card p-3">
+                            <p><strong>Term:</strong> Wie verrückt</p>
+                            <p><strong>Meaning:</strong> Like crazy</p>
                         </div>
                     </div>
                 </div>
-            </section>
+                <h4>🧩 Comprehension Questions</h4>
+                <ul>
+                    <li>What is the weather like today?</li>
+                    <li>What are the people doing in the neighborhood?</li>
+                    <li>Who greets first?</li>
+                    <li>Do the guy and his buddy know each other?</li>
+                    <li>What do the kids do?</li>
+                </ul>
+                <button class="btn btn-secondary collapse-btn" type="button" data-bs-toggle="collapse" data-bs-target="#reading2-solutions" aria-expanded="false" aria-controls="reading2-solutions">
+                    Show Solutions
+                </button>
+                <div class="collapse" id="reading2-solutions">
+                    <h4>Solutions</h4>
+                    <ul>
+                        <li>It’s a super sunny day.</li>
+                        <li>Some are walking around, others are chatting or checking their phones.</li>
+                        <li>One guy greets first.</li>
+                        <li>Yes, they know each other.</li>
+                        <li>The kids are kicking a ball.</li>
+                    </ul>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
+</div>
 
-    <!-- Bootstrap JS and Popper.js -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
-    <!-- JavaScript for Tabs, Text-to-Speech, and Exercises -->
-    <script>
-        // Tab switching function
-        function openTab(event, tabName) {
-            speechSynthesis.cancel();
-            const tabContents = document.getElementsByClassName('tab-content');
-            for (let i = 0; i < tabContents.length; i++) {
-                tabContents[i].classList.remove('active');
-            }
-            const tabLinks = document.getElementsByClassName('tab-link');
-            for (let i = 0; i < tabLinks.length; i++) {
-                tabLinks[i].classList.remove('active');
-            }
-            document.getElementById(tabName).classList.add('active');
-            event.currentTarget.classList.add('active');
-        }
+<!-- JavaScript -->
+<script>
+    // Tab Navigation
+    function openTab(evt, tabName) {
+        document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+        document.querySelectorAll('.tab-link').forEach(link => link.classList.remove('active'));
+        document.getElementById(tabName).classList.add('active');
+        evt.currentTarget.classList.add('active');
+    }
 
-        // Text-to-Speech Functions
-        const feedback = document.getElementById('audio-feedback');
-
-        function showFeedback(message, alertClass) {
-            feedback.textContent = message;
-            feedback.className = `alert ${alertClass}`;
-            feedback.style.display = 'block';
-            setTimeout(() => {
-                feedback.style.display = 'none';
-            }, 7000);
-        }
-
-        function getVoices() {
-            const voices = speechSynthesis.getVoices();
-            console.log('Available voices:', voices.map(v => ({ name: v.name, lang: v.lang })));
-            return voices;
-        }
-
-        function speak(text, lang) {
-            const processedText = text.replace(/,/g, '.');
-            const utterance = new SpeechSynthesisUtterance(processedText);
+    // Speech Synthesis
+    function speak(text, lang) {
+        if ('speechSynthesis' in window) {
+            const utterance = new SpeechSynthesisUtterance(text);
             utterance.lang = lang;
-            utterance.rate = 0.9;
-            utterance.pitch = 1;
-            const voices = getVoices();
-            const germanVoice = voices.find(voice => voice.lang === 'de-DE');
-            if (germanVoice) {
-                utterance.voice = germanVoice;
-                console.log('Speaking with voice:', germanVoice.name, germanVoice.lang);
-            } else {
-                const fallbackVoice = voices[0];
-                if (fallbackVoice) {
-                    utterance.voice = fallbackVoice;
-                    console.log('No German voice, using fallback:', fallbackVoice.name, fallbackVoice.lang);
-                    showFeedback('No German voice available. Install a German language pack and restart your browser.', 'alert-warning');
-                } else {
-                    console.log('No voices available.');
-                    showFeedback('No voices available. Install a German language pack and restart your browser.', 'alert-danger');
-                    return;
-                }
-            }
-            utterance.onerror = (event) => {
-                console.error('Speech error:', event);
-                showFeedback(`Error playing audio: ${event.error}. Check audio settings, use HTTPS, or try another browser.`, 'alert-danger');
-            };
-            utterance.onend = () => {
-                showFeedback('Audio played successfully.', 'alert-success');
-            };
+            utterance.onerror = () => showAudioFeedback('Error playing audio.', 'alert-danger');
+            utterance.onend = () => showAudioFeedback('Audio playback completed.', 'alert-success');
             speechSynthesis.speak(utterance);
+            showAudioFeedback('Playing audio...', 'alert-info');
+        } else {
+            showAudioFeedback('Your browser does not support audio playback.', 'alert-danger');
         }
+    }
 
-      
-  
-      
-        window.addEventListener('load', () => {
-            speechSynthesis.getVoices();
+    // Audio Feedback
+    function showAudioFeedback(message, alertType) {
+        const feedback = document.getElementById('audio-feedback');
+        feedback.textContent = message;
+        feedback.className = `alert ${alertType}`;
+        feedback.style.display = 'block';
+        setTimeout(() => feedback.style.display = 'none', 3000);
+    }
+
+    // Exercise Feedback
+    function showExerciseFeedback(elementId, message, alertType) {
+        const feedback = document.getElementById(elementId);
+        feedback.innerHTML = message;
+        feedback.className = `alert ${alertType}`;
+    }
+
+    // Drag-and-Drop Functionality
+    let draggedItem = null;
+
+    document.querySelectorAll('.draggable').forEach(item => {
+        item.addEventListener('dragstart', () => {
+            draggedItem = item;
+            item.classList.add('dragging');
         });
-          
-          // Complete the onvoiceschanged event handler
-speechSynthesis.onvoiceschanged = () => {
-    getVoices();
-};
+        item.addEventListener('dragend', () => {
+            item.classList.remove('dragging');
+            draggedItem = null;
+        });
+    });
 
-// Function to display exercise feedback
-function showExerciseFeedback(elementId, message, alertClass) {
-    const feedbackElement = document.getElementById(elementId);
-    feedbackElement.innerHTML = message;
-    feedbackElement.className = `alert ${alertClass} mt-2`;
-    feedbackElement.style.display = 'block';
-}
+    document.querySelectorAll('.droppable').forEach(dropZone => {
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+        });
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            if (draggedItem) {
+                // If the drop zone already has an item, swap it back to the greetings list
+                const existingItem = dropZone.querySelector('.draggable');
+                if (existingItem) {
+                    document.getElementById('greetings-list').appendChild(existingItem);
+                }
+                // Append the dragged item to the drop zone
+                dropZone.appendChild(draggedItem);
+            }
+        });
+    });
 
-// Exercise 1: Fill-in-the-blank for "sein" forms
-function checkExercise1() {
-    const answers = {
-        'ex1-1': 'bin',
-        'ex1-2': 'bist',
-        'ex1-3': 'ist',
-        'ex1-4': 'sind',
-        'ex1-5': 'sind'
-    };
-    let correct = 0;
-    let feedback = '<h5>Feedback:</h5><ul>';
-    Object.keys(answers).forEach((id, index) => {
-        const userAnswer = document.getElementById(id).value.trim().toLowerCase();
-        if (userAnswer === answers[id]) {
-            correct++;
-            feedback += `<li>${index + 1}. Correct!</li>`;
-        } else {
-            feedback += `<li>${index + 1}. Incorrect. Correct answer: <strong>${answers[id]}</strong></li>`;
-        }
+    document.querySelectorAll('.draggable-word').forEach(word => {
+        word.addEventListener('dragstart', () => {
+            draggedItem = word;
+            word.classList.add('dragging');
+        });
+        word.addEventListener('dragend', () => {
+            word.classList.remove('dragging');
+            draggedItem = null;
+        });
     });
-    feedback += '</ul>';
-    showExerciseFeedback('exercise1-feedback', `You got ${correct}/5 correct! ${feedback}`, correct === 5 ? 'alert-success' : 'alert-warning');
-}
 
-// Exercise 2: Drag-and-drop matching for greetings and dialects
-let draggedItem = null;
+    document.querySelectorAll('.droppable-sentence').forEach(dropZone => {
+        dropZone.addEventListener('dragover', (e) => e.preventDefault());
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            if (draggedItem) {
+                dropZone.appendChild(draggedItem);
+            }
+        });
+    });
 
-document.querySelectorAll('.draggable').forEach(item => {
-    item.addEventListener('dragstart', (e) => {
-        draggedItem = e.target;
-        e.target.classList.add('dragging');
-    });
-    item.addEventListener('dragend', (e) => {
-        e.target.classList.remove('dragging');
-        draggedItem = null;
-    });
-});
-
-document.querySelectorAll('.droppable').forEach(dropZone => {
-    dropZone.addEventListener('dragover', (e) => {
-        e.preventDefault();
-    });
-    dropZone.addEventListener('drop', (e) => {
-        e.preventDefault();
-        if (draggedItem) {
-            dropZone.appendChild(draggedItem);
-        }
-    });
-});
-
-function checkExercise2() {
-    const correctAnswers = {
-        'A': 'Hallo',
-        'B': 'Hey',
-        'C': 'Servus',
-        'D': 'Grüß di'
-    };
-    let correct = 0;
-    let feedback = '<h5>Feedback:</h5><ul>';
-    document.querySelectorAll('.droppable').forEach(zone => {
-        const dialect = zone.dataset.id;
-        const greeting = zone.querySelector('.draggable');
-        if (greeting && greeting.textContent.trim() === correctAnswers[dialect]) {
-            correct++;
-            feedback += `<li>${greeting.textContent} → ${zone.textContent}: Correct!</li>`;
-        } else {
-            feedback += `<li>${greeting ? greeting.textContent : 'Nothing'} → ${zone.textContent}: Incorrect. Correct answer: <strong>${correctAnswers[dialect]}</strong></li>`;
-        }
-    });
-    feedback += '</ul>';
-    showExerciseFeedback('exercise2-feedback', `You got ${correct}/4 correct! ${feedback}`, correct === 4 ? 'alert-success' : 'alert-warning');
-}
-
-// Exercise 3: Sentence ordering with drag-and-drop
-document.querySelectorAll('.draggable-word').forEach(item => {
-    item.addEventListener('dragstart', (e) => {
-        draggedItem = e.target;
-        e.target.classList.add('dragging');
-    });
-    item.addEventListener('dragend', (e) => {
-        e.target.classList.remove('dragging');
-        draggedItem = null;
-    });
-});
-
-document.querySelectorAll('.droppable-sentence').forEach(dropZone => {
-    dropZone.addEventListener('dragover', (e) => {
-        e.preventDefault();
-    });
-    dropZone.addEventListener('drop', (e) => {
-        e.preventDefault();
-        if (draggedItem) {
-            dropZone.appendChild(draggedItem);
-        }
-    });
-});
-
-function checkExercise3() {
-    let correct = 0;
-    let feedback = '<h5>Feedback:</h5><ul>';
-    document.querySelectorAll('.sentence-drag').forEach(list => {
-        const sentenceId = list.dataset.sentence;
-        const correctSentence = list.dataset.correct;
-        const dropZone = document.querySelector(`.droppable-sentence[data-sentence="${sentenceId}"]`);
-        const userSentence = Array.from(dropZone.children).map(item => item.textContent.trim()).join(' ');
-        if (userSentence === correctSentence) {
-            correct++;
-            feedback += `<li>Sentence ${sentenceId}: Correct!</li>`;
-        } else {
-            feedback += `<li>Sentence ${sentenceId}: Incorrect. Correct answer: <strong>${correctSentence}</strong></li>`;
-        }
-    });
-    feedback += '</ul>';
-    showExerciseFeedback('exercise3-feedback', `You got ${correct}/3 correct! ${feedback}`, correct === 3 ? 'alert-success' : 'alert-warning');
-}
-
-// Exercise 4: Multiple-choice vocabulary
-function checkExercise4() {
-    const answers = {
-        'ex4-1': 'Tag',
-        'ex4-2': 'Wie',
-        'ex4-3': 'Servus',
-        'ex4-4': 'Grüß'
-    };
-    let correct = 0;
-    let feedback = '<h5>Feedback:</h5><ul>';
-    Object.keys(answers).forEach((name, index) => {
-        const selected = document.querySelector(`input[name="${name}"]:checked`);
-        if (selected && selected.value === answers[name]) {
-            correct++;
-            feedback += `<li>${index + 1}. Correct!</li>`;
-        } else {
-            feedback += `<li>${index + 1}. Incorrect. Correct answer: <strong>${answers[name]}</strong></li>`;
-        }
-    });
-    feedback += '</ul>';
-    showExerciseFeedback('exercise4-feedback', `You got ${correct}/4 correct! ${feedback}`, correct === 4 ? 'alert-success' : 'alert-warning');
-}
-
-// Exercise 5: Fill-in-the-blank with mixed dialects
-function checkExercise5() {
-    const answers = {
-        'ex5-1': 'sind',
-        'ex5-2': 'bist',
-        'ex5-3': 'bin',
-        'ex5-4': 'sind',
-        'ex5-5': 'sind',
-        'ex5-6': 'sind',
-        'ex5-7': 'ist',
-        'ex5-8': 'gudd'
-    };
-    let correct = 0;
-    let feedback = '<h5>Feedback:</h5><ul>';
-    Object.keys(answers).forEach((id, index) => {
-        const userAnswer = document.getElementById(id).value.trim().toLowerCase();
-        if (userAnswer === answers[id]) {
-            correct++;
-            feedback += `<li>${index + 1}. Correct!</li>`;
-        } else {
-            feedback += `<li>${index + 1}. Incorrect. Correct answer: <strong>${answers[id]}</strong></li>`;
-        }
-    });
-    feedback += '</ul>';
-    showExerciseFeedback('exercise5-feedback', `You got ${correct}/8 correct! ${feedback}`, correct === 8 ? 'alert-success' : 'alert-warning');
-}
-
-// Exercise 6: Translation to colloquial German
-function checkExercise6() {
-    const answers = {
-        'ex6-1': ['Hey, na, wie geht’s, Kumpel?', 'Hey, wie geht’s, Kumpel?', 'Na, wie geht’s, Mann?'],
-        'ex6-2': ['Mann, ich bin total kaputt!', 'Ich bin voll kaputt, Mann!', 'Total kaputt, Mann!'],
-        'ex6-3': ['Wo kommst’n her?', 'Woher kommst’n?', 'Was, wo kommst’n her?'],
-        'ex6-4': ['Komm, lass uns ’nen Kaffee trinken!', 'Lass uns ’nen Kaffee trinken, Mann!', 'Komm, ’nen Kaffee trinken!']
-    };
-    let correct = 0;
-    let feedback = '<h5>Feedback:</h5><ul>';
-    Object.keys(answers).forEach((id, index) => {
-        const userAnswer = document.getElementById(id).value.trim();
-        if (answers[id].includes(userAnswer)) {
-            correct++;
-            feedback += `<li>${index + 1}. Correct!</li>`;
-        } else {
-            feedback += `<li>${index + 1}. Incorrect. Possible answer: <strong>${answers[id][0]}</strong></li>`;
-        }
-    });
-    feedback += '</ul>';
-    showExerciseFeedback('exercise6-feedback', `You got ${correct}/4 correct! ${feedback}`, correct === 4 ? 'alert-success' : 'alert-warning');
-}
-
-// Exercise 7: Dialogue creation
-function checkExercise7() {
-    const dialogue = document.getElementById('ex7-dialogue').value.trim();
-    if (dialogue.length < 20) {
-        showExerciseFeedback('exercise7-feedback', 'Please write a dialogue with 4-6 lines.', 'alert-danger');
-        return;
+    // Exercise 1: Check Answers
+    function checkExercise1() {
+        const answers = {
+            'ex1-1': 'bin',
+            'ex1-2': 'bist',
+            'ex1-3': 'ist',
+            'ex1-4': 'sind',
+            'ex1-5': 'sind'
+        };
+        let correct = 0;
+        let feedback = '<h5>Feedback:</h5><ul>';
+        Object.keys(answers).forEach((id, index) => {
+            const userAnswer = document.getElementById(id).value.trim().toLowerCase();
+            if (userAnswer === answers[id]) {
+                correct++;
+                feedback += `<li>${index + 1}. Correct!</li>`;
+            } else {
+                feedback += `<li>${index + 1}. Incorrect. Check the form of "sein" for this pronoun.</li>`;
+            }
+        });
+        feedback += '</ul>';
+        showExerciseFeedback('exercise1-feedback', `You got ${correct}/5 correct! ${feedback}`, correct === 5 ? 'alert-success' : 'alert-warning');
     }
-    const lines = dialogue.split('\n').filter(line => line.trim() !== '');
-    const hasSein = /bin|bist|ist|sind|seid/.test(dialogue.toLowerCase());
-    const hasGreeting = /hallo|hey|servus|grüß di/i.test(dialogue);
-    let feedback = '<h5>Feedback:</h5>';
-    if (lines.length < 4 || lines.length > 6) {
-        feedback += '<p>Dialogue should have 4-6 lines.</p>';
-    }
-    if (!hasSein) {
-        feedback += '<p>Include at least one form of “sein” (bin, bist, ist, sind, seid).</p>';
-    }
-    if (!hasGreeting) {
-        feedback += '<p>Include at least one greeting (Hallo, Hey, Servus, Grüß di).</p>';
-    }
-    if (lines.length >= 4 && lines.length <= 6 && hasSein && hasGreeting) {
-        feedback += '<p>Great job! Your dialogue meets all requirements.</p>';
-        showExerciseFeedback('exercise7-feedback', feedback, 'alert-success');
-    } else {
-        showExerciseFeedback('exercise7-feedback', feedback, 'alert-warning');
-    }
-}
 
-// Exercise 8: Multiple-choice dialect identification
-function checkExercise8() {
-    const answers = {
-        'ex8-1': 'C',
-        'ex8-2': 'A',
-        'ex8-3': 'B',
-        'ex8-4': 'D'
-    };
-    let correct = 0;
-    let feedback = '<h5>Feedback:</h5><ul>';
-    Object.keys(answers).forEach((name, index) => {
-        const selected = document.querySelector(`input[name="${name}"]:checked`);
-        if (selected && selected.value === answers[name]) {
-            correct++;
-            feedback += `<li>${index + 1}. Correct!</li>`;
-        } else {
-            feedback += `<li>${index + 1}. Incorrect. Correct answer: <strong>${['A. Standard German', 'B. Colloquial German', 'C. Bavarian', 'D. Swabian'][parseInt(answers[name].charCodeAt(0) - 65)]}</strong></li>`;
-        }
-    });
-    feedback += '</ul>';
-    showExerciseFeedback('exercise8-feedback', `You got ${correct}/4 correct! ${feedback}`, correct === 4 ? 'alert-success' : 'alert-warning');
-}
-
-// Exercise 9: Vocabulary substitution in dialects
-function checkExercise9() {
-    const answers = {
-        'ex9-1-bav': ['Servus! Wo geht’s dir?', 'Servus! Wo geht’s?'],
-        'ex9-1-swa': ['Grüß di! Wie goht’s dir?', 'Grüß di! Wie goht’s?'],
-        'ex9-2-bav': ['Passt scho, i bin guat.', 'Passt scho, i bin guat, gell.'],
-        'ex9-2-swa': ['Gudd, i bin gudd.', 'Danke, i bin gudd.'],
-        'ex9-3-bav': ['Geh, mia schwätzen a bisserl!', 'Geh, mia schwätzen!'],
-        'ex9-3-swa': ['Geh, mir schwätzen en babbel!', 'Geh, mir schwätzen!'],
-        'ex9-4-bav': ['Jo, des is mei schee.', 'Jo, des is schee, gell.'],
-        'ex9-4-swa': ['Jo, des is richtig schee.', 'Jo, des is schee.']
-    };
-    let correct = 0;
-    let feedback = '<h5>Feedback:</h5><ul>';
-    Object.keys(answers).forEach((id, index) => {
-        const userAnswer = document.getElementById(id).value.trim();
-        if (answers[id].includes(userAnswer)) {
-            correct++;
-            feedback += `<li>${Math.floor(index / 2) + 1}. ${id.includes('bav') ? 'Bavarian' : 'Swabian'}: Correct!</li>`;
-        } else {
-            feedback += `<li>${Math.floor(index / 2) + 1}. ${id.includes('bav') ? 'Bavarian' : 'Swabian'}: Incorrect. Possible answer: <strong>${answers[id][0]}</strong></li>`;
-        }
-    });
-    feedback += '</ul>';
-    showExerciseFeedback('exercise9-feedback', `You got ${correct}/8 correct! ${feedback}`, correct === 8 ? 'alert-success' : 'alert-warning');
-}
-
-// Exercise 10: Comprehension and writing
-function checkExercise10() {
-    const answers = {
-        'ex10-1': ['Beide Texte beschreiben einen sonnigen Tag, wo Leute sich treffen und entspannen.', 'Beide Texte reden von ’nem sonnigen Tag, wo Leute chillen und quatschen.'],
-        'ex10-2': ['Text 1 ist höflich und formell, Text 2 ist locker und freundschaftlich.', 'Text 1 is’ eher förmlich und höflich, Text 2 is’ total locker und wie Kumpels reden.'],
-        'ex10-3': ['Die Hunde jagen etwas und bellen.', 'In beiden Texten jagt ’n Hund was hinterher und bellt wie verrückt.']
-    };
-    let correct = 0;
-    let feedback = '<h5>Feedback:</h5><ul>';
-    Object.keys(answers).forEach((id, index) => {
-        const userAnswer = document.getElementById(id).value.trim();
-        if (answers[id].some(ans => userAnswer.toLowerCase().includes(ans.toLowerCase().split(' ')[0]))) {
-            correct++;
-            feedback += `<li>${index + 1}. Correct!</li>`;
-        } else {
-            feedback += `<li>${index + 1}. Incorrect. Possible answer: <strong>${answers[id][0]}</strong></li>`;
-        }
-    });
-    const paragraph = document.getElementById('ex10-paragraph').value.trim();
-    const paragraphValid = paragraph.split('.').filter(s => s.trim()).length >= 3;
-    if (paragraphValid) {
-        correct++;
-        feedback += '<li>Paragraph: Valid! You wrote a paragraph with 3 or more sentences.</li>';
-    } else {
-        feedback += '<li>Paragraph: Please write 3-4 sentences.</li>';
+    // Exercise 2: Check Answers
+    function checkExercise2() {
+        const correctAnswers = {
+            'A': 'Hallo',
+            'B': 'Hey',
+            'C': 'Servus',
+            'D': 'Grüß di'
+        };
+        let correct = 0;
+        let feedback = '<h5>Feedback:</h5><ul>';
+        document.querySelectorAll('.droppable').forEach(zone => {
+            const dialect = zone.dataset.id;
+            const greeting = zone.querySelector('.draggable');
+            if (greeting && greeting.textContent.trim() === correctAnswers[dialect]) {
+                correct++;
+                feedback += `<li>${zone.textContent}: Correct!</li>`;
+            } else {
+                feedback += `<li>${zone.textContent}: Incorrect. Check the greeting for this dialect.</li>`;
+            }
+        });
+        feedback += '</ul>';
+        showExerciseFeedback('exercise2-feedback', `You got ${correct}/4 correct! ${feedback}`, correct === 4 ? 'alert-success' : 'alert-warning');
     }
-    feedback += '</ul>';
-    showExerciseFeedback('exercise10-feedback', `You got ${correct}/4 correct! ${feedback}`, correct === 4 ? 'alert-success' : 'alert-warning');
-}</script>
-       
-      </body>
+
+    // Exercise 3: Check Answers
+    function checkExercise3() {
+        let correct = 0;
+        let feedback = '<h5>Feedback:</h5><ul>';
+        document.querySelectorAll('.sentence-drag-list').forEach((list, index) => {
+            const sentenceId = index + 1;
+            const correctSentence = list.dataset.correct.trim().toLowerCase();
+            const dropZone = document.querySelector(`.droppable-sentence[data-sentence="${sentenceId}"]`);
+            const userWords = Array.from(dropZone.children).map(item => item.textContent.trim());
+            const userSentence = userWords.join(' ').toLowerCase().replace(/[.,!?]/g, '');
+            const normalizedCorrect = correctSentence.toLowerCase().replace(/[.,!?]/g, '');
+            if (userSentence === normalizedCorrect) {
+                correct++;
+                feedback += `<li>Sentence ${sentenceId}: Correct!</li>`;
+            } else {
+                feedback += `<li>Sentence ${sentenceId}: Incorrect. Check the word order.</li>`;
+            }
+        });
+        feedback += '</ul>';
+        showExerciseFeedback('exercise3-feedback', `You got ${correct}/3 correct! ${feedback}`, correct === 3 ? 'alert-success' : 'alert-warning');
+    }
+
+    // Exercise 4: Check Answers
+    function checkExercise4() {
+        const answers = {
+            'ex4-1': 'Tag',
+            'ex4-2': 'Wie',
+            'ex4-3': 'Servus',
+            'ex4-4': 'Grüß'
+        };
+        let correct = 0;
+        let feedback = '<h5>Feedback:</h5><ul>';
+        Object.keys(answers).forEach((name, index) => {
+            const selected = document.querySelector(`input[name="${name}"]:checked`);
+            if (selected && selected.value === answers[name]) {
+                correct++;
+                feedback += `<li>${index + 1}. Correct!</li>`;
+            } else {
+                feedback += `<li>${index + 1}. Incorrect. Check the vocabulary for this dialect.</li>`;
+            }
+        });
+        feedback += '</ul>';
+        showExerciseFeedback('exercise4-feedback', `You got ${correct}/4 correct! ${feedback}`, correct === 4 ? 'alert-success' : 'alert-warning');
+    }
+
+    // Exercise 5: Check Answers
+    function checkExercise5() {
+        const answers = {
+            'ex5-1': 'sind',
+            'ex5-2': 'bist',
+            'ex5-3': 'bin',
+            'ex5-4': 'sind',
+            'ex5-5': 'sind',
+            'ex5-6': 'sind',
+            'ex5-7': 'ist',
+            'ex5-8': 'bist'
+        };
+        let correct = 0;
+        let feedback = '<h5>Feedback:</h5><ul>';
+        Object.keys(answers).forEach((id, index) => {
+            const userAnswer = document.getElementById(id).value.trim().toLowerCase();
+            if (userAnswer === answers[id]) {
+                correct++;
+                feedback += `<li>${index + 1}. Correct!</li>`;
+            } else {
+                feedback += `<li>${index + 1}. Incorrect. Check the form of "sein" for this dialect.</li>`;
+            }
+        });
+        feedback += '</ul>';
+        showExerciseFeedback('exercise5-feedback', `You got ${correct}/8 correct! ${feedback}`, correct === 8 ? 'alert-success' : 'alert-warning');
+    }
+
+    // Exercise 6: Check Answers
+    function checkExercise6() {
+        const answers = {
+            'ex6-1': ['Hey, na, wie geht’s, Kumpel?', 'Hey, wie geht’s, Kumpel?', 'Na, wie geht’s, Mann?', 'Hey, na, wie geht’s?', 'Hey, wie geht’s dir, Mann?'],
+            'ex6-2': ['Mann, ich bin total kaputt!', 'Ich bin voll kaputt, Mann!', 'Total kaputt, Mann!', 'Ich bin total fertig!', 'Voll fertig, Mann!'],
+            'ex6-3': ['Wo kommst’n her?', 'Woher kommst’n?', 'Was, wo kommst’n her?', 'Wo kommst du her, Mann?', 'Woher bist’n?'],
+            'ex6-4': ['Komm, lass uns ’nen Kaffee trinken!', 'Lass uns ’nen Kaffee trinken, Mann!', 'Komm, ’nen Kaffee trinken!', 'Lass uns ins Café, Mann!', 'Komm, Kaffee trinken!']
+        };
+        let correct = 0;
+        let feedback = '<h5>Feedback:</h5><ul>';
+        Object.keys(answers).forEach((id, index) => {
+            const userAnswer = document.getElementById(id).value.trim().toLowerCase();
+            const isCorrect = answers[id].some(ans => ans.toLowerCase() === userAnswer);
+            if (isCorrect) {
+                correct++;
+                feedback += `<li>${index + 1}. Correct!</li>`;
+            } else {
+                feedback += `<li>${index + 1}. Incorrect. Try using more colloquial expressions.</li>`;
+            }
+        });
+        feedback += '</ul>';
+        showExerciseFeedback('exercise6-feedback', `You got ${correct}/4 correct! ${feedback}`, correct === 4 ? 'alert-success' : 'alert-warning');
+    }
+
+    // Exercise 7: Check Dialogue
+    function checkExercise7() {
+        const dialogue = document.getElementById('ex7-dialogue').value.trim();
+        let feedback = '';
+        if (dialogue.length < 20) {
+            feedback = 'Please write a dialogue with 4-6 lines.';
+            showExerciseFeedback('exercise7-feedback', feedback, 'alert-danger');
+            return;
+        }
+        const hasSein = dialogue.toLowerCase().includes('bin') || dialogue.toLowerCase().includes('bist') || dialogue.toLowerCase().includes('ist') || dialogue.toLowerCase().includes('sind') || dialogue.toLowerCase().includes('seid');
+        const hasGreeting = dialogue.toLowerCase().includes('hallo') || dialogue.toLowerCase().includes('hey') || dialogue.toLowerCase().includes('servus') || dialogue.toLowerCase().includes('grüß');
+        if (hasSein && hasGreeting) {
+            feedback = 'Great job! Your dialogue includes a form of “sein” and a greeting. Check the sample solution for comparison.';
+            showExerciseFeedback('exercise7-feedback', feedback, 'alert-success');
+        } else {
+            feedback = 'Incomplete. Ensure your dialogue includes one form of “sein” and one greeting (e.g., Hallo, Hey, Servus, or Grüß di).';
+            showExerciseFeedback('exercise7-feedback', feedback, 'alert-warning');
+        }
+    }
+
+    // Exercise 8: Check Answers
+    function checkExercise8() {
+        const answers = {
+            'ex8-1': 'C',
+            'ex8-2': 'A',
+            'ex8-3': 'B',
+            'ex8-4': 'D'
+        };
+        let correct = 0;
+        let feedback = '<h5>Feedback:</h5><ul>';
+        Object.keys(answers).forEach((name, index) => {
+            const selected = document.querySelector(`input[name="${name}"]:checked`);
+            if (selected && selected.value === answers[name]) {
+                correct++;
+                feedback += `<li>${index + 1}. Correct!</li>`;
+            } else {
+                feedback += `<li>${index + 1}. Incorrect. Check the dialect characteristics.</li>`;
+            }
+        });
+        feedback += '</ul>';
+        showExerciseFeedback('exercise8-feedback', `You got ${correct}/4 correct! ${feedback}`, correct === 4 ? 'alert-success' : 'alert-warning');
+    }
+
+    // Exercise 9: Check Answers
+    function checkExercise9() {
+        const answers = {
+            'ex9-1-bav': ['Servus! Wo geht’s dir?', 'Servus! Wo geht’s?', 'Servus! Wo geht’s dir, gell?'],
+            'ex9-1-swa': ['Grüß di! Wie goht’s dir?', 'Grüß di! Wie goht’s?', 'Grüß di! Wie goht’s dir, ma?'],
+            'ex9-2-bav': ['Passt scho, i bin guat.', 'Passt scho, i bin guat, gell.', 'Passt scho! I bin guat.'],
+            'ex9-2-swa': ['Gudd, i bin gudd.', 'Danke, i bin gudd.', 'Gudd! I bin gudd.'],
+            'ex9-3-bav': ['Geh, mia schwätzen a bisserl!', 'Geh, mia schwätzen!', 'Geh, mia schwätzen, gell!'],
+            'ex9-3-swa': ['Geh, mir schwätzen en babbel!', 'Geh, mir schwätzen!', 'Geh, mir schwätzen, ma!'],
+            'ex9-4-bav': ['Jo, des is mei schee.', 'Jo, des is schee, gell.', 'Jo! Des is mei schee.'],
+            'ex9-4-swa': ['Jo, des is richtig schee.', 'Jo, des is schee.', 'Jo! Des is richtig schee.']
+        };
+        let correct = 0;
+        let feedback = '<h5>Feedback:</h5><ul>';
+        Object.keys(answers).forEach((id, index) => {
+            const userAnswer = document.getElementById(id).value.trim().toLowerCase().replace(/[.,!?;]/g, '');
+            const isCorrect = answers[id].some(ans => ans.toLowerCase().replace(/[.,!?;]/g, '') === userAnswer);
+            if (isCorrect) {
+                correct++;
+                feedback += `<li>${Math.floor(index / 2) + 1}. ${id.includes('bav') ? 'Bavarian' : 'Swabian'}: Correct!</li>`;
+            } else {
+                feedback += `<li>${Math.floor(index / 2) + 1}. ${id.includes('bav') ? 'Bavarian' : 'Swabian'}: Incorrect. Check the dialect-specific vocabulary.</li>`;
+            }
+        });
+        feedback += '</ul>';
+        showExerciseFeedback('exercise9-feedback', `You got ${correct}/8 correct! ${feedback}`, correct === 8 ? 'alert-success' : 'alert-warning');
+    }
+
+    // Exercise 10: Check Answers
+    function checkExercise10() {
+        const answers = {
+            'ex10-1': ['Beide Texte beschreiben einen sonnigen Tag, wo Leute sich treffen und entspannen.', 'Beide Texte handeln von einem sonnigen Tag mit Leuten, die sich treffen.', 'Die Texte beschreiben beide sonnige Tage mit sozialen Aktivitäten.'],
+            'ex10-2': ['Text 1 ist höflich und formell, Text 2 ist locker und freundschaftlich.', 'Text 1 ist formell, Text 2 ist informell.', 'Text 1 klingt höflich, Text 2 ist entspannt.'],
+            'ex10-3': ['Die Hunde jagen etwas und bellen.', 'Die Hunde laufen hinter etwas her und bellen.', 'In beiden Texten jagen Hunde etwas und bellen.']
+        };
+        let correct = 0;
+        let feedback = '<h5>Feedback:</h5><ul>';
+        Object.keys(answers).forEach((id, index) => {
+            const userAnswer = document.getElementById(id).value.trim().toLowerCase();
+            const isCorrect = answers[id].some(ans => ans.toLowerCase().includes(userAnswer) || userAnswer.includes(ans.toLowerCase()));
+            if (isCorrect) {
+                correct++;
+                feedback += `<li>${index + 1}. Correct!</li>`;
+            } else {
+                feedback += `<li>${index + 1}. Incorrect. Review the passages for the correct details.</li>`;
+            }
+        });
+        const paragraph = document.getElementById('ex10-paragraph').value.trim();
+        if (paragraph.split('.').length >= 3 && paragraph.toLowerCase().includes('sonnig') && paragraph.toLowerCase().includes('leute')) {
+            correct++;
+            feedback += `<li>Paragraph: Well done! Your paragraph describes a similar scene.</li>`;
+        } else {
+            feedback += `<li>Paragraph: Ensure your paragraph has 3-4 sentences and describes a sunny day with people interacting.</li>`;
+        }
+        feedback += '</ul>';
+        showExerciseFeedback('exercise10-feedback', `You got ${correct}/4 correct! ${feedback}`, correct === 4 ? 'alert-success' : 'alert-warning');
+    }
+</script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>
