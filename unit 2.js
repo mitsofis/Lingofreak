@@ -162,7 +162,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const sentenceId = item.dataset.sentence;
                 const sourceList = document.querySelector(`.sentence-drag-list[data-sentence="${sentenceId}"]`);
                 item.appendChild(dragged);
-                // Ensure word returns to source if dropped elsewhere
                 if (!item.contains(dragged)) {
                     sourceList.appendChild(dragged);
                 }
@@ -252,10 +251,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Exercise 6: Translate and Transform
     function checkExercise6() {
         const answers = [
-            'hey na was machstn',
+            'hey na was machst n',
             'ich komm aus münchen mann',
             'lass uns mal nen plan machen',
-            'cool dich kennst lernen'
+            'cool dich kennenzulernen'
         ];
         let correct = 0;
         for (let i = 1; i <= 4; i++) {
@@ -334,8 +333,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Exercise 9: Vocabulary Substitution
     function checkExercise9() {
         const answers = {
-            'ex9-1-bav': 'servus was machstn',
-            'ex9-1-swa': 'grüß di wie gohts',
+            'ex9-1-bav': 'servus was machst n',
+            'ex9-1-swa': 'grüß di wie goht s',
             'ex9-2-bav': 'i mach mei arbeit',
             'ex9-2-swa': 'i mach mei sach',
             'ex9-3-bav': 'woher kimmt n',
