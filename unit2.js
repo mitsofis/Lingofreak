@@ -18,51 +18,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Tab Functionality
-    function openTab(evt, tabName) {
-        try {
-            // Remove active class from all tabs and links
-            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active')));
-            document.querySelectorAll('.tab-item').forEach(item => item.classList.remove('active'));
+    
+let currentUtterance = null;
+let isSpeaking = false;
+let lastSpokenText = '';
+let lastLang = '';
 
-            // Add active class to selected tab content
-            const tabContent = document.getElementById(tabName);
-            if (tabContent) {
-                tabContent.classList.add('active');
-            } else {
-                console.error('Content with ID "${tabName}" not found');
-                showFeedback('Error switching tabs. Please try again.', 'danger');
-                return;
-            }
+// Tab Navigation
+function openTab(evt, tabName) {
+    stopSpeaking();  // Stop audio when switching tabs
 
-            // Add active class to clicked tab link
-            if (evt.currentTarget) {
-                evt.currentTarget.classList.add('active');
-            } else {
-                console.error('Event target is not valid');
-            }
-        } catch (error) {
-            console.error('Error in openTab:', error);
-            showFeedback('Error switching tabs. Please try again.', 'danger');
-        }
-    }
-
-    // Initialize first tab as active
-    const firstTabContent = document.getElementById('dialogues');
-    const firstTabLink = document.querySelector('.tab-item[onclick*="dialogues"]');
-    if (firstTabContent && firstTabLink) {
-        firstTabContent.classList.add('active');
-        firstTabLink.classList.add('active');
-    }
-
-    // Attach event listeners to tab buttons programmatically
-    document.querySelectorAll('.tab-item').forEach(item => {
-        const onclick = link.getAttribute('onclick');
-        if (onclick && onclick.includes('openTab')) {
-            const tabName = onclick.match(/'([^']+)'/)[1];
-            link.addEventListener('click', (evt) => openTab(evt, tabName));
-        }
-    });
+    document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+    document.querySelectorAll('.tab-link').forEach(link => link.classList.remove('active'));
+    document.getElementById(tabName).classList.add('active');
+    evt.currentTarget.classList.add('active');
+}
 
     // Exercise 1: Fill in the Blank (Standard German)
     function checkExercise1() {
