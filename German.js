@@ -1,5 +1,7 @@
 let currentUtterance = null;
 let isSpeaking = false;
+let lastSpokenText = '';
+let lastLang = '';
 
 // Tab Navigation
 function openTab(evt, tabName) {
@@ -11,25 +13,35 @@ function openTab(evt, tabName) {
     evt.currentTarget.classList.add('active');
 }
 
-// Stop any playing speech
+// Stop current speech
 function stopSpeaking() {
-    if ('speechSynthesis' in window && speechSynthesis.speaking) {
+    if ('speechSynthesis' in window && (speechSynthesis.speaking || speechSynthesis.pending)) {
         speechSynthesis.cancel();
         isSpeaking = false;
+        lastSpokenText = '';
     }
 }
 
 // Speech Synthesis
 function speak(text, lang) {
-    stopSpeaking(); // Always stop current playback before starting new one
-
     if (!('speechSynthesis' in window)) {
         showAudioFeedback('Your browser does not support audio playback.', 'alert-danger');
         return;
     }
 
+    // If same text and language is already speaking, stop instead of restarting
+    if (isSpeaking && text === lastSpokenText && lang === lastLang) {
+        stopSpeaking();
+        showAudioFeedback('Audio stopped.', 'alert-warning');
+        return;
+    }
+
+    stopSpeaking(); // Stop previous before starting new one
+
     currentUtterance = new SpeechSynthesisUtterance(text);
     currentUtterance.lang = lang;
+    lastSpokenText = text;
+    lastLang = lang;
 
     currentUtterance.onerror = () => {
         showAudioFeedback('Error playing audio.', 'alert-danger');
