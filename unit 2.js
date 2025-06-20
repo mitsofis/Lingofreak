@@ -1,4 +1,4 @@
-<script>
+
         // Tab Functionality
         function openTab(evt, tabName) {
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
