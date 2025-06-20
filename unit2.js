@@ -88,6 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let correct = 0;
         for (let i = 1; i <= 5; i++) {
             const input = document.getElementById(`ex1-${i}`);
+            if (!input) continue;
             const value = normalizeInput(input.value);
             if (value === answers[i - 1]) {
                 correct++;
@@ -120,6 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
             item.addEventListener('dragover', e => e.preventDefault());
             item.addEventListener('drop', e => {
                 e.preventDefault();
+                if (!dragged) return;
                 while (item.firstChild) {
                     document.getElementById('phrases-list').appendChild(item.firstChild);
                 }
@@ -172,6 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
             item.addEventListener('dragover', e => e.preventDefault());
             item.addEventListener('drop', e => {
                 e.preventDefault();
+                if (!dragged) return;
                 const sentenceId = item.dataset.sentence;
                 const sourceList = document.querySelector(`.sentence-drag-list[data-sentence="${sentenceId}"]`);
                 item.appendChild(dragged);
@@ -217,15 +220,14 @@ document.addEventListener('DOMContentLoaded', () => {
         let correct = 0;
         for (let i = 1; i <= 4; i++) {
             const selected = document.querySelector(`input[name="ex4-${i}"]:checked`);
-            const parent = selected ? selected.parentElement : null;
-            if (parent) {
-                parent.classList.remove('text-success', 'text-danger');
-                if (selected.value === answers[i - 1]) {
-                    correct++;
-                    parent.classList.add('text-success');
-                } else {
-                    parent.classList.add('text-danger');
-                }
+            if (!selected) continue;
+            const parent = selected.parentElement;
+            parent.classList.remove('text-success', 'text-danger');
+            if (selected.value === answers[i - 1]) {
+                correct++;
+                parent.classList.add('text-success');
+            } else {
+                parent.classList.add('text-danger');
             }
         }
         document.getElementById('exercise4-feedback').innerHTML = `You got ${correct} out of 4 correct!`;
@@ -237,6 +239,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let correct = 0;
         for (let i = 1; i <= 8; i++) {
             const input = document.getElementById(`ex5-${i}`);
+            if (!input) continue;
             const value = normalizeInput(input.value);
             if (value === answers[i - 1]) {
                 correct++;
@@ -251,9 +254,7 @@ document.addEventListener('DOMContentLoaded', () => {
         showFeedback(`Exercise 5: ${correct}/8 correct!`, correct === 8 ? 'success' : 'warning');
     }
 
-    // Add checkExercise6 through checkExercise10 here similarly if needed...
-
-    // Initialize Drag-and-Drop
+    // Init
     initializeDragAndDrop();
     initializeSentenceDragAndDrop();
 });
