@@ -7,11 +7,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Audio Feedback
     function showFeedback(message, type) {
-        const feedback = document.getElementById('audio-feedback');
+        const feedback = document.getElementById('feedback');
         if (feedback) {
             feedback.textContent = message;
             feedback.className = `alert alert-${type}`;
-            feedback.style.display = 'block';
+            feedback.style.display = 'inline-block';
             setTimeout(() => feedback.style.display = 'none', 3000);
         } else {
             console.error('Audio feedback element not found');
@@ -22,15 +22,15 @@ document.addEventListener('DOMContentLoaded', () => {
     function openTab(evt, tabName) {
         try {
             // Remove active class from all tabs and links
-            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-            document.querySelectorAll('.tab-link').forEach(link => link.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active')));
+            document.querySelectorAll('.tab-item').forEach(item => item.classList.remove('active'));
 
             // Add active class to selected tab content
             const tabContent = document.getElementById(tabName);
             if (tabContent) {
                 tabContent.classList.add('active');
             } else {
-                console.error(`Tab content with ID "${tabName}" not found`);
+                console.error('Content with ID "${tabName}" not found');
                 showFeedback('Error switching tabs. Please try again.', 'danger');
                 return;
             }
@@ -49,14 +49,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize first tab as active
     const firstTabContent = document.getElementById('dialogues');
-    const firstTabLink = document.querySelector('.tab-link[onclick*="dialogues"]');
+    const firstTabLink = document.querySelector('.tab-item[onclick*="dialogues"]');
     if (firstTabContent && firstTabLink) {
         firstTabContent.classList.add('active');
         firstTabLink.classList.add('active');
     }
 
     // Attach event listeners to tab buttons programmatically
-    document.querySelectorAll('.tab-link').forEach(link => {
+    document.querySelectorAll('.tab-item').forEach(item => {
         const onclick = link.getAttribute('onclick');
         if (onclick && onclick.includes('openTab')) {
             const tabName = onclick.match(/'([^']+)'/)[1];
