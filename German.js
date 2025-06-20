@@ -1,4 +1,4 @@
-<script>
+
     // Tab Navigation
     function openTab(evt, tabName) {
         document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
@@ -334,4 +334,3 @@
         feedback += '</ul>';
         showExerciseFeedback('exercise10-feedback', `You got ${correct}/4 correct! ${feedback}`, correct === 4 ? 'alert-success' : 'alert-warning');
     }
-</script>
