@@ -4,6 +4,7 @@ function openTab(evt, tabName) {
     document.querySelectorAll('.tab-link').forEach(link => link.classList.remove('active'));
     document.getElementById(tabName).classList.add('active');
     evt.currentTarget.classList.add('active');
+    console.log(`Opened tab: ${tabName}`);
 }
 
 // Speech Synthesis
@@ -28,15 +29,21 @@ function showAudioFeedback(message, alertType) {
         feedback.className = `alert ${alertType}`;
         feedback.style.display = 'block';
         setTimeout(() => feedback.style.display = 'none', 3000);
+    } else {
+        console.error('Audio feedback element not found.');
     }
 }
 
 // Exercise Feedback
 function showExerciseFeedback(elementId, message, alertType) {
     const feedback = document.getElementById(elementId);
-    feedback.innerHTML = message;
-    feedback.className = `alert ${alertType}`;
-    feedback.style.display = 'block';
+    if (feedback) {
+        feedback.innerHTML = message;
+        feedback.className = `alert ${alertType}`;
+        feedback.style.display = 'block';
+    } else {
+        console.error(`Feedback element with ID ${elementId} not found.`);
+    }
 }
 
 // Drag-and-Drop Functionality for Exercise 2
@@ -46,64 +53,65 @@ document.querySelectorAll('.draggable').forEach(item => {
     item.addEventListener('dragstart', () => {
         draggedItem = item;
         item.classList.add('dragging');
+        console.log('Dragging (Ex2):', item.textContent);
     });
     item.addEventListener('dragend', () => {
         item.classList.remove('dragging');
         draggedItem = null;
+        console.log('Drag ended (Ex2)');
     });
 });
 
 document.querySelectorAll('.droppable').forEach(dropZone => {
-    dropZone.addEventListener('dragover', (e) => {
-        e.preventDefault();
-    });
+    dropZone.addEventListener('dragover', (e) => e.preventDefault());
     dropZone.addEventListener('drop', (e) => {
         e.preventDefault();
         if (draggedItem) {
             const existingItem = dropZone.querySelector('.draggable');
             if (existingItem) {
-                document.getElementById('greetings-list').appendChild(existingItem);
+                const greetingsList = document.getElementById('greetings-list');
+                if (greetingsList) {
+                    greetingsList.appendChild(existingItem);
+                } else {
+                    console.error('Greetings list not found.');
+                }
             }
             dropZone.appendChild(draggedItem);
+            console.log('Dropped (Ex2):', draggedItem.textContent, 'into', dropZone);
         }
     });
 });
 
 // Drag-and-Drop Functionality for Exercise 3
-document.querySelectorAll('.draggable-word').forEach(word => {
+function makeWordDraggable(word) {
+    word.setAttribute('draggable', 'true');
     word.addEventListener('dragstart', (e) => {
         draggedItem = word;
         word.classList.add('dragging');
         e.dataTransfer.setData('text/plain', word.textContent);
+        console.log('Dragging (Ex3):', word.textContent);
     });
     word.addEventListener('dragend', () => {
         word.classList.remove('dragging');
         draggedItem = null;
+        console.log('Drag ended (Ex3)');
     });
-});
+}
+
+document.querySelectorAll('.draggable-word').forEach(makeWordDraggable);
 
 document.querySelectorAll('.droppable-sentence').forEach(dropZone => {
-    dropZone.addEventListener('dragover', (e) => {
-        e.preventDefault();
-    });
+    dropZone.addEventListener('dragover', (e) => e.preventDefault());
     dropZone.addEventListener('drop', (e) => {
         e.preventDefault();
         if (draggedItem) {
             const wordSpan = document.createElement('span');
-            wordSpan.textContent = draggedItem.textContent;
+            wordSpan.textContent = e.dataTransfer.getData('text/plain');
             wordSpan.classList.add('draggable-word');
-            wordSpan.setAttribute('draggable', 'true');
-            wordSpan.addEventListener('dragstart', (ev) => {
-                draggedItem = wordSpan;
-                wordSpan.classList.add('dragging');
-                ev.dataTransfer.setData('text/plain', wordSpan.textContent);
-            });
-            wordSpan.addEventListener('dragend', () => {
-                wordSpan.classList.remove('dragging');
-                draggedItem = null;
-            });
+            makeWordDraggable(wordSpan);
             dropZone.appendChild(wordSpan);
-            dropZone.innerHTML += ' ';
+            dropZone.appendChild(document.createTextNode(' '));
+            console.log('Dropped (Ex3):', wordSpan.textContent, 'into sentence', dropZone.getAttribute('data-sentence'));
         }
     });
 });
@@ -120,7 +128,12 @@ function checkExercise1() {
     let correct = 0;
     let feedback = '<h5>Feedback:</h5><ul>';
     Object.keys(answers).forEach((id, index) => {
-        const userAnswer = document.getElementById(id).value.trim().toLowerCase();
+        const input = document.getElementById(id);
+        if (!input) {
+            console.error(`Input with ID ${id} not found.`);
+            return;
+        }
+        const userAnswer = input.value.trim().toLowerCase();
         if (userAnswer === answers[id]) {
             correct++;
             feedback += `<li>${index + 1}. Correct!</li>`;
@@ -144,6 +157,10 @@ function checkExercise2() {
     let feedback = '<h5>Feedback:</h5><ul>';
     document.querySelectorAll('.droppable').forEach(zone => {
         const dialectId = zone.getAttribute('data-id');
+        if (!dialectId) {
+            console.error('Missing data-id on droppable zone:', zone);
+            return;
+        }
         const greeting = zone.querySelector('.draggable')?.textContent.trim();
         if (greeting && greeting === correctAnswers[dialectId]) {
             correct++;
@@ -167,11 +184,18 @@ function checkExercise3() {
     let feedback = '<h5>Feedback:</h5><ul>';
     document.querySelectorAll('.droppable-sentence').forEach(dropZone => {
         const sentenceId = dropZone.getAttribute('data-sentence');
-        const userSentence = Array.from(dropZone.childNodes)
-            .map(node => node.textContent.trim())
-            .filter(text => text)
-            .join(' ')
-            .trim();
+        if (!sentenceId) {
+            console.error('Missing data-sentence attribute on:', dropZone);
+            feedback += `<li>Sentence ${sentenceId || 'unknown'}: Error - missing sentence ID.</li>`;
+            return;
+        }
+        const userSentence = dropZone.textContent
+            .replace(/\s+/g, ' ')
+            .trim()
+            .replace(/ ,/g, ',')
+            .replace(/ \?/g, '?')
+            .replace(/ !/g, '!');
+        console.log(`Sentence ${sentenceId} - User: "${userSentence}", Expected: "${correctSentences[sentenceId]}"`);
         if (userSentence === correctSentences[sentenceId]) {
             correct++;
             feedback += `<li>Sentence ${sentenceId}: Correct!</li>`;
@@ -181,6 +205,7 @@ function checkExercise3() {
     });
     feedback += '</ul>';
     showExerciseFeedback('exercise3-feedback', `You got ${correct}/3 correct! ${feedback}`, correct === 3 ? 'alert-success' : 'alert-warning');
+    console.log('Exercise 3 checked. Correct answers:', correct);
 }
 
 // Exercise 4: Check Answers
@@ -196,7 +221,10 @@ function checkExercise4() {
     Object.keys(answers).forEach((name, index) => {
         const selected = document.querySelector(`input[name="${name}"]:checked`);
         const correctLabel = document.querySelector(`label[for="${name}${answers[name]}"]`);
-        if (selected && selected.value === answers[name]) {
+        if (!selected) {
+            console.warn(`No selection for question ${name}`);
+            feedback += `<li>${index + 1}. Incorrect. No answer selected. Correct answer: "${correctLabel ? correctLabel.textContent : answers[name]}".</li>`;
+        } else if (selected.value === answers[name]) {
             correct++;
             feedback += `<li>${index + 1}. Correct!</li>`;
         } else {
@@ -205,6 +233,7 @@ function checkExercise4() {
     });
     feedback += '</ul>';
     showExerciseFeedback('exercise4-feedback', `You got ${correct}/4 correct! ${feedback}`, correct === 4 ? 'alert-success' : 'alert-warning');
+    console.log('Exercise 4 checked. Correct answers:', correct);
 }
 
 // Exercise 5: Check Answers
@@ -222,7 +251,12 @@ function checkExercise5() {
     let correct = 0;
     let feedback = '<h5>Feedback:</h5><ul>';
     Object.keys(answers).forEach((id, index) => {
-        const userAnswer = document.getElementById(id).value.trim().toLowerCase();
+        const input = document.getElementById(id);
+        if (!input) {
+            console.error(`Input with ID ${id} not found.`);
+            return;
+        }
+        const userAnswer = input.value.trim().toLowerCase();
         if (userAnswer === answers[id]) {
             correct++;
             feedback += `<li>${index + 1}. Correct!</li>`;
@@ -245,7 +279,12 @@ function checkExercise6() {
     let correct = 0;
     let feedback = '<h5>Feedback:</h5><ul>';
     Object.keys(answers).forEach((id, index) => {
-        const userAnswer = document.getElementById(id).value.trim().toLowerCase();
+        const input = document.getElementById(id);
+        if (!input) {
+            console.error(`Input with ID ${id} not found.`);
+            return;
+        }
+        const userAnswer = input.value.trim().toLowerCase();
         const correctAnswer = answers[id].toLowerCase();
         if (userAnswer === correctAnswer) {
             correct++;
@@ -260,7 +299,13 @@ function checkExercise6() {
 
 // Exercise 7: Check Dialogue
 function checkExercise7() {
-    const dialogue = document.getElementById('ex7-dialogue').value.trim();
+    const dialogueInput = document.getElementById('ex7-dialogue');
+    if (!dialogueInput) {
+        console.error('Dialogue input with ID ex7-dialogue not found.');
+        showExerciseFeedback('exercise7-feedback', 'Error: Dialogue input not found.', 'alert-danger');
+        return;
+    }
+    const dialogue = dialogueInput.value.trim();
     if (!dialogue) {
         showExerciseFeedback('exercise7-feedback', 'Please write a dialogue.', 'alert-danger');
         return;
@@ -298,7 +343,10 @@ function checkExercise8() {
     let feedback = '<h5>Feedback:</h5><ul>';
     Object.keys(answers).forEach((name, index) => {
         const selected = document.querySelector(`input[name="${name}"]:checked`);
-        if (selected && selected.value === answers[name]) {
+        if (!selected) {
+            console.warn(`No selection for question ${name}`);
+            feedback += `<li>${index + 1}. Incorrect. No answer selected. Correct answer: "${answers[name]}".</li>`;
+        } else if (selected.value === answers[name]) {
             correct++;
             feedback += `<li>${index + 1}. Correct!</li>`;
         } else {
@@ -324,7 +372,12 @@ function checkExercise9() {
     let correct = 0;
     let feedback = '<h5>Feedback:</h5><ul>';
     Object.keys(answers).forEach((id, index) => {
-        const userAnswer = document.getElementById(id).value.trim().toLowerCase();
+        const input = document.getElementById(id);
+        if (!input) {
+            console.error(`Input with ID ${id} not found.`);
+            return;
+        }
+        const userAnswer = input.value.trim().toLowerCase();
         const correctAnswer = answers[id].toLowerCase();
         if (userAnswer === correctAnswer) {
             correct++;
@@ -347,7 +400,12 @@ function checkExercise10() {
     let correct = 0;
     let feedback = '<h5>Feedback:</h5><ul>';
     Object.keys(answers).forEach((id, index) => {
-        const userAnswer = document.getElementById(id).value.trim().toLowerCase();
+        const input = document.getElementById(id);
+        if (!input) {
+            console.error(`Input with ID ${id} not found.`);
+            return;
+        }
+        const userAnswer = input.value.trim().toLowerCase();
         const correctAnswer = answers[id].toLowerCase();
         if (userAnswer.includes(correctAnswer.split('.')[0])) {
             correct++;
@@ -356,7 +414,12 @@ function checkExercise10() {
             feedback += `<li>${index + 1}. Incorrect. Expected: "${answers[id]}".</li>`;
         }
     });
-    const paragraph = document.getElementById('ex10-paragraph').value.trim();
+    const paragraphInput = document.getElementById('ex10-paragraph');
+    if (!paragraphInput) {
+        console.error('Paragraph input with ID ex10-paragraph not found.');
+        return;
+    }
+    const paragraph = paragraphInput.value.trim();
     const sentences = paragraph.split('.').filter(s => s.trim()).length;
     if (sentences < 3 || sentences > 4) {
         feedback += '<li>Paragraph: Should have 3-4 sentences.</li>';
