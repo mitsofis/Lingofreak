@@ -111,28 +111,7 @@ function checkExercise1() {
     showExerciseFeedback('exercise1-feedback', `${correct}/5 correct. ${feedback}`, correct === 5 ? 'alert-success' : 'alert-danger');
 }
 
-function checkExercise2() {
-    const correctAnswers = {
-        'A': 'Wie viel kostet das?',
-        'B': 'Was kostet’n das?',
-        'C': 'Was kost’ des?',
-        'D': 'Was koscht des?'
-    };
-    let correct = 0;
-    let feedback = '<h5>Results</h5><ul>';
-    document.querySelectorAll('.droppable').forEach(zone => {
-        const dialectId = zone.getAttribute('data-id');
-        const greeting = zone.querySelector('.draggable')?.textContent.trim();
-        if (greeting && greeting === correctAnswers[dialectId]) {
-            correct++;
-            feedback += `<li>${zone.textContent.trim()}: Correct!</li>`;
-        } else {
-            feedback += `<li>${zone.textContent.trim()}: Incorrect. Correct answer is "${correctAnswers[dialectId]}".</li>`;
-        }
-    });
-    feedback += '</ul>';
-    showExerciseFeedback('exercise2-feedback', `${correct}/4 correct. ${feedback}`, correct === 4 ? 'alert-success' : 'alert-danger');
-}
+
 
 function checkExercise3() {
     const correctSentences = {
