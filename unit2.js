@@ -23,10 +23,12 @@ function speak(text, lang) {
 // Audio Feedback
 function showAudioFeedback(message, alertType) {
     const feedback = document.getElementById('audio-feedback');
-    feedback.textContent = message;
-    feedback.className = `alert ${alertType}`;
-    feedback.style.display = 'block';
-    setTimeout(() => feedback.style.display = 'none', 3000);
+    if (feedback) {
+        feedback.textContent = message;
+        feedback.className = `alert ${alertType}`;
+        feedback.style.display = 'block';
+        setTimeout(() => feedback.style.display = 'none', 3000);
+    }
 }
 
 // Exercise Feedback
@@ -34,9 +36,10 @@ function showExerciseFeedback(elementId, message, alertType) {
     const feedback = document.getElementById(elementId);
     feedback.innerHTML = message;
     feedback.className = `alert ${alertType}`;
+    feedback.style.display = 'block';
 }
 
-// Drag-and-Drop Functionality
+// Drag-and-Drop Functionality for Exercise 2
 let draggedItem = null;
 
 document.querySelectorAll('.draggable').forEach(item => {
@@ -57,17 +60,16 @@ document.querySelectorAll('.droppable').forEach(dropZone => {
     dropZone.addEventListener('drop', (e) => {
         e.preventDefault();
         if (draggedItem) {
-            // If the drop zone already has an item, swap it back to the greetings list
             const existingItem = dropZone.querySelector('.draggable');
             if (existingItem) {
                 document.getElementById('greetings-list').appendChild(existingItem);
             }
-            // Append the dragged item to the drop zone
             dropZone.appendChild(draggedItem);
         }
     });
 });
 
+// Drag-and-Drop Functionality for Exercise 3
 document.querySelectorAll('.draggable-word').forEach(word => {
     word.addEventListener('dragstart', () => {
         draggedItem = word;
@@ -80,11 +82,14 @@ document.querySelectorAll('.draggable-word').forEach(word => {
 });
 
 document.querySelectorAll('.droppable-sentence').forEach(dropZone => {
-    dropZone.addEventListener('dragover', (e) => e.preventDefault());
+    dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+    });
     dropZone.addEventListener('drop', (e) => {
         e.preventDefault();
         if (draggedItem) {
-            dropZone.appendChild(draggedItem);
+            dropZone.innerHTML += ` ${draggedItem.textContent}`;
+            draggedItem.remove();
         }
     });
 });
@@ -106,7 +111,7 @@ function checkExercise1() {
             correct++;
             feedback += `<li>${index + 1}. Correct!</li>`;
         } else {
-            feedback += `<li>${index + 1}. Incorrect. Check the form of "sein" for this pronoun.</li>`;
+            feedback += `<li>${index + 1}. Incorrect. Correct answer: "${answers[id]}".</li>`;
         }
     });
     feedback += '</ul>';
@@ -124,13 +129,13 @@ function checkExercise2() {
     let correct = 0;
     let feedback = '<h5>Feedback:</h5><ul>';
     document.querySelectorAll('.droppable').forEach(zone => {
-        const dialect = zone.dataset.id;
-        const greeting = zone.querySelector('.draggable');
-        if (greeting && greeting.textContent.trim() === correctAnswers[dialect]) {
+        const dialectId = zone.getAttribute('data-id');
+        const greeting = zone.querySelector('.draggable')?.textContent.trim();
+        if (greeting && greeting === correctAnswers[dialectId]) {
             correct++;
-            feedback += `<li>${zone.textContent}: Correct!</li>`;
+            feedback += `<li>${zone.textContent.trim().split(':')[0]}: Correct!</li>`;
         } else {
-            feedback += `<li>${zone.textContent}: Incorrect. Check the greeting for this dialect.</li>`;
+            feedback += `<li>${zone.textContent.trim().split(':')[0]}: Incorrect. Correct greeting: "${correctAnswers[dialectId]}".</li>`;
         }
     });
     feedback += '</ul>';
@@ -139,20 +144,21 @@ function checkExercise2() {
 
 // Exercise 3: Check Answers
 function checkExercise3() {
+    const correctSentences = {
+        '1': 'Was machst’n, Kumpel?',
+        '2': 'Ich komm gleich, Mann!',
+        '3': 'Wir machen Party!'
+    };
     let correct = 0;
     let feedback = '<h5>Feedback:</h5><ul>';
-    document.querySelectorAll('.sentence-drag-list').forEach((list, index) => {
-        const sentenceId = index + 1;
-        const correctSentence = list.dataset.correct.trim().toLowerCase();
-        const dropZone = document.querySelector(`.droppable-sentence[data-sentence="${sentenceId}"]`);
-        const userWords = Array.from(dropZone.children).map(item => item.textContent.trim());
-        const userSentence = userWords.join(' ').toLowerCase().replace(/[.,!?]/g, '');
-        const normalizedCorrect = correctSentence.toLowerCase().replace(/[.,!?]/g, '');
-        if (userSentence === normalizedCorrect) {
+    document.querySelectorAll('.droppable-sentence').forEach(dropZone => {
+        const sentenceId = dropZone.getAttribute('data-sentence');
+        const userSentence = dropZone.textContent.replace(`Sentence ${sentenceId}:`, '').trim();
+        if (userSentence === correctSentences[sentenceId]) {
             correct++;
             feedback += `<li>Sentence ${sentenceId}: Correct!</li>`;
         } else {
-            feedback += `<li>Sentence ${sentenceId}: Incorrect. Check the word order.</li>`;
+            feedback += `<li>Sentence ${sentenceId}: Incorrect. Correct sentence: "${correctSentences[sentenceId]}".</li>`;
         }
     });
     feedback += '</ul>';
@@ -175,7 +181,7 @@ function checkExercise4() {
             correct++;
             feedback += `<li>${index + 1}. Correct!</li>`;
         } else {
-            feedback += `<li>${index + 1}. Incorrect. Check the vocabulary for this dialect.</li>`;
+            feedback += `<li>${index + 1}. Incorrect. Correct answer: "${answers[name]}".</li>`;
         }
     });
     feedback += '</ul>';
@@ -202,7 +208,7 @@ function checkExercise5() {
             correct++;
             feedback += `<li>${index + 1}. Correct!</li>`;
         } else {
-            feedback += `<li>${index + 1}. Incorrect. Check the form of "sein" for this dialect.</li>`;
+            feedback += `<li>${index + 1}. Incorrect. Correct answer: "${answers[id]}".</li>`;
         }
     });
     feedback += '</ul>';
@@ -212,21 +218,21 @@ function checkExercise5() {
 // Exercise 6: Check Answers
 function checkExercise6() {
     const answers = {
-        'ex6-1': ['Hey, na, wie geht’s, Kumpel?', 'Hey, wie geht’s, Kumpel?', 'Na, wie geht’s, Mann?', 'Hey, na, wie geht’s?', 'Hey, wie geht’s dir, Mann?'],
-        'ex6-2': ['Mann, ich bin total kaputt!', 'Ich bin voll kaputt, Mann!', 'Total kaputt, Mann!', 'Ich bin total fertig!', 'Voll fertig, Mann!'],
-        'ex6-3': ['Wo kommst’n her?', 'Woher kommst’n?', 'Was, wo kommst’n her?', 'Wo kommst du her, Mann?', 'Woher bist’n?'],
-        'ex6-4': ['Komm, lass uns ’nen Kaffee trinken!', 'Lass uns ’nen Kaffee trinken, Mann!', 'Komm, ’nen Kaffee trinken!', 'Lass uns ins Café, Mann!', 'Komm, Kaffee trinken!']
+        'ex6-1': 'Hey, na, wie geht’s, Kumpel?',
+        'ex6-2': 'Mann, ich bin total kaputt!',
+        'ex6-3': 'Wo kommst’n her?',
+        'ex6-4': 'Komm, lass uns ’nen Kaffee trinken!'
     };
     let correct = 0;
     let feedback = '<h5>Feedback:</h5><ul>';
     Object.keys(answers).forEach((id, index) => {
         const userAnswer = document.getElementById(id).value.trim().toLowerCase();
-        const isCorrect = answers[id].some(ans => ans.toLowerCase() === userAnswer);
-        if (isCorrect) {
+        const correctAnswer = answers[id].toLowerCase();
+        if (userAnswer === correctAnswer) {
             correct++;
             feedback += `<li>${index + 1}. Correct!</li>`;
         } else {
-            feedback += `<li>${index + 1}. Incorrect. Try using more colloquial expressions.</li>`;
+            feedback += `<li>${index + 1}. Incorrect. Correct answer: "${answers[id]}".</li>`;
         }
     });
     feedback += '</ul>';
@@ -236,19 +242,27 @@ function checkExercise6() {
 // Exercise 7: Check Dialogue
 function checkExercise7() {
     const dialogue = document.getElementById('ex7-dialogue').value.trim();
-    let feedback = '';
-    if (dialogue.length < 20) {
-        feedback = 'Please write a dialogue with 4-6 lines.';
-        showExerciseFeedback('exercise7-feedback', feedback, 'alert-danger');
+    if (!dialogue) {
+        showExerciseFeedback('exercise7-feedback', 'Please write a dialogue.', 'alert-danger');
         return;
     }
-    const hasSein = dialogue.toLowerCase().includes('bin') || dialogue.toLowerCase().includes('bist') || dialogue.toLowerCase().includes('ist') || dialogue.toLowerCase().includes('sind') || dialogue.toLowerCase().includes('seid');
-    const hasGreeting = dialogue.toLowerCase().includes('hallo') || dialogue.toLowerCase().includes('hey') || dialogue.toLowerCase().includes('servus') || dialogue.toLowerCase().includes('grüß');
-    if (hasSein && hasGreeting) {
+    const lines = dialogue.split('\n').filter(line => line.trim() !== '');
+    const hasSein = /bin|bist|ist|sind|sein/i.test(dialogue);
+    const hasGreeting = /hallo|hey|servus|grüß/i.test(dialogue.toLowerCase());
+    let feedback = '';
+    if (lines.length < 4 || lines.length > 6) {
+        feedback += 'Dialogue should have 4-6 lines.<br>';
+    }
+    if (!hasSein) {
+        feedback += 'Dialogue must include a form of "sein" (bin, bist, ist, sind).<br>';
+    }
+    if (!hasGreeting) {
+        feedback += 'Dialogue must include a greeting (e.g., Hallo, Hey, Servus, Grüß di).<br>';
+    }
+    if (feedback === '') {
         feedback = 'Great job! Your dialogue includes a form of “sein” and a greeting. Check the sample solution for comparison.';
         showExerciseFeedback('exercise7-feedback', feedback, 'alert-success');
     } else {
-        feedback = 'Incomplete. Ensure your dialogue includes one form of “sein” and one greeting (e.g., Hallo, Hey, Servus, or Grüß di).';
         showExerciseFeedback('exercise7-feedback', feedback, 'alert-warning');
     }
 }
@@ -269,7 +283,7 @@ function checkExercise8() {
             correct++;
             feedback += `<li>${index + 1}. Correct!</li>`;
         } else {
-            feedback += `<li>${index + 1}. Incorrect. Check the dialect characteristics.</li>`;
+            feedback += `<li>${index + 1}. Incorrect. Correct answer: "${answers[name]}".</li>`;
         }
     });
     feedback += '</ul>';
@@ -279,25 +293,25 @@ function checkExercise8() {
 // Exercise 9: Check Answers
 function checkExercise9() {
     const answers = {
-        'ex9-1-bav': ['Servus! Was machst’n?', 'Servus! Was machst’n, gell?', 'Servus! Was machst du?'],
-        'ex9-1-swa': ['Grüß di! Wie goht’s?', 'Grüß di! Wie goht’s dir?', 'Grüß di! Wie goht’s dir, ma?'],
-        'ex9-2-bav': ['Passt scho, i bin guat.', 'Passt scho, i bin guat, gell.', 'Passt scho! I bin guat.'],
-        'ex9-2-swa': ['Gudd, i bin gudd.', 'Danke, i bin gudd.', 'Gudd! I bin gudd.'],
-        'ex9-3-bav': ['Geh, mia schwätzen!', 'Geh, mia schwätzen a bisserl!', 'Geh, mia schwätzen, gell!'],
-        'ex9-3-swa': ['Geh, mir schwätzen!', 'Geh, mir schwätzen en babbel!', 'Geh, mir schwätzen, ma!'],
-        'ex9-4-bav': ['Jo, des is mei schee.', 'Jo, des is schee, gell.', 'Jo! Des is mei schee.'],
-        'ex9-4-swa': ['Jo, des is richtig schee.', 'Jo, des is schee.', 'Jo! Des is richtig schee.']
+        'ex9-1-bav': 'Servus! Was machst’n?',
+        'ex9-1-swa': 'Grüß di! Wie goht’s?',
+        'ex9-2-bav': 'Passt scho, i bin guat.',
+        'ex9-2-swa': 'Gudd, i bin gudd.',
+        'ex9-3-bav': 'Geh, mia schwätzen!',
+        'ex9-3-swa': 'Geh, mir schwätzen!',
+        'ex9-4-bav': 'Jo, des is mei schee.',
+        'ex9-4-swa': 'Jo, des is richtig schee.'
     };
     let correct = 0;
     let feedback = '<h5>Feedback:</h5><ul>';
     Object.keys(answers).forEach((id, index) => {
-        const userAnswer = document.getElementById(id).value.trim().toLowerCase().replace(/[.,!?;]/g, '');
-        const isCorrect = answers[id].some(ans => ans.toLowerCase().replace(/[.,!?;]/g, '') === userAnswer);
-        if (isCorrect) {
+        const userAnswer = document.getElementById(id).value.trim().toLowerCase();
+        const correctAnswer = answers[id].toLowerCase();
+        if (userAnswer === correctAnswer) {
             correct++;
             feedback += `<li>${Math.floor(index / 2) + 1}. ${id.includes('bav') ? 'Bavarian' : 'Swabian'}: Correct!</li>`;
         } else {
-            feedback += `<li>${Math.floor(index / 2) + 1}. ${id.includes('bav') ? 'Bavarian' : 'Swabian'}: Incorrect. Check the dialect-specific vocabulary.</li>`;
+            feedback += `<li>${Math.floor(index / 2) + 1}. ${id.includes('bav') ? 'Bavarian' : 'Swabian'}: Incorrect. Correct answer: "${answers[id]}".</li>`;
         }
     });
     feedback += '</ul>';
@@ -307,28 +321,31 @@ function checkExercise9() {
 // Exercise 10: Check Answers
 function checkExercise10() {
     const answers = {
-        'ex10-1': ['Text 1 is in a café, Text 2 is at a house party.', 'Text 1 takes place in a café, Text 2 at a party.', 'Text 1: café, Text 2: house party.'],
-        'ex10-2': ['Text 1 is formal and polite, Text 2 is casual and relaxed.', 'Text 1 is polite, Text 2 is informal.', 'Text 1 is formal, Text 2 is relaxed.'],
-        'ex10-3': ['People talk, chat, and make plans to meet again in both passages.', 'Both texts involve conversations and plans to meet.', 'In both, people chat and plan to meet again.']
+        'ex10-1': 'Text 1 is in a café, Text 2 is at a house party.',
+        'ex10-2': 'Text 1 is formal and polite, Text 2 is casual and relaxed.',
+        'ex10-3': 'People talk, chat, and make plans to meet again in both passages.'
     };
     let correct = 0;
     let feedback = '<h5>Feedback:</h5><ul>';
     Object.keys(answers).forEach((id, index) => {
         const userAnswer = document.getElementById(id).value.trim().toLowerCase();
-        const isCorrect = answers[id].some(ans => ans.toLowerCase().includes(userAnswer) || userAnswer.includes(ans.toLowerCase()));
-        if (isCorrect) {
+        const correctAnswer = answers[id].toLowerCase();
+        if (userAnswer.includes(correctAnswer.split('.')[0])) {
             correct++;
             feedback += `<li>${index + 1}. Correct!</li>`;
         } else {
-            feedback += `<li>${index + 1}. Incorrect. Review the passages for the correct details.</li>`;
+            feedback += `<li>${index + 1}. Incorrect. Expected: "${answers[id]}".</li>`;
         }
     });
     const paragraph = document.getElementById('ex10-paragraph').value.trim();
-    if (paragraph.split('.').length >= 3 && paragraph.toLowerCase().includes('sonnig') && paragraph.toLowerCase().includes('leute')) {
-        correct++;
-        feedback += `<li>Paragraph: Well done! Your paragraph describes a similar scene.</li>`;
+    const sentences = paragraph.split('.').filter(s => s.trim()).length;
+    if (sentences < 3 || sentences > 4) {
+        feedback += '<li>Paragraph: Should have 3-4 sentences.</li>';
+    } else if (!/bin|bist|ist|sind|sein/i.test(paragraph)) {
+        feedback += '<li>Paragraph: Must include a form of "sein".</li>';
     } else {
-        feedback += `<li>Paragraph: Ensure your paragraph has 3-4 sentences and describes a sunny day with people interacting.</li>`;
+        correct++;
+        feedback += '<li>Paragraph: Well done! Matches the requirements.</li>';
     }
     feedback += '</ul>';
     showExerciseFeedback('exercise10-feedback', `You got ${correct}/4 correct! ${feedback}`, correct === 4 ? 'alert-success' : 'alert-warning');
