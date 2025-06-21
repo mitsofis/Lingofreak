@@ -1,4 +1,3 @@
-
 // Tab Navigation
 function openTab(evt, tabName) {
     document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
@@ -72,9 +71,10 @@ document.querySelectorAll('.droppable').forEach(dropZone => {
 
 // Drag-and-Drop Functionality for Exercise 3
 document.querySelectorAll('.draggable-word').forEach(word => {
-    word.addEventListener('dragstart', () => {
+    word.addEventListener('dragstart', (e) => {
         draggedItem = word;
         word.classList.add('dragging');
+        e.dataTransfer.setData('text/plain', word.textContent);
     });
     word.addEventListener('dragend', () => {
         word.classList.remove('dragging');
@@ -89,8 +89,21 @@ document.querySelectorAll('.droppable-sentence').forEach(dropZone => {
     dropZone.addEventListener('drop', (e) => {
         e.preventDefault();
         if (draggedItem) {
-            dropZone.innerHTML += ` ${draggedItem.textContent}`;
-            draggedItem.remove();
+            const wordSpan = document.createElement('span');
+            wordSpan.textContent = draggedItem.textContent;
+            wordSpan.classList.add('draggable-word');
+            wordSpan.setAttribute('draggable', 'true');
+            wordSpan.addEventListener('dragstart', (ev) => {
+                draggedItem = wordSpan;
+                wordSpan.classList.add('dragging');
+                ev.dataTransfer.setData('text/plain', wordSpan.textContent);
+            });
+            wordSpan.addEventListener('dragend', () => {
+                wordSpan.classList.remove('dragging');
+                draggedItem = null;
+            });
+            dropZone.appendChild(wordSpan);
+            dropZone.innerHTML += ' ';
         }
     });
 });
@@ -154,12 +167,16 @@ function checkExercise3() {
     let feedback = '<h5>Feedback:</h5><ul>';
     document.querySelectorAll('.droppable-sentence').forEach(dropZone => {
         const sentenceId = dropZone.getAttribute('data-sentence');
-        const userSentence = dropZone.textContent.trim();
+        const userSentence = Array.from(dropZone.childNodes)
+            .map(node => node.textContent.trim())
+            .filter(text => text)
+            .join(' ')
+            .trim();
         if (userSentence === correctSentences[sentenceId]) {
             correct++;
             feedback += `<li>Sentence ${sentenceId}: Correct!</li>`;
         } else {
-            feedback += `<li>Sentence ${sentenceId}: Incorrect. Correct sentence: "${correctSentences[sentenceId]}".</li>`;
+            feedback += `<li>Sentence ${sentenceId}: Incorrect. Correct sentence: "${correctSentences[sentenceId]}". Your answer: "${userSentence}".</li>`;
         }
     });
     feedback += '</ul>';
@@ -178,11 +195,12 @@ function checkExercise4() {
     let feedback = '<h5>Feedback:</h5><ul>';
     Object.keys(answers).forEach((name, index) => {
         const selected = document.querySelector(`input[name="${name}"]:checked`);
+        const correctLabel = document.querySelector(`label[for="${name}${answers[name]}"]`);
         if (selected && selected.value === answers[name]) {
             correct++;
             feedback += `<li>${index + 1}. Correct!</li>`;
         } else {
-            feedback += `<li>${index + 1}. Incorrect. Correct answer: "${document.querySelector(`label[for="${name}${answers[name]}"]`).textContent}".</li>`;
+            feedback += `<li>${index + 1}. Incorrect. Correct answer: "${correctLabel ? correctLabel.textContent : answers[name]}".</li>`;
         }
     });
     feedback += '</ul>';
