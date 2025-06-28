@@ -1,0 +1,97 @@
+<!-- Main Document Section Start -->
+<!DOCTYPE html>
+<html lang="en">
+<!-- Head Section Start -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colloquial German for Beginners - Unit 2</title>
+    <!-- Tailwind CSS Subsection Start -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind CSS Subsection End -->
+    <!-- Critical CSS Subsection Start -->
+    <style>
+        /* Global Styles Section Start */
+        /* Custom Colors Subsection Start */
+        :root {
+            --light-blue: #d6e4ff;
+            --dark-blue: #0052cc;
+            --bootstrap-blue: #0d6efd;
+            --gray-inactive: #f1f1f1;
+        }
+        /* Custom Colors Subsection End */
+        /* Global Styles Section End */
+    </style>
+    <!-- Critical CSS Subsection End -->
+    <!-- Module Preload Subsection Start -->
+    <link rel="modulepreload" href="js/tabNavigation.js">
+    <link rel="modulepreload" href="js/audioPlayback.js">
+    <link rel="modulepreload" href="js/feedbackDisplay.js">
+    <link rel="modulepreload" href="js/progressTracking.js">
+    <link rel="modulepreload" href="js/vocabularyQuiz.js">
+    <link rel="modulepreload" href="js/flashcards.js">
+    <link rel="modulepreload" href="js/grammarPractice.js">
+    <link rel="modulepreload" href="js/exercise1.js">
+    <link rel="modulepreload" href="js/exercise2.js">
+    <!-- Module Preload Subsection End -->
+</head>
+<!-- Head Section End -->
+
+<!-- Body Section Start -->
+<body class="font-sans max-w-4xl mx-auto p-5 leading-6 text-base">
+    <!-- Header Placeholder Subsection Start -->
+    <div id="header"></div>
+    <!-- Header Placeholder Subsection End -->
+
+    <!-- Main Layout Subsection Start -->
+    <div class="flex flex-col md:flex-row gap-6">
+        <!-- Navigation Placeholder Subsection Start -->
+        <div id="navigation" class="w-full md:w-1/4 flex flex-col gap-2"></div>
+        <!-- Navigation Placeholder Subsection End -->
+        <!-- Content Area Subsection Start -->
+        <div class="w-full md:w-3/4">
+            <div id="conversations" class="tab-content"></div>
+            <div id="grammar" class="tab-content hidden"></div>
+            <div id="exercises" class="tab-content hidden"></div>
+            <div id="practice" class="tab-content hidden"></div>
+        </div>
+        <!-- Content Area Subsection End -->
+    </div>
+    <!-- Main Layout Subsection End -->
+
+    <!-- Global Feedback Subsection Start -->
+    <div id="global-feedback" class="feedback hidden"></div>
+    <!-- Global Feedback Subsection End -->
+
+    <!-- Progress Overview Subsection Start -->
+    <div id="progress-section" class="bg-gray-100 p-4 rounded-lg mt-4">
+        <h4 class="text-lg font-semibold">Progress Overview</h4>
+        <div class="w-full bg-gray-200 rounded-full h-2.5 mt-3">
+            <div id="progress-bar" class="bg-green-600 h-2.5 rounded-full" style="width: 0%;"></div>
+        </div>
+        <p id="progress-text" class="mt-2">0/3 exercises completed</p>
+        <div id="score" class="mt-2 font-bold">Score: 0</div>
+        <div id="badge" class="mt-2"></div>
+        <button class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 mt-2" onclick="resetProgress()">Reset Progress</button>
+    </div>
+    <!-- Progress Overview Subsection End -->
+
+    <!-- JavaScript Include Subsection Start -->
+    <script type="module" src="js/main.js"></script>
+    <script>
+        /* Load Non-Critical CSS Subsection Start */
+        (function() {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = 'css/styles.css';
+            link.onload = () => console.log('Non-critical CSS loaded');
+            link.onerror = () => console.error('Error loading non-critical CSS');
+            document.head.appendChild(link);
+        })();
+        /* Load Non-Critical CSS Subsection End */
+    </script>
+    <!-- JavaScript Include Subsection End -->
+</body>
+<!-- Body Section End -->
+</html>
+<!-- Main Document Section End -->
