@@ -506,44 +506,46 @@
                 </div>
                 <!-- END EXERCISE 1 SUBSECTION -->
                 <!-- START EXERCISE 2 SUBSECTION -->
-                <div class="exercise mb-4">
-                    <h4>Exercise 2: Matching Phrases to Dialects</h4>
-                    <p>Match the phrase to its dialect.</p>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h5>Phrases:</h5>
-                            <ul id="greetings-list" class="list-group">
-                                <li class="list-group-item draggable" draggable="true" data-answer="A">Guten Morgen</li>
-                                <li class="list-group-item draggable" draggable="true" data-answer="B">Na, wie läuft’s</li>
-                                <li class="list-group-item draggable" draggable="true" data-answer="C">Servus</li>
-                                <li class="list-group-item draggable" draggable="true" data-answer="D">Grüß di</li>
-                            </ul>
-                        </div>
-                        <div class="col-md-6">
-                            <h5>Dialects:</h5>
-                            <ul class="list-group">
-                                <li class="list-group-item droppable" data-id="A">A. Standard German</li>
-                                <li class="list-group-item droppable" data-id="B">B. Colloquial German</li>
-                                <li class="list-group-item droppable" data-id="C">C. Bavarian</li>
-                                <li class="list-group-item droppable" data-id="D">D. Swabian</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <button class="btn btn-primary mt-2" onclick="checkExercise2()">Check Answers</button>
-                    <button class="btn btn-secondary collapse-btn mt-2 ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#exercise2-solutions" aria-expanded="false" aria-controls="exercise2-solutions">Show Solutions</button>
-                    <div class="collapse" id="exercise2-solutions">
-                        <h4>Solutions:</h4>
-                        <ul>
-                            <li>Guten Morgen – A. Standard German</li>
-                            <li>Na, wie läuft’s – B. Colloquial German</li>
-                            <li>Servus – C. Bavarian</li>
-                            <li>Grüß di – D. Swabian</li>
-                        </ul>
-                    </div>
-                    <div id="exercise2-feedback" class="mt-2"></div>
-                </div>
-                <!-- END EXERCISE 2 SUBSECTION -->
-                <!-- START EXERCISE 3 SUBSECTION -->
+<div class="exercise mb-4">
+    <h4>Exercise 2: Matching Phrases to Dialects</h4>
+    <p>Match the phrase to its dialect.</p>
+    <div class="row">
+        <div class="col-md-6">
+            <h5>Phrases:</h5>
+            <ul id="greetings-list" class="list-group">
+                <li class="list-group-item draggable" draggable="true" data-answer="A">Guten Morgen</li>
+                <li class="list-group-item draggable" draggable="true" data-answer="B">Na, wie läuft’s</li>
+                <li class="list-group-item draggable" draggable="true" data-answer="C">Servus</li>
+                <li class="list-group-item draggable" draggable="true" data-answer="D">Grüß di</li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <h5>Dialects:</h5>
+            <ul class="list-group">
+                <li class="list-group-item droppable" data-id="A">A. Standard German</li>
+                <li class="list-group-item droppable" data-id="B">B. Colloquial German</li>
+                <li class="list-group-item droppable" data-id="C">C. Bavarian</li>
+                <li class="list-group-item droppable" data-id="D">D. Swabian</li>
+            </ul>
+        </div>
+    </div>
+    <button class="btn btn-primary mt-2" onclick="checkExercise2()">Check Answers</button>
+    <button class="btn btn-secondary mt-2 ms-2" onclick="resetDragAndDrop()">Reset</button>
+    <button class="btn btn-secondary collapse-btn mt-2 ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#exercise2-solutions" aria-expanded="false" aria-controls="exercise2-solutions">Show Solutions</button>
+    <div class="collapse" id="exercise2-solutions">
+        <h4>Solutions:</h4>
+        <ul>
+            <li>Guten Morgen – A. Standard German</li>
+            <li>Na, wie läuft’s – B. Colloquial German</li>
+            <li>Servus – C. Bavarian</li>
+            <li>Grüß di – D. Swabian</li>
+        </ul>
+    </div>
+    <div id="exercise2-feedback" class="mt-2"></div>
+</div>
+<!-- END EXERCISE 2 SUBSECTION -->
+
+<!-- START EXERCISE 3 SUBSECTION -->
 <div class="exercise mb-4">
     <h4>Exercise 3: Sentence Ordering (Colloquial German)</h4>
     <p>Put the words in order to form a correct sentence in Colloquial German.</p>
@@ -580,6 +582,7 @@
         </div>
     </div>
     <button class="btn btn-primary mt-2" onclick="checkExercise3()">Check Answers</button>
+    <button class="btn btn-secondary mt-2 ms-2" onclick="resetDragAndDrop()">Reset</button>
     <button class="btn btn-secondary collapse-btn mt-2 ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#exercise3-solutions" aria-expanded="false" aria-controls="exercise3-solutions">Show Solutions</button>
     <div class="collapse" id="exercise3-solutions">
         <h4>Solutions:</h4>
