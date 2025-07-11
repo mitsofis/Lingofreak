@@ -50,11 +50,42 @@ function showExerciseFeedback(elementId, message, alertType) {
 }
 // END EXERCISE FEEDBACK //
 
-// START DRAG-AND-DROP EXERCISE 2 //
+// START DRAG-AND-DROP UTILITIES //
 let draggedItem = null;
 
+function resetDragAndDrop() {
+    // Reset Exercise 2
+    const greetingsList = document.getElementById('greetings-list');
+    if (greetingsList) {
+        document.querySelectorAll('.droppable').forEach(zone => {
+            const item = zone.querySelector('.draggable');
+            if (item) {
+                greetingsList.appendChild(item);
+            }
+        });
+    } else {
+        console.error('Greetings list not found for reset (Ex2).');
+    }
+
+    // Reset Exercise 3
+    document.querySelectorAll('.droppable-sentence').forEach(dropZone => {
+        const sentenceId = dropZone.getAttribute('data-sentence');
+        const wordList = document.querySelector(`.sentence-drag-list[data-sentence="${sentenceId}"]`);
+        if (wordList) {
+            dropZone.querySelectorAll('.draggable-word').forEach(word => {
+                wordList.appendChild(word);
+            });
+        } else {
+            console.error(`Word list for sentence ${sentenceId} not found for reset (Ex3).`);
+        }
+    });
+    console.log('Drag-and-drop exercises reset.');
+}
+// END DRAG-AND-DROP UTILITIES //
+
+// START DRAG-AND-DROP EXERCISE 2 //
 document.querySelectorAll('.draggable').forEach(item => {
-    item.addEventListener('dragstart', () => {
+    item.addEventListener('dragstart', (e) => {
         draggedItem = item;
         item.classList.add('dragging');
         console.log('Dragging (Ex2):', item.textContent);
@@ -71,17 +102,17 @@ document.querySelectorAll('.droppable').forEach(dropZone => {
     dropZone.addEventListener('drop', (e) => {
         e.preventDefault();
         if (draggedItem) {
+            const greetingsList = document.getElementById('greetings-list');
+            if (!greetingsList) {
+                console.error('Greetings list not found (Ex2).');
+                return;
+            }
             const existingItem = dropZone.querySelector('.draggable');
-            if (existingItem) {
-                const greetingsList = document.getElementById('greetings-list');
-                if (greetingsList) {
-                    greetingsList.appendChild(existingItem);
-                } else {
-                    console.error('Greetings list not found.');
-                }
+            if (existingItem && existingItem !== draggedItem) {
+                greetingsList.appendChild(existingItem);
             }
             dropZone.appendChild(draggedItem);
-            console.log('Dropped (Ex2):', draggedItem.textContent, 'into', dropZone);
+            console.log('Dropped (Ex2):', draggedItem.textContent, 'into', dropZone.getAttribute('data-id'));
         }
     });
 });
@@ -110,13 +141,9 @@ document.querySelectorAll('.droppable-sentence').forEach(dropZone => {
     dropZone.addEventListener('drop', (e) => {
         e.preventDefault();
         if (draggedItem) {
-            const wordSpan = document.createElement('span');
-            wordSpan.textContent = e.dataTransfer.getData('text/plain');
-            wordSpan.classList.add('draggable-word');
-            makeWordDraggable(wordSpan);
-            dropZone.appendChild(wordSpan);
+            dropZone.appendChild(draggedItem);
             dropZone.appendChild(document.createTextNode(' '));
-            console.log('Dropped (Ex3):', wordSpan.textContent, 'into sentence', dropZone.getAttribute('data-sentence'));
+            console.log('Dropped (Ex3):', draggedItem.textContent, 'into sentence', dropZone.getAttribute('data-sentence'));
         }
     });
 });
