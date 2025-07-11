@@ -1,4 +1,4 @@
-// Tab Navigation
+// START TAB NAVIGATION //
 function openTab(evt, tabName) {
     document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
     document.querySelectorAll('.tab-link').forEach(link => link.classList.remove('active'));
@@ -6,8 +6,9 @@ function openTab(evt, tabName) {
     evt.currentTarget.classList.add('active');
     console.log(`Opened tab: ${tabName}`);
 }
+// END TAB NAVIGATION //
 
-// Speech Synthesis
+// START SPEECH SYNTHESIS //
 function speak(text, lang) {
     if ('speechSynthesis' in window) {
         const utterance = new SpeechSynthesisUtterance(text);
@@ -20,8 +21,9 @@ function speak(text, lang) {
         showAudioFeedback('Your browser does not support audio playback.', 'alert-danger');
     }
 }
+// END SPEECH SYNTHESIS //
 
-// Audio Feedback
+// START AUDIO FEEDBACK //
 function showAudioFeedback(message, alertType) {
     const feedback = document.getElementById('audio-feedback');
     if (feedback) {
@@ -33,8 +35,9 @@ function showAudioFeedback(message, alertType) {
         console.error('Audio feedback element not found.');
     }
 }
+// END AUDIO FEEDBACK //
 
-// Exercise Feedback
+// START EXERCISE FEEDBACK //
 function showExerciseFeedback(elementId, message, alertType) {
     const feedback = document.getElementById(elementId);
     if (feedback) {
@@ -45,8 +48,9 @@ function showExerciseFeedback(elementId, message, alertType) {
         console.error(`Feedback element with ID ${elementId} not found.`);
     }
 }
+// END EXERCISE FEEDBACK //
 
-// Drag-and-Drop Functionality for Exercise 2
+// START DRAG-AND-DROP EXERCISE 2 //
 let draggedItem = null;
 
 document.querySelectorAll('.draggable').forEach(item => {
@@ -81,8 +85,9 @@ document.querySelectorAll('.droppable').forEach(dropZone => {
         }
     });
 });
+// END DRAG-AND-DROP EXERCISE 2 //
 
-// Drag-and-Drop Functionality for Exercise 3
+// START DRAG-AND-DROP EXERCISE 3 //
 function makeWordDraggable(word) {
     word.setAttribute('draggable', 'true');
     word.addEventListener('dragstart', (e) => {
@@ -115,8 +120,10 @@ document.querySelectorAll('.droppable-sentence').forEach(dropZone => {
         }
     });
 });
+// END DRAG-AND-DROP EXERCISE 3 //
 
-// Exercise 1: Check Answers
+// START EXERCISE CHECKERS //
+// START EXERCISE 1 CHECKER //
 function checkExercise1() {
     const answers = {
         'ex1-1': 'mache',
@@ -144,8 +151,9 @@ function checkExercise1() {
     feedback += '</ul>';
     showExerciseFeedback('exercise1-feedback', `You got ${correct}/5 correct! ${feedback}`, correct === 5 ? 'alert-success' : 'alert-warning');
 }
+// END EXERCISE 1 CHECKER //
 
-// Exercise 2: Check Answers
+// START EXERCISE 2 CHECKER //
 function checkExercise2() {
     const correctAnswers = {
         'A': 'Guten Morgen',
@@ -172,13 +180,14 @@ function checkExercise2() {
     feedback += '</ul>';
     showExerciseFeedback('exercise2-feedback', `You got ${correct}/4 correct! ${feedback}`, correct === 4 ? 'alert-success' : 'alert-warning');
 }
+// END EXERCISE 2 CHECKER //
 
-// Exercise 3: Check Answers
+// START EXERCISE 3 CHECKER //
 function checkExercise3() {
     const correctSentences = {
-        '1': 'Was machst’n, Kumpel?',
-        '2': 'Ich komm gleich, Mann!',
-        '3': 'Wir machen Party!'
+        '1': 'Was machst’n Kumpel ?',
+        '2': 'Ich komm gleich Mann !',
+        '3': 'Wir machen Party !'
     };
     let correct = 0;
     let feedback = '<h5>Feedback:</h5><ul>';
@@ -189,26 +198,25 @@ function checkExercise3() {
             feedback += `<li>Sentence ${sentenceId || 'unknown'}: Error - missing sentence ID.</li>`;
             return;
         }
-        const userSentence = dropZone.textContent
-            .replace(/\s+/g, ' ')
-            .trim()
-            .replace(/ ,/g, ',')
-            .replace(/ \?/g, '?')
-            .replace(/ !/g, '!');
+        const userSentence = Array.from(dropZone.querySelectorAll('.draggable-word'))
+            .map(word => word.textContent.trim())
+            .join(' ')
+            .trim();
         console.log(`Sentence ${sentenceId} - User: "${userSentence}", Expected: "${correctSentences[sentenceId]}"`);
         if (userSentence === correctSentences[sentenceId]) {
             correct++;
             feedback += `<li>Sentence ${sentenceId}: Correct!</li>`;
         } else {
-            feedback += `<li>Sentence ${sentenceId}: Incorrect. Correct sentence: "${correctSentences[sentenceId]}". Your answer: "${userSentence}".</li>`;
+            feedback += `<li>Sentence ${sentenceId}: Incorrect. Correct sentence: "${correctSentences[sentenceId].replace(' ?', '?').replace(' !', '!')}". Your answer: "${userSentence}".</li>`;
         }
     });
     feedback += '</ul>';
     showExerciseFeedback('exercise3-feedback', `You got ${correct}/3 correct! ${feedback}`, correct === 3 ? 'alert-success' : 'alert-warning');
     console.log('Exercise 3 checked. Correct answers:', correct);
 }
+// END EXERCISE 3 CHECKER //
 
-// Exercise 4: Check Answers
+// START EXERCISE 4 CHECKER //
 function checkExercise4() {
     const answers = {
         'ex4-1': 'B', // Was
@@ -235,200 +243,5 @@ function checkExercise4() {
     showExerciseFeedback('exercise4-feedback', `You got ${correct}/4 correct! ${feedback}`, correct === 4 ? 'alert-success' : 'alert-warning');
     console.log('Exercise 4 checked. Correct answers:', correct);
 }
-
-// Exercise 5: Check Answers
-function checkExercise5() {
-    const answers = {
-        'ex5-1': 'komme',
-        'ex5-2': 'kommst',
-        'ex5-3': 'kimm',
-        'ex5-4': 'kommen',
-        'ex5-5': 'kommen',
-        'ex5-6': 'kommen',
-        'ex5-7': 'kimmt',
-        'ex5-8': 'kommst'
-    };
-    let correct = 0;
-    let feedback = '<h5>Feedback:</h5><ul>';
-    Object.keys(answers).forEach((id, index) => {
-        const input = document.getElementById(id);
-        if (!input) {
-            console.error(`Input with ID ${id} not found.`);
-            return;
-        }
-        const userAnswer = input.value.trim().toLowerCase();
-        if (userAnswer === answers[id]) {
-            correct++;
-            feedback += `<li>${index + 1}. Correct!</li>`;
-        } else {
-            feedback += `<li>${index + 1}. Incorrect. Correct answer: "${answers[id]}".</li>`;
-        }
-    });
-    feedback += '</ul>';
-    showExerciseFeedback('exercise5-feedback', `You got ${correct}/8 correct! ${feedback}`, correct === 8 ? 'alert-success' : 'alert-warning');
-}
-
-// Exercise 6: Check Answers
-function checkExercise6() {
-    const answers = {
-        'ex6-1': 'Hey, na, was machst’n?',
-        'ex6-2': 'Ich komm aus München, Mann!',
-        'ex6-3': 'Lass uns mal ’nen Plan machen!',
-        'ex6-4': 'Cool, dich kennenzulernen!'
-    };
-    let correct = 0;
-    let feedback = '<h5>Feedback:</h5><ul>';
-    Object.keys(answers).forEach((id, index) => {
-        const input = document.getElementById(id);
-        if (!input) {
-            console.error(`Input with ID ${id} not found.`);
-            return;
-        }
-        const userAnswer = input.value.trim().toLowerCase();
-        const correctAnswer = answers[id].toLowerCase();
-        if (userAnswer === correctAnswer) {
-            correct++;
-            feedback += `<li>${index + 1}. Correct!</li>`;
-        } else {
-            feedback += `<li>${index + 1}. Incorrect. Correct answer: "${answers[id]}".</li>`;
-        }
-    });
-    feedback += '</ul>';
-    showExerciseFeedback('exercise6-feedback', `You got ${correct}/4 correct! ${feedback}`, correct === 4 ? 'alert-success' : 'alert-warning');
-}
-
-// Exercise 7: Check Dialogue
-function checkExercise7() {
-    const dialogueInput = document.getElementById('ex7-dialogue');
-    if (!dialogueInput) {
-        console.error('Dialogue input with ID ex7-dialogue not found.');
-        showExerciseFeedback('exercise7-feedback', 'Error: Dialogue input not found.', 'alert-danger');
-        return;
-    }
-    const dialogue = dialogueInput.value.trim();
-    if (!dialogue) {
-        showExerciseFeedback('exercise7-feedback', 'Please write a dialogue.', 'alert-danger');
-        return;
-    }
-    const lines = dialogue.split('\n').filter(line => line.trim() !== '');
-    const hasVerb = /mach(e|st|en|t)|komm(e|st|en|t)|kimm(t)?|kemma/i.test(dialogue);
-    const hasGreeting = /guten morgen|hey|servus|grüß/i.test(dialogue.toLowerCase());
-    let feedback = '';
-    if (lines.length < 4 || lines.length > 6) {
-        feedback += 'Dialogue should have 4-6 lines.<br>';
-    }
-    if (!hasVerb) {
-        feedback += 'Dialogue must include a form of "machen" or "kommen".<br>';
-    }
-    if (!hasGreeting) {
-        feedback += 'Dialogue must include a greeting (e.g., Guten Morgen, Hey, Servus, Grüß di).<br>';
-    }
-    if (feedback === '') {
-        feedback = 'Great job! Your dialogue includes a form of “machen” or “kommen” and a greeting. Check the sample solution for comparison.';
-        showExerciseFeedback('exercise7-feedback', feedback, 'alert-success');
-    } else {
-        showExerciseFeedback('exercise7-feedback', feedback, 'alert-warning');
-    }
-}
-
-// Exercise 8: Check Answers
-function checkExercise8() {
-    const answers = {
-        'ex8-1': 'C',
-        'ex8-2': 'A',
-        'ex8-3': 'B',
-        'ex8-4': 'D'
-    };
-    let correct = 0;
-    let feedback = '<h5>Feedback:</h5><ul>';
-    Object.keys(answers).forEach((name, index) => {
-        const selected = document.querySelector(`input[name="${name}"]:checked`);
-        if (!selected) {
-            console.warn(`No selection for question ${name}`);
-            feedback += `<li>${index + 1}. Incorrect. No answer selected. Correct answer: "${answers[name]}".</li>`;
-        } else if (selected.value === answers[name]) {
-            correct++;
-            feedback += `<li>${index + 1}. Correct!</li>`;
-        } else {
-            feedback += `<li>${index + 1}. Incorrect. Correct answer: "${answers[name]}".</li>`;
-        }
-    });
-    feedback += '</ul>';
-    showExerciseFeedback('exercise8-feedback', `You got ${correct}/4 correct! ${feedback}`, correct === 4 ? 'alert-success' : 'alert-warning');
-}
-
-// Exercise 9: Check Answers
-function checkExercise9() {
-    const answers = {
-        'ex9-1-bav': 'Servus! Was machst’n?',
-        'ex9-1-swa': 'Grüß di! Wie goht’s?',
-        'ex9-2-bav': 'I mach mei Arbeit.',
-        'ex9-2-swa': 'I mach mei Sach.',
-        'ex9-3-bav': 'Woher kimmt’n?',
-        'ex9-3-swa': 'Wo kommst’n her?',
-        'ex9-4-bav': 'Jo, des freut mi.',
-        'ex9-4-swa': 'Jo, des freut mi.'
-    };
-    let correct = 0;
-    let feedback = '<h5>Feedback:</h5><ul>';
-    Object.keys(answers).forEach((id, index) => {
-        const input = document.getElementById(id);
-        if (!input) {
-            console.error(`Input with ID ${id} not found.`);
-            return;
-        }
-        const userAnswer = input.value.trim().toLowerCase();
-        const correctAnswer = answers[id].toLowerCase();
-        if (userAnswer === correctAnswer) {
-            correct++;
-            feedback += `<li>${Math.floor(index / 2) + 1}. ${id.includes('bav') ? 'Bavarian' : 'Swabian'}: Correct!</li>`;
-        } else {
-            feedback += `<li>${Math.floor(index / 2) + 1}. ${id.includes('bav') ? 'Bavarian' : 'Swabian'}: Incorrect. Correct answer: "${answers[id]}".</li>`;
-        }
-    });
-    feedback += '</ul>';
-    showExerciseFeedback('exercise9-feedback', `You got ${correct}/8 correct! ${feedback}`, correct === 8 ? 'alert-success' : 'alert-warning');
-}
-
-// Exercise 10: Check Answers
-function checkExercise10() {
-    const answers = {
-        'ex10-1': 'Text 1 is in a café, Text 2 is at a house party.',
-        'ex10-2': 'Text 1 is formal and polite, Text 2 is casual and relaxed.',
-        'ex10-3': 'People talk, chat, and make plans to meet again in both passages.'
-    };
-    let correct = 0;
-    let feedback = '<h5>Feedback:</h5><ul>';
-    Object.keys(answers).forEach((id, index) => {
-        const input = document.getElementById(id);
-        if (!input) {
-            console.error(`Input with ID ${id} not found.`);
-            return;
-        }
-        const userAnswer = input.value.trim().toLowerCase();
-        const correctAnswer = answers[id].toLowerCase();
-        if (userAnswer.includes(correctAnswer.split('.')[0])) {
-            correct++;
-            feedback += `<li>${index + 1}. Correct!</li>`;
-        } else {
-            feedback += `<li>${index + 1}. Incorrect. Expected: "${answers[id]}".</li>`;
-        }
-    });
-    const paragraphInput = document.getElementById('ex10-paragraph');
-    if (!paragraphInput) {
-        console.error('Paragraph input with ID ex10-paragraph not found.');
-        return;
-    }
-    const paragraph = paragraphInput.value.trim();
-    const sentences = paragraph.split('.').filter(s => s.trim()).length;
-    if (sentences < 3 || sentences > 4) {
-        feedback += '<li>Paragraph: Should have 3-4 sentences.</li>';
-    } else if (!/mach(e|st|en|t)|komm(e|st|en|t)|kimm(t)?|kemma/i.test(paragraph)) {
-        feedback += '<li>Paragraph: Must include a form of "machen" or "kommen".</li>';
-    } else {
-        correct++;
-        feedback += '<li>Paragraph: Well done! Matches the requirements.</li>';
-    }
-    feedback += '</ul>';
-    showExerciseFeedback('exercise10-feedback', `You got ${correct}/4 correct! ${feedback}`, correct === 4 ? 'alert-success' : 'alert-warning');
-        }
+// END EXERCISE 4 CHECKER //
+// END EXERCISE CHECKERS //
