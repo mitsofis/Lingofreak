@@ -1,6 +1,6 @@
 // Tab Navigation
 function openTab(evt, tabName) {
-    window.speechSynthesis.cancel(); // Cancel any ongoing speech
+    window.speechSynthesis.cancel();
     document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
     document.querySelectorAll('.tab-link').forEach(link => link.classList.remove('active'));
     document.getElementById(tabName).classList.add('active');
@@ -12,7 +12,6 @@ document.querySelectorAll('.tab-link').forEach(button => {
     button.addEventListener('click', (evt) => openTab(evt, button.dataset.tab));
 });
 
-// Initialize first tab
 document.getElementById('dialogues').classList.add('active');
 
 // Speech Synthesis
@@ -87,50 +86,68 @@ function checkExercise1() {
     showExerciseFeedback('exercise1-feedback', `You got ${correct}/5 correct! ${feedback}`, correct === 5 ? 'alert-success' : 'alert-warning');
 }
 
-document.querySelectorAll('.check-btn[data-exercise="1"]').forEach(button => {
-    button.addEventListener('click', checkExercise1);
+document.getElementById('check-ex1').addEventListener('click', checkExercise1);
+
+// Exercise 2: Matching Phrases to Dialects (Drag-and-Drop)
+let draggedItem = null;
+
+document.querySelectorAll('.draggable').forEach(item => {
+    item.addEventListener('dragstart', () => {
+        draggedItem = item;
+        item.classList.add('dragging');
+        console.log('Dragging (Ex2):', item.textContent);
+    });
+    item.addEventListener('dragend', () => {
+        item.classList.remove('dragging');
+        draggedItem = null;
+        console.log('Drag ended (Ex2)');
+    });
 });
 
-// Exercise 2: Matching Phrases to Dialects
+document.querySelectorAll('.droppable').forEach(dropZone => {
+    dropZone.addEventListener('dragover', (e) => e.preventDefault());
+    dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        if (draggedItem) {
+            const existingItem = dropZone.querySelector('.draggable');
+            const phrasesList = document.getElementById('phrases-list');
+            if (existingItem && phrasesList) {
+                phrasesList.appendChild(existingItem);
+            }
+            dropZone.appendChild(draggedItem);
+            console.log('Dropped (Ex2):', draggedItem.textContent, 'into', dropZone.getAttribute('data-id'));
+        }
+    });
+});
+
 function checkExercise2() {
-    const answers = {
-        '1': 'A', // Wie viel kostet das? -> Standard German
-        '2': 'B', // Was kostet’n das? -> Colloquial German
-        '3': 'C', // Was kost’ des? -> Bavarian
-        '4': 'D'  // Was koscht des? -> Swabian
+    const correctAnswers = {
+        'A': 'Wie viel kostet das?', // Standard German
+        'B': 'Was kostet’n das?',  // Colloquial German
+        'C': 'Was kost’ des?',     // Bavarian
+        'D': 'Was koscht des?'     // Swabian
     };
     let correct = 0;
     let feedback = '<h5>Feedback:</h5><ul>';
-    document.querySelectorAll('.matching-option').forEach(option => {
-        if (option.classList.contains('selected')) {
-            const question = option.dataset.question;
-            const selectedDialect = option.dataset.option;
-            const dialectText = option.textContent.trim();
-            if (selectedDialect === answers[question]) {
-                correct++;
-                feedback += `<li>${question}. Correct! "${dialectText}"</li>`;
-            } else {
-                const correctOption = document.querySelector(`.matching-option[data-exercise="2"][data-question="${question}"][data-option="${answers[question]}"]`).textContent.trim();
-                feedback += `<li>${question}. Incorrect. Correct answer: "${correctOption}".</li>`;
-            }
+    document.querySelectorAll('.droppable').forEach(zone => {
+        const dialectId = zone.getAttribute('data-id');
+        if (!dialectId) {
+            console.error('Missing data-id on droppable zone:', zone);
+            return;
+        }
+        const phrase = zone.querySelector('.draggable')?.textContent.trim();
+        if (phrase && phrase === correctAnswers[dialectId]) {
+            correct++;
+            feedback += `<li>${zone.textContent.trim().split(':')[0]}: Correct!</li>`;
+        } else {
+            feedback += `<li>${zone.textContent.trim().split(':')[0]}: Incorrect. Correct phrase: "${correctAnswers[dialectId]}".</li>`;
         }
     });
     feedback += '</ul>';
     showExerciseFeedback('exercise2-feedback', `You got ${correct}/4 correct! ${feedback}`, correct === 4 ? 'alert-success' : 'alert-warning');
 }
 
-document.querySelectorAll('.matching-option').forEach(option => {
-    option.addEventListener('click', () => {
-        const question = option.dataset.question;
-        document.querySelectorAll(`.matching-option[data-question="${question}"]`).forEach(opt => opt.classList.remove('selected'));
-        option.classList.add('selected');
-        console.log(`Selected (Ex2): ${option.textContent} for question ${question}`);
-    });
-});
-
-document.querySelectorAll('.check-btn[data-exercise="2"]').forEach(button => {
-    button.addEventListener('click', checkExercise2);
-});
+document.getElementById('check-ex2').addEventListener('click', checkExercise2);
 
 // Exercise 3: Sentence Ordering (Colloquial German)
 const answers3 = {
@@ -138,8 +155,6 @@ const answers3 = {
     '2': 'Gib mir ’n Kilo Karotten !',
     '3': 'Das ist ziemlich teuer , oder ?'
 };
-
-let draggedItem = null;
 
 function makeWordDraggable(word) {
     word.setAttribute('draggable', 'true');
@@ -158,11 +173,11 @@ function makeWordDraggable(word) {
 
 document.querySelectorAll('.sentence-part').forEach(makeWordDraggable);
 
-document.querySelectorAll('.sentence-drop').forEach(dropZone => {
+document.querySelectorAll('.droppable-sentence').forEach(dropZone => {
     dropZone.addEventListener('dragover', (e) => e.preventDefault());
     dropZone.addEventListener('drop', (e) => {
         e.preventDefault();
-        if (draggedItem && draggedItem.dataset.exercise === '3' && draggedItem.dataset.question === dropZone.id.split('-')[2]) {
+        if (draggedItem && draggedItem.dataset.exercise === '3' && draggedItem.dataset.question === dropZone.getAttribute('data-sentence')) {
             const wordSpan = document.createElement('span');
             wordSpan.textContent = e.dataTransfer.getData('text/plain');
             wordSpan.classList.add('sentence-part');
@@ -171,7 +186,7 @@ document.querySelectorAll('.sentence-drop').forEach(dropZone => {
             makeWordDraggable(wordSpan);
             dropZone.appendChild(wordSpan);
             dropZone.appendChild(document.createTextNode(' '));
-            console.log('Dropped (Ex3):', wordSpan.textContent, 'into sentence', dropZone.id);
+            console.log('Dropped (Ex3):', wordSpan.textContent, 'into sentence', dropZone.getAttribute('data-sentence'));
         }
     });
 });
@@ -179,8 +194,13 @@ document.querySelectorAll('.sentence-drop').forEach(dropZone => {
 function checkExercise3() {
     let correct = 0;
     let feedback = '<h5>Feedback:</h5><ul>';
-    document.querySelectorAll('.sentence-drop').forEach(dropZone => {
-        const sentenceId = dropZone.id.split('-')[2];
+    document.querySelectorAll('.droppable-sentence').forEach(dropZone => {
+        const sentenceId = dropZone.getAttribute('data-sentence');
+        if (!sentenceId) {
+            console.error('Missing data-sentence attribute on:', dropZone);
+            feedback += `<li>Sentence ${sentenceId || 'unknown'}: Error - missing sentence ID.</li>`;
+            return;
+        }
         const userSentence = Array.from(dropZone.children)
             .map(part => part.textContent.trim())
             .join(' ')
@@ -198,9 +218,7 @@ function checkExercise3() {
     showExerciseFeedback('exercise3-feedback', `You got ${correct}/3 correct! ${feedback}`, correct === 3 ? 'alert-success' : 'alert-warning');
 }
 
-document.querySelectorAll('.check-btn[data-exercise="3"]').forEach(button => {
-    button.addEventListener('click', checkExercise3);
-});
+document.getElementById('check-ex3').addEventListener('click', checkExercise3);
 
 // Exercise 4: Multiple Choice Vocabulary
 function checkExercise4() {
@@ -235,6 +253,4 @@ function checkExercise4() {
     showExerciseFeedback('exercise4-feedback', `You got ${correct}/4 correct! ${feedback}`, correct === 4 ? 'alert-success' : 'alert-warning');
 }
 
-document.querySelectorAll('.check-btn[data-exercise="4"]').forEach(button => {
-    button.addEventListener('click', checkExercise4);
-});
+document.getElementById('check-ex4').addEventListener('click', checkExercise4);
